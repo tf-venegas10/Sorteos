@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 import NavbarIndex from "../navbars/NavbarIndex"
 import NavbarUser from "../navbars/NavbarUser";
-
+import Roulette from "./Roulette.js";
 import "./App.css";
 
 export default class App extends Component {
@@ -12,10 +12,10 @@ export default class App extends Component {
             navbar: "index",
             location: "index",
             locationUser: "home"
-        }
+        };
 
         this.callbackUserNavbar = this.callbackUserNavbar.bind(this);
-        this.callbackUserNavbar = this.callbackUserNavbar;
+        this.callbackNavbarIndex = this.callbackNavbarIndex.bind(this);
     }
 
     callbackNavbarIndex(value) {
@@ -26,7 +26,21 @@ export default class App extends Component {
         this.setState({locationUser: value});
     }
 
+
+
     render() {
+        const handleOnComplete = (value) => {
+            console.log(value);
+        };
+
+        const options = [
+            "drink one",
+            "drink two",
+            "drink three",
+            "give drink",
+            "drink bottle",
+            "drink","drink","drink","drink","drink","drink",
+        ];
         let navbar = null;
 
         if (this.state.navbar === "index") {
@@ -40,9 +54,12 @@ export default class App extends Component {
             <div>
                 {navbar}
                 <div className="container-fluid">
-
+                    <img src={"/logo.png"}/>
+                    <Roulette options={options} baseSize={300} onComplete={handleOnComplete}/>
                 </div>
             </div>
         );
     }
 }
+
+
