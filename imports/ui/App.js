@@ -41,7 +41,8 @@ export default class App extends Component {
             <div>
                 {navbar}
                 <div className="container-fluid">
-                    <h1>Tomas puta</h1>
+                    <h1>John bon Lovi</h1>
+                    <img src={"/logo.png"}/>
                 </div>
             </div>
         );
