@@ -40,7 +40,7 @@ export default class App extends Component {
             <div>
                 {navbar}
                 <div className="container-fluid">
-           
+
                 </div>
             </div>
         );
