@@ -54,7 +54,6 @@ export default class App extends Component {
             <div>
                 {navbar}
                 <div className="container-fluid">
-                    <img src={"/logo.png"}/>
                     <Roulette options={options} baseSize={300} onComplete={handleOnComplete}/>
                 </div>
             </div>
