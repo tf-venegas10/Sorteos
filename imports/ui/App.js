@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import NavbarIndex from "../navbars/NavbarIndex"
 import NavbarUser from "../navbars/NavbarUser";
@@ -41,7 +40,7 @@ export default class App extends Component {
             <div>
                 {navbar}
                 <div className="container-fluid">
-                    <h1>Tomas puta</h1>
+           
                 </div>
             </div>
         );
