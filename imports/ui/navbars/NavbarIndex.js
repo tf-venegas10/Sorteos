@@ -11,13 +11,16 @@ export default class NavbarIndex extends Component{
         const background={
             backgroundColor: 'rgb(55,55,55)'
         };
+        const titleStyle={
+          textAlign: "center"
+        };
         return(
             <MuiThemeProvider>
                 <AppBar
                     title={<img className="col-4 col-sm-2 col-md-1" src="name.png"/>}
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     style={background}
-
+                    titleStyle={titleStyle}
                 />
             </MuiThemeProvider>
         );
