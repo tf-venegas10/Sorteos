@@ -1,0 +1,10 @@
+.navbar-brand {
+    text-align: center;
+    margin: auto;
+    position: center;
+    height: 10%;
+}
+
+.nav-link{
+    font-size: 20px;
+}

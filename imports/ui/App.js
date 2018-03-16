@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import NavbarIndex from "../navbars/NavbarIndex"
 import NavbarUser from "../navbars/NavbarUser";
@@ -61,6 +60,7 @@ export default class App extends Component {
                 <div className="container-fluid">
                     <img src={"/logo.png"}/>
                     <Roulette options={this.state.options} baseSize={300} onComplete={handleOnComplete}/>
+
                 </div>
             </div>
         );
