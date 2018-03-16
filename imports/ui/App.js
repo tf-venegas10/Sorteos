@@ -83,7 +83,7 @@ export default class App extends Component {
                 <div className="container-fluid row">
                     <div className="col-1"></div>
                     <div className="col-10">
-                        <Roulette className="col-10" options={this.state.options} baseSize={300}
+                        <Roulette options={this.state.options} baseSize={250}
                                   onComplete={handleOnComplete}/>
                     </div>
 

@@ -11,7 +11,7 @@ class Roulette extends React.Component {
             startAngle: 0,
             spinTime: 0,
             arc: Math.PI / (props.options.length / 2),
-        }
+        };
         this.spinTimer = null;
         this.handleOnClick = this.handleOnClick.bind(this);
         this.spin = this.spin.bind(this);
@@ -66,7 +66,7 @@ class Roulette extends React.Component {
         if (canvas.getContext) {
             const outsideRadius = baseSize - 25;
             const textRadius = baseSize - 45;
-            const insideRadius = baseSize - 55;
+            const insideRadius = 10;
 
             ctx = canvas.getContext('2d');
             ctx.clearRect(0,0,600,600);
@@ -113,12 +113,14 @@ class Roulette extends React.Component {
     }
 
     rotate(){
-        const { spinAngleStart, spinTimeTotal } = this.props;
-        if(this.state.spinTime > 2800) {
+        let spinTimeTotal = Math.random()*2*30*35.9+ 30*35.9;
+        if(this.state.spinTime >spinTimeTotal) {
             clearTimeout(this.spinTimer);
             this.stopRotateWheel();
         } else {
-            const spinAngle = spinAngleStart - this.easeOut(this.state.spinTime, 0, spinAngleStart, spinTimeTotal);
+            const spinAngle = 10;
+            console.log(spinAngle*Math.PI / 180);
+            //Avanza de spinAngle cada 30 ms
             this.setState({
                 startAngle: this.state.startAngle + spinAngle * Math.PI / 180,
                 spinTime: this.state.spinTime + 30,
@@ -142,17 +144,13 @@ class Roulette extends React.Component {
         const index = Math.floor((360 - degrees % 360) / arcd);
         ctx.save();
         ctx.font = 'bold 20px Helvetica, Arial';
-        const text = options[index]
+        const text = options[index];
         ctx.fillText(text, baseSize - ctx.measureText(text).width / 2, baseSize / 3);
         ctx.restore();
         this.props.onComplete(text);
     }
 
-    easeOut(t, b, c, d) {
-        const ts = (t/=d)*t;
-        const tc = ts*t;
-        return b+c*(tc + -3*ts + 3*t);
-    }
+
 
     handleOnClick() {
         this.spin();
