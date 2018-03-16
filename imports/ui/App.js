@@ -1,5 +1,8 @@
 import React, {Component} from "react";
 import AppBar from 'material-ui/AppBar';
+import Avatar from 'material-ui/Avatar';
+import Paper from 'material-ui/Paper';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Roulette from "./Roulette.js";
@@ -54,20 +57,19 @@ export default class App extends Component {
         }
 
         return (
-
+            <div>
             <MuiThemeProvider>
                 <AppBar
-                    title="Toss-App"
+                    title={<img className="col-4 col-sm-2 col-md-1" src="name.png"/>}
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
-                    iconElementRight={<Avatar src="logo.png" />}
                 />
-
+            </MuiThemeProvider>
                 <div className="container-fluid">
-                    <img src={"/logo.png"}/>
                     <Roulette options={this.state.options} baseSize={300} onComplete={handleOnComplete}/>
 
                 </div>
-            </MuiThemeProvider>
+            </div>
+
         );
     }
 }
