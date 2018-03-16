@@ -12,7 +12,15 @@ export default class App extends Component {
         this.state = {
             navbar: "index",
             location: "index",
-            locationUser: "home"
+            locationUser: "home",
+            oprions:[
+                "drink one",
+                "drink two",
+                "drink three",
+                "give drink",
+                "drink bottle",
+                "drink","drink","drink","drink","drink","drink",
+            ]
         };
 
         this.callbackUserNavbar = this.callbackUserNavbar.bind(this);
@@ -34,15 +42,8 @@ export default class App extends Component {
             console.log(value);
         };
 
-        const options = [
-            "drink one",
-            "drink two",
-            "drink three",
-            "give drink",
-            "drink bottle",
-            "drink","drink","drink","drink","drink","drink",
-        ];
         let navbar = null;
+        
 
         if (this.state.navbar === "index") {
             navbar = <NavbarIndex onChange={this.callbackNavbarIndex}/>;
@@ -50,13 +51,16 @@ export default class App extends Component {
         else {
             navbar = <NavbarUser onChange={this.callbackUserNavbar}/>;
         }
+        if (this.state.location=== "new"){
+
+        }
 
         return (
             <div>
                 {navbar}
                 <div className="container-fluid">
                     <img src={"/logo.png"}/>
-                    <Roulette options={options} baseSize={300} onComplete={handleOnComplete}/>
+                    <Roulette options={this.state.options} baseSize={300} onComplete={handleOnComplete}/>
                 </div>
             </div>
         );
