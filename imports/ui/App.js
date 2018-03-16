@@ -9,6 +9,7 @@ import NavbarUser from './navbars/NavbarUser.js';
 
 import Roulette from "./Roulette.js";
 import "./App.css";
+import Selector from "./Selector";
 
 export default class App extends Component {
     constructor(props) {
@@ -25,8 +26,8 @@ export default class App extends Component {
                 "drink bottle",
                 "drink",
             ],
-            weights:[
-                1,1,1,4,1,2
+            weights: [
+                1, 1, 1, 4, 1, 2
             ],
             add: false
         };
@@ -35,7 +36,7 @@ export default class App extends Component {
         this.callbackNavbarIndex = this.callbackNavbarIndex.bind(this);
         this.adding = this.adding.bind(this);
         this.handleClose = this.handleClose.bind(this);
-
+        this.handleOnComplete = this.handleOnComplete.bind(this);
     }
 
     callbackNavbarIndex(value) {
@@ -54,10 +55,11 @@ export default class App extends Component {
         this.setState({add: false});
     };
 
+    handleOnComplete = (value) => {
+        console.log(value);
+    };
+
     render() {
-        const handleOnComplete = (value) => {
-            console.log(value);
-        };
 
         let navbar = null;
 
@@ -73,28 +75,8 @@ export default class App extends Component {
         return (
             <div>
                 {navbar}
-                <div className="row">
-                    <div className="col-11"></div>
-                    <div className="col-1">
-                        <MuiThemeProvider>
-                            <FloatingActionButton onClick={this.adding}>
-                                <ContentAdd/>
-                            </FloatingActionButton>
-                        </MuiThemeProvider>
-                    </div>
-                </div>
-                <div className="container-fluid row">
-                    <div className="col-1"></div>
-                    <div className="col-10">
-                        <Roulette options={this.state.options} baseSize={250}
-                                  onComplete={handleOnComplete} weights={this.state.weights}/>
-                    </div>
-
-                    <div className="col-1"></div>
-
-
-                </div>
-                <Dialog open={this.state.add} handleClose={this.handleClose}/>
+                <Selector adding={this.adding} add={this.state.add} handleOnComplete={this.handleOnComplete}
+                          options={this.state.options} weights={this.state.weights} handleClose={this.handleClose}/>
 
             </div>
 

@@ -16,12 +16,7 @@ export default class CustomDialog extends Component {
             width: '200px',
             maxWidth: 'none',
         };
-        const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onClick={this.props.handleClose}
-            />,
+        let actions = [
             <FlatButton
                 label="Add Participant"
                 primary={true}
@@ -34,7 +29,19 @@ export default class CustomDialog extends Component {
                 keyboardFocused={true}
                 onClick={this.props.handleClose}
             />,
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onClick={this.props.handleClose}
+            />,
         ];
+
+        if(!this.props.action){
+            let x=actions.pop();
+            actions.pop();
+            actions.push(x);
+        }
+
         return (
 
             <MuiThemeProvider>
