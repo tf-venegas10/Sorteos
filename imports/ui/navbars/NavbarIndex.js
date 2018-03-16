@@ -1,6 +1,6 @@
 import React,  { Component }  from "react";
 import AppBar from 'material-ui/AppBar';
-import Avatar from 'material-ui/Avatar';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 /**
  * This className contains all needed to display the nav bar on top.
@@ -8,12 +8,18 @@ import Avatar from 'material-ui/Avatar';
 export default class NavbarIndex extends Component{
 
     render(){
+        const background={
+            backgroundColor: 'rgb(55,55,55)'
+        };
         return(
-            <AppBar
-                title="Toss-App"
-                iconClassNameLeft="muidocs-icon-navigation-expand-more"
-                iconElementRight={<Avatar src="logo.png" backgroundColor={"white"}/>}
-            />
+            <MuiThemeProvider>
+                <AppBar
+                    title={<img className="col-4 col-sm-2 col-md-1" src="name.png"/>}
+                    iconClassNameRight="muidocs-icon-navigation-expand-more"
+                    style={background}
+
+                />
+            </MuiThemeProvider>
         );
     }
 }

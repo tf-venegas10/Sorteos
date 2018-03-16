@@ -1,9 +1,11 @@
 import React, {Component} from "react";
-import AppBar from 'material-ui/AppBar';
-import Avatar from 'material-ui/Avatar';
-import Paper from 'material-ui/Paper';
-
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import Dialog from './CustomDialog.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import NavbarIndex from './navbars/NavbarIndex.js';
+import NavbarUser from './navbars/NavbarUser.js';
+
 
 import Roulette from "./Roulette.js";
 import "./App.css";
@@ -15,18 +17,22 @@ export default class App extends Component {
             navbar: "index",
             location: "index",
             locationUser: "home",
-            oprions: [
+            options: [
                 "drink one",
                 "drink two",
                 "drink three",
                 "give drink",
                 "drink bottle",
                 "drink", "drink", "drink", "drink", "drink", "drink",
-            ]
+            ],
+            add: false
         };
 
         this.callbackUserNavbar = this.callbackUserNavbar.bind(this);
         this.callbackNavbarIndex = this.callbackNavbarIndex.bind(this);
+        this.adding = this.adding.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+
     }
 
     callbackNavbarIndex(value) {
@@ -37,6 +43,13 @@ export default class App extends Component {
         this.setState({locationUser: value});
     }
 
+    adding() {
+        this.setState({add: true});
+    }
+
+    handleClose() {
+        this.setState({add: false});
+    };
 
     render() {
         const handleOnComplete = (value) => {
@@ -45,29 +58,41 @@ export default class App extends Component {
 
         let navbar = null;
 
-        /*
+
         if (this.state.navbar === "index") {
             navbar = <NavbarIndex onChange={this.callbackNavbarIndex}/>;
         }
         else {
             navbar = <NavbarUser onChange={this.callbackUserNavbar}/>;
-        }*/
-        if (this.state.location === "new") {
-
         }
+
 
         return (
             <div>
-            <MuiThemeProvider>
-                <AppBar
-                    title={<img className="col-4 col-sm-2 col-md-1" src="name.png"/>}
-                    iconClassNameRight="muidocs-icon-navigation-expand-more"
-                />
-            </MuiThemeProvider>
-                <div className="container-fluid">
-                    <Roulette options={this.state.options} baseSize={300} onComplete={handleOnComplete}/>
+                {navbar}
+                <div className="row">
+                    <div className="col-11"></div>
+                    <div className="col-1">
+                        <MuiThemeProvider>
+                            <FloatingActionButton onClick={this.adding}>
+                                <ContentAdd/>
+                            </FloatingActionButton>
+                        </MuiThemeProvider>
+                    </div>
+                </div>
+                <div className="container-fluid row">
+                    <div className="col-1"></div>
+                    <div className="col-10">
+                        <Roulette className="col-10" options={this.state.options} baseSize={300}
+                                  onComplete={handleOnComplete}/>
+                    </div>
+
+                    <div className="col-1"></div>
+
 
                 </div>
+                <Dialog open={this.state.add} handleClose={this.handleClose}/>
+
             </div>
 
         );
