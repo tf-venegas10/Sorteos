@@ -23,7 +23,10 @@ export default class App extends Component {
                 "drink three",
                 "give drink",
                 "drink bottle",
-                "drink", "drink", "drink", "drink", "drink", "drink",
+                "drink",
+            ],
+            weights:[
+                1,1,1,4,1,2
             ],
             add: false
         };
@@ -84,7 +87,7 @@ export default class App extends Component {
                     <div className="col-1"></div>
                     <div className="col-10">
                         <Roulette options={this.state.options} baseSize={250}
-                                  onComplete={handleOnComplete}/>
+                                  onComplete={handleOnComplete} weights={this.state.weights}/>
                     </div>
 
                     <div className="col-1"></div>

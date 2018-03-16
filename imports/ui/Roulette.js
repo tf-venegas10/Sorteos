@@ -54,7 +54,12 @@ class Roulette extends React.Component {
     drawRouletteWheel() {
         const { options, baseSize } = this.props;
         let { startAngle, arc } = this.state;
-
+        let totalWeight=0;
+        this.props.weights.forEach((w)=>{
+           totalWeight+=w;
+        });
+        arc=Math.PI / (totalWeight/ 2);
+        this.setState({arc:arc});
 
         // const spinTimeout = null;
         // const spinTime = 0;
@@ -74,16 +79,16 @@ class Roulette extends React.Component {
             ctx.strokeStyle = 'white';
             ctx.lineWidth = 2;
 
-            ctx.font = '14px Helvetica, Arial';
-
+            ctx.font = '100% Helvetica, Arial';
+            let actualSum=0;
             for(let i = 0; i < options.length; i++) {
-                const angle = startAngle + i * arc;
+                const angle = startAngle + (actualSum) * arc;
+                actualSum+= this.props.weights[i];
 
                 ctx.fillStyle = this.getColor(i, options.length);
-
                 ctx.beginPath();
-                ctx.arc(baseSize, baseSize, outsideRadius, angle, angle + arc, false);
-                ctx.arc(baseSize, baseSize, insideRadius, angle + arc, angle, true);
+                ctx.arc(baseSize, baseSize, outsideRadius, angle, angle + arc*(this.props.weights[i]), false);
+                ctx.arc(baseSize, baseSize, insideRadius, angle + arc*(this.props.weights[i]), angle, true);
                 ctx.fill();
 
                 ctx.save();
@@ -119,7 +124,6 @@ class Roulette extends React.Component {
             this.stopRotateWheel();
         } else {
             const spinAngle = 10;
-            console.log(spinAngle*Math.PI / 180);
             //Avanza de spinAngle cada 30 ms
             this.setState({
                 startAngle: this.state.startAngle + spinAngle * Math.PI / 180,
@@ -141,10 +145,17 @@ class Roulette extends React.Component {
 
         const degrees = startAngle * 180 / Math.PI + 90;
         const arcd = arc * 180 / Math.PI;
-        const index = Math.floor((360 - degrees % 360) / arcd);
+        let index = Math.floor((360 - degrees % 360) / arcd);
         ctx.save();
         ctx.font = 'bold 20px Helvetica, Arial';
-        const text = options[index];
+        let i=0;
+        while(index>0){
+            index-=this.props.weights[i];
+            i+=1;
+        }
+        console.log(index<0?i-1:i);
+        const text = options[index<0?i-1:i];
+        console.log(text);
         ctx.fillText(text, baseSize - ctx.measureText(text).width / 2, baseSize / 3);
         ctx.restore();
         this.props.onComplete(text);
