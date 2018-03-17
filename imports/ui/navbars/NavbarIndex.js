@@ -9,7 +9,7 @@ export default class NavbarIndex extends Component{
 
     render(){
         const background={
-            backgroundColor: 'rgb(55,55,55)'
+            backgroundColor: '#00171F'
         };
         const titleStyle={
           textAlign: "center"
