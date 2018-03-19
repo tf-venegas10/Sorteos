@@ -164,19 +164,21 @@ class Roulette extends React.Component {
 
 
     handleOnClick() {
-        this.spin();
+       this.props.onSpin(()=> {
+           this.spin();
+       });
     }
 
     render() {
         const { baseSize } = this.props;
+        if(this.props.spin){
+            this.handleOnClick();
+        }
 
         return (
             <div className="roulette">
                 <div className="roulette-container">
                     <canvas ref="canvas" width={baseSize * 2} height={baseSize * 2} className="roulette-canvas"></canvas>
-                </div>
-                <div className="roulette-container">
-                    <input type="button" value="spin" onClick={this.handleOnClick} className="button" id="spin" />
                 </div>
             </div>
         );

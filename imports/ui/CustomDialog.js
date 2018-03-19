@@ -87,6 +87,7 @@ export default class CustomDialog extends Component {
                     onRequestClose={this.props.handleClose}
                     contentStyle={customContentStyle}
                 >
+                    <input/>
                 </Dialog>
             </MuiThemeProvider>
 

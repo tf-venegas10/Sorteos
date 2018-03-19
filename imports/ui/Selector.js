@@ -6,6 +6,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Dialog from './CustomDialog.js';
 import AddButton from "./AddButton";
+import TossOne from "./TossOne";
 
 
 // App component - represents the whole app
@@ -30,76 +31,22 @@ export default class Selector extends Component {
             <MuiThemeProvider>
                 <Tabs inkBarStyle={ink}>
                     <Tab label="Persona" buttonStyle={background}>
-                        <div className="row">
-                            <div className="col-11"></div>
-                            <div className="col-1">
-                                <AddButton adding={this.props.adding}/>
-                            </div>
-                        </div>
-                        <div className="container-fluid row">
-                            <div className="col-1"></div>
-                            <div className="col-10">
-                                <Roulette options={this.props.options} baseSize={250}
-                                          onComplete={this.props.handleOnComplete} weights={this.props.weights}/>
-                            </div>
-
-                            <div className="col-1"></div>
-
-                        </div>
-                        <Dialog open={this.props.add} handleClose={this.props.handleClose} action={false}
-                                person={true}/>
+                        <TossOne options={this.props.persons} baseSize={250}
+                                 weights={this.props.weightsPersons}
+                                 add={this.props.add} handleClose={this.props.handleClose} action={false}
+                                 person={true} adding={this.props.adding}/>
                     </Tab>
                     <Tab label="Acción" buttonStyle={background}>
-                        <div className="row">
-                            <div className="col-11"></div>
-                            <div className="col-1">
-                                <AddButton adding={this.props.adding}/>
-                            </div>
-                        </div>
-                        <div className="container-fluid row">
-                            <div className="col-1"></div>
-                            <div className="col-10">
-                                <Roulette options={this.props.options} baseSize={250}
-                                          onComplete={this.props.handleOnComplete} weights={this.props.weights}/>
-                            </div>
-
-                            <div className="col-1"></div>
-
-                        </div>
-                        <Dialog open={this.props.add} handleClose={this.props.handleClose} action={true}
-                                person={false}/>
+                        <TossOne options={this.props.actions} baseSize={250}
+                                 weights={this.props.weightsActions}
+                                 add={this.props.add} handleClose={this.props.handleClose} action={true}
+                                 person={false} adding={this.props.adding}/>
                     </Tab>
                     <Tab label="Persona y Acción" buttonStyle={background}>
-                        <div className="row">
-                            <div className="col-11"></div>
-                            <div className="col-1">
-                                <AddButton adding={this.props.adding}/>
-                            </div>
-                        </div>
-                        <div className="container-fluid row">
-                            <div className="col-1"></div>
-                            <div className="col-10">
-                                <Roulette options={this.props.options} baseSize={250}
-                                          onComplete={this.props.handleOnComplete} weights={this.props.weights}/>
-                            </div>
 
-                            <div className="col-1"></div>
-
-                        </div>
-                        <Dialog open={this.props.add} handleClose={this.props.handleClose} action={true} person={true}/>
                     </Tab>
-                    <Tab
-                        label="Acción para cada persona"
-                        data-route="/home"
-                        buttonStyle={background}
+                    <Tab label="Acción para cada persona" buttonStyle={background}>
 
-                    >
-                        <div>
-                            <h2 style={headline}>Tab Three</h2>
-                            <p>
-                                This is a third example tab.
-                            </p>
-                        </div>
                     </Tab>
                 </Tabs>
             </MuiThemeProvider>

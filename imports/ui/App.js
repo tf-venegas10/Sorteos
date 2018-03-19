@@ -18,7 +18,7 @@ export default class App extends Component {
             navbar: "index",
             location: "index",
             locationUser: "home",
-            options: [
+            actions: [
                 "drink one",
                 "drink two",
                 "drink three",
@@ -26,9 +26,13 @@ export default class App extends Component {
                 "drink bottle",
                 "drink",
             ],
-            weights: [
+            persons: [
+                "Tomas","Juan", "Zeus"
+            ],
+            weightsActions: [
                 1, 1, 1, 4, 1, 2
             ],
+            weightsPersons:[1,1,1],
             add: false
         };
 
@@ -36,7 +40,6 @@ export default class App extends Component {
         this.callbackNavbarIndex = this.callbackNavbarIndex.bind(this);
         this.adding = this.adding.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        this.handleOnComplete = this.handleOnComplete.bind(this);
     }
 
     callbackNavbarIndex(value) {
@@ -55,9 +58,7 @@ export default class App extends Component {
         this.setState({add: false});
     };
 
-    handleOnComplete = (value) => {
-        console.log(value);
-    };
+
 
     render() {
 
@@ -75,8 +76,8 @@ export default class App extends Component {
         return (
             <div>
                 {navbar}
-                <Selector adding={this.adding} add={this.state.add} handleOnComplete={this.handleOnComplete}
-                          options={this.state.options} weights={this.state.weights} handleClose={this.handleClose}/>
+                <Selector adding={this.adding} add={this.state.add}
+                          actions={this.state.actions} persons={this.state.persons} weightsActions={this.state.weightsActions} weightsPersons={this.state.weightsPersons} handleClose={this.handleClose}/>
 
             </div>
 
