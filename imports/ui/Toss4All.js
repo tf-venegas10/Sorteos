@@ -8,24 +8,24 @@ import ActionDelete from 'material-ui/svg-icons/action/delete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
-import Snackbar from 'material-ui/Snackbar';
-
+import Toggle from 'material-ui/Toggle';
 
 // App component - represents the random person sorting app
 
-export default class TossPandA extends Component {
+export default class Toss4All extends Component {
     constructor(props) {
         super(props);
         this.state = {
             selected: [],
             spin: false,
-            value: "",
-            chosenOne: null
+            matchParticipants: false
+
         };
         this.handleRouletteSpin = this.handleRouletteSpin.bind(this);
         this.onSpin = this.onSpin.bind(this);
         this.click = this.click.bind(this);
         this.handleRequestDelete = this.handleRequestDelete.bind(this);
+        this.onToggle = this.onToggle.bind(this);
     }
 
     handleRouletteSpin(value) {
@@ -52,15 +52,18 @@ export default class TossPandA extends Component {
         let i;
         let j=0;
         this.props.weightsPersons.forEach((p)=>{
-           for(i=0; i<p; i++){
-               arr.push(this.props.persons[j]);
-           }
-           j++;
+            for(i=0; i<p; i++){
+                arr.push(this.props.persons[j]);
+            }
+            j++;
         });
         let x = Math.round(Math.random() * (arr.length-1));
         let chosenOne = arr[x];
         this.setState({spin: false, value: "", chosenOne: chosenOne},
             callback);
+    }
+    onToggle(e, isChecked){
+        setState({matchParticipants:isChecked});
     }
 
     render() {
@@ -98,7 +101,18 @@ export default class TossPandA extends Component {
         return (
             <div>
                 <div className="row">
-                    <div className="col-11"></div>
+
+                    <div className="col-3"></div>
+                    <div className="col-2">
+                        <MuiThemeProvider>
+                            <Toggle
+                                label="Match Participantes"
+                                onToggle={this.onToggle}
+                            />
+                        </MuiThemeProvider>
+                       
+                    </div>
+                    <div className="col-6"></div>
                     <div className="col-1">
                         <AddButton adding={this.props.adding}/>
                     </div>
@@ -111,9 +125,7 @@ export default class TossPandA extends Component {
                                 <RaisedButton label="Spin" style={ink} onClick={this.click}/>
                             </MuiThemeProvider>
                         </div>
-                        <Roulette options={this.props.options} baseSize={250} spin={this.state.spin}
-                                  onSpin={this.onSpin}
-                                  onComplete={this.handleRouletteSpin} weights={this.props.weights}/>
+
                     </div>
                     <div className="col-sm-2 col-6">
                         <MuiThemeProvider>
@@ -146,14 +158,6 @@ export default class TossPandA extends Component {
                 <Dialog open={this.props.add} handleClose={this.props.handleClose} action={this.props.action}
                         person={this.props.person} onTextChange={this.props.onTextChange}
                         onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction} onAddPerson={this.props.onAddPerson}/>
-                <MuiThemeProvider>
-                    <Snackbar
-                        open={this.state.value !== ""}
-                        message={this.state.chosenOne + ": " + this.state.value}
-                        autoHideDuration={4000}
-                        onRequestClose={this.handleRequestClose}
-                    />
-                </MuiThemeProvider>
             </div>
 
         );

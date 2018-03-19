@@ -17,7 +17,7 @@ export default class CustomDialog extends Component {
                         label="Add Action"
                         primary={true}
                         keyboardFocused={true}
-                        onClick={this.props.handleClose}
+                        onClick={this.props.onAddAction}
                     />,
                     <FlatButton
                         label="Cancel"
@@ -34,7 +34,7 @@ export default class CustomDialog extends Component {
                         label="Add Participant"
                         primary={true}
                         keyboardFocused={true}
-                        onClick={this.props.handleClose}
+                        onClick={this.props.onAddPerson}
                     />,
                     <FlatButton
                         label="Cancel"
@@ -51,13 +51,13 @@ export default class CustomDialog extends Component {
                         label="Add Participant"
                         primary={true}
                         keyboardFocused={true}
-                        onClick={this.props.handleClose}
+                        onClick={this.props.onAddPerson}
                     />,
                     <FlatButton
                         label="Add Action"
                         primary={true}
                         keyboardFocused={true}
-                        onClick={this.props.handleClose}
+                        onClick={this.props.onAddAction}
                     />,
                     <FlatButton
                         label="Cancel"
@@ -67,13 +67,19 @@ export default class CustomDialog extends Component {
                 ]
             }
         }
+        this.state.inputText = "";
+        this.state.inputNumb = 1;
+
     }
+
+
 
 
     render() {
         const customContentStyle = {
             width: '200px',
             maxWidth: 'none',
+
         };
 
 
@@ -87,7 +93,12 @@ export default class CustomDialog extends Component {
                     onRequestClose={this.props.handleClose}
                     contentStyle={customContentStyle}
                 >
-                    <input/>
+                    <label htmlFor="textInput">Valor</label><input id="textInput" type="text"
+                                                                   onChange={this.props.onTextChange}
+                />
+                    <label htmlFor="numberInput">Peso</label> <input id="numberInput" type="number"
+                                                                     onChange={this.props.onNumberChange}
+                                                                     />
                 </Dialog>
             </MuiThemeProvider>
 

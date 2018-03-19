@@ -33,7 +33,9 @@ export default class App extends Component {
                 1, 1, 1, 4, 1, 2
             ],
             weightsPersons: [1, 1, 1],
-            add: false
+            add: false,
+            inputText: "",
+            inputNumb: 1
         };
 
         this.callbackUserNavbar = this.callbackUserNavbar.bind(this);
@@ -41,6 +43,10 @@ export default class App extends Component {
         this.adding = this.adding.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.onTextChange = this.onTextChange.bind(this);
+        this.onNumberChange = this.onNumberChange.bind(this);
+        this.onAddPerson = this.onAddPerson.bind(this);
+        this.onAddAction = this.onAddAction.bind(this);
     }
 
     callbackNavbarIndex(value) {
@@ -65,10 +71,17 @@ export default class App extends Component {
             this.setState((prevState) => {
                 let newActions = [];
                 let newAWeights = [];
-                for (i = 0; i < prevState.actions.length; i++) {
-                    if (i !== id) {
-                        newActions.push(prevState.actions[i]);
-                        newAWeights.push(prevState.weightsActions[i]);
+                if(id===-1){
+                    newActions = prevState.actions;
+                    newAWeights = prevState.weightsActions;
+                    newActions.pop();
+                    newAWeights.pop();
+                }else {
+                    for (i = 0; i < prevState.actions.length; i++) {
+                        if (i !== id) {
+                            newActions.push(prevState.actions[i]);
+                            newAWeights.push(prevState.weightsActions[i]);
+                        }
                     }
                 }
                 return {actions: newActions, weightsActions: newAWeights};
@@ -78,46 +91,88 @@ export default class App extends Component {
             this.setState((prevState) => {
                 let newpersons = [];
                 let newAWeights = [];
-                for (i = 0; i < prevState.persons.length; i++) {
-                    if (i !== id) {
-                        newpersons.push(prevState.persons[i]);
-                        newAWeights.push(prevState.weightsPersons[i]);
+                if(id===-1){
+                    newpersons = prevState.persons;
+                    newAWeights = prevState.weightsPersons;
+                    newpersons.pop();
+                    newAWeights.pop();
+                }
+                else {
+                    for (i = 0; i < prevState.persons.length; i++) {
+                        if (i !== id) {
+                            newpersons.push(prevState.persons[i]);
+                            newAWeights.push(prevState.weightsPersons[i]);
+                        }
                     }
                 }
                 return {persons: newpersons, weightsPersons: newAWeights};
             })
 
         }
-}
-
-
-render()
-{
-
-    let navbar = null;
-
-
-    if (this.state.navbar === "index") {
-        navbar = <NavbarIndex onChange={this.callbackNavbarIndex}/>;
-    }
-    else {
-        navbar = <NavbarUser onChange={this.callbackUserNavbar}/>;
     }
 
+    onTextChange(e) {
+        this.setState({inputText: e.target.value});
+    }
 
-    return (
-        <div>
-            {navbar}
-            <Selector adding={this.adding} add={this.state.add}
-                      actions={this.state.actions} persons={this.state.persons}
-                      weightsActions={this.state.weightsActions} weightsPersons={this.state.weightsPersons}
-                      handleClose={this.handleClose}
-                      handleDelete={this.handleDelete}/>
+    onNumberChange(e) {
+        if (Number(e.target.value)) {
+            this.setState({inputNumb: Number(e.target.value)});
+        }
+        else {
+            this.setState({inputNumb: 0});
+        }
+    }
 
-        </div>
+    onAddPerson() {
+        this.setState((prevState) => {
+            newpersons = prevState.persons;
+            newAWeights = prevState.weightsPersons;
+            newpersons.push(this.state.inputText);
+            newAWeights.push(this.state.inputNumb);
+            return {persons: newpersons, weightsPersons: newAWeights , add:false};
+        });
+    }
 
-    );
-}
+    onAddAction() {
+        this.setState((prevState) => {
+            let newActions = prevState.actions;
+            let newAWeights = prevState.weightsActions;
+            newAWeights.push(this.state.inputNumb);
+            newActions.push(this.state.inputText);
+            return {actions: newActions, weightsActions: newAWeights, add:false};
+        });
+
+    }
+
+    render() {
+
+        let navbar = null;
+
+
+        if (this.state.navbar === "index") {
+            navbar = <NavbarIndex onChange={this.callbackNavbarIndex}/>;
+        }
+        else {
+            navbar = <NavbarUser onChange={this.callbackUserNavbar}/>;
+        }
+
+
+        return (
+            <div>
+                {navbar}
+                <Selector adding={this.adding} add={this.state.add}
+                          actions={this.state.actions} persons={this.state.persons}
+                          weightsActions={this.state.weightsActions} weightsPersons={this.state.weightsPersons}
+                          handleClose={this.handleClose}
+                          handleDelete={this.handleDelete} onTextChange={this.onTextChange}
+                          onNumberChange={this.onNumberChange}
+                          onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/>
+
+            </div>
+
+        );
+    }
 }
 
 

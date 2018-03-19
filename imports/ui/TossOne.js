@@ -54,9 +54,10 @@ export default class TossOne extends Component {
 
         let opt = [];
         let i = 0;
+        let totalWeight= this.props.weights.reduce((a,w)=>a+w);
         this.props.options.forEach((op) => {
                 i += 1;
-                opt.push(<ListItem primaryText={op} key={i}
+                opt.push(<ListItem primaryText={op+" :"+Math.round(this.props.weights[i-1]/totalWeight*100)+"%"} key={i}
                                    rightIcon={<ActionDelete onClick={this.handleRequestDelete.bind(this, i)}/>}/>);
             }
         );
@@ -109,7 +110,8 @@ export default class TossOne extends Component {
 
                 </div>
                 <Dialog open={this.props.add} handleClose={this.props.handleClose} action={this.props.action}
-                        person={this.props.person}/>
+                        person={this.props.person} onTextChange={this.props.onTextChange}
+                        onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction} onAddPerson={this.props.onAddPerson}/>
                 <MuiThemeProvider>
                     <Snackbar
                         open={this.state.value !== ""}
