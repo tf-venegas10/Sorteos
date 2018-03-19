@@ -7,6 +7,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import Dialog from './CustomDialog.js';
 import AddButton from "./AddButton";
 import TossOne from "./TossOne";
+import TossPandA from "./TossPandA";
 
 
 // App component - represents the whole app
@@ -43,7 +44,11 @@ export default class Selector extends Component {
                                  person={false} adding={this.props.adding} handleDelete={this.props.handleDelete}/>
                     </Tab>
                     <Tab label="Persona y Acción" buttonStyle={background}>
-
+                        <TossPandA options={this.props.actions} baseSize={250}
+                                   weights={this.props.weightsActions}
+                                   add={this.props.add} handleClose={this.props.handleClose} action={true}
+                                   person={false} adding={this.props.adding} handleDelete={this.props.handleDelete}
+                                   persons={this.props.persons}/>
                     </Tab>
                     <Tab label="Acción para cada persona" buttonStyle={background}>
 
