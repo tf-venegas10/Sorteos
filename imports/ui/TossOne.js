@@ -8,6 +8,7 @@ import ActionDelete from 'material-ui/svg-icons/action/delete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
+import Snackbar from 'material-ui/Snackbar';
 
 
 // App component - represents the random person sorting app
@@ -17,11 +18,13 @@ export default class TossOne extends Component {
         super(props);
         this.state = {
             selected: [],
-            spin: false
+            spin: false,
+            value: ""
         };
         this.handleRouletteSpin = this.handleRouletteSpin.bind(this);
         this.onSpin = this.onSpin.bind(this);
         this.click = this.click.bind(this);
+        this.handleRequestDelete = this.handleRequestDelete.bind(this);
     }
 
     handleRouletteSpin(value) {
@@ -29,27 +32,28 @@ export default class TossOne extends Component {
             this.setState((prevState) => {
                 let actions = prevState.selected;
                 actions.push(value);
-                return ({selectedActions: actions});
+                return ({selectedActions: actions, value: value});
             })
         } else {
             this.setState((prevState) => {
                 let actions = prevState.selected;
                 actions.push(value);
-                return ({selectedActions: actions});
+                return ({selectedActions: actions, value: value});
             })
         }
     };
 
     //TODO: handle request delete
-    handleRequestDelete() {
+    handleRequestDelete(i) {
+        this.props.handleDelete(i - 1, this.props.action);
     };
 
     click() {
-        this.setState({spin: true});
+        this.setState({spin: true,value:""});
     }
 
     onSpin(callback) {
-        this.setState({spin: false},
+        this.setState({spin: false, value: ""},
             callback);
     }
 
@@ -60,7 +64,7 @@ export default class TossOne extends Component {
         this.props.options.forEach((op) => {
                 i += 1;
                 opt.push(<ListItem primaryText={op} key={i}
-                                   rightIcon={<ActionDelete/>}/>);
+                                   rightIcon={<ActionDelete onClick={this.handleRequestDelete.bind(this, i)}/>}/>);
             }
         );
         i = 0;
@@ -73,7 +77,6 @@ export default class TossOne extends Component {
         const ink = {
             backgroundColor: '#149bda'
         };
-
 
         return (
             <div>
@@ -114,6 +117,14 @@ export default class TossOne extends Component {
                 </div>
                 <Dialog open={this.props.add} handleClose={this.props.handleClose} action={this.props.action}
                         person={this.props.person}/>
+                <MuiThemeProvider>
+                    <Snackbar
+                        open={this.state.value!==""}
+                        message={this.state.value}
+                        autoHideDuration={4000}
+                        onRequestClose={this.handleRequestClose}
+                    />
+                </MuiThemeProvider>
             </div>
 
         );

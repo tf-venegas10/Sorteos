@@ -34,13 +34,13 @@ export default class Selector extends Component {
                         <TossOne options={this.props.persons} baseSize={250}
                                  weights={this.props.weightsPersons}
                                  add={this.props.add} handleClose={this.props.handleClose} action={false}
-                                 person={true} adding={this.props.adding}/>
+                                 person={true} adding={this.props.adding} handleDelete={this.props.handleDelete}/>
                     </Tab>
                     <Tab label="Acción" buttonStyle={background}>
                         <TossOne options={this.props.actions} baseSize={250}
                                  weights={this.props.weightsActions}
                                  add={this.props.add} handleClose={this.props.handleClose} action={true}
-                                 person={false} adding={this.props.adding}/>
+                                 person={false} adding={this.props.adding} handleDelete={this.props.handleDelete}/>
                     </Tab>
                     <Tab label="Persona y Acción" buttonStyle={background}>
 

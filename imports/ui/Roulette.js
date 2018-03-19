@@ -28,6 +28,11 @@ class Roulette extends React.Component {
     componentDidMount() {
         this.drawRouletteWheel();
     }
+    componentDidUpdate(prevProps){
+        if(prevProps.options!==this.props.options) {
+            this.drawRouletteWheel();
+        }
+    }
 
     byte2Hex(n) {
         const nybHexString = '0123456789ABCDEF';
@@ -81,11 +86,11 @@ class Roulette extends React.Component {
 
             ctx.font = '100% Helvetica, Arial';
             let actualSum=0;
-            for(let i = 0; i < options.length; i++) {
+            for(let i = 0; i < this.props.options.length; i++) {
                 const angle = startAngle + (actualSum) * arc;
                 actualSum+= this.props.weights[i];
 
-                ctx.fillStyle = this.getColor(i, options.length);
+                ctx.fillStyle = this.getColor(i, this.props.options.length);
                 ctx.beginPath();
                 ctx.arc(baseSize, baseSize, outsideRadius, angle, angle + arc*(this.props.weights[i]), false);
                 ctx.arc(baseSize, baseSize, insideRadius, angle + arc*(this.props.weights[i]), angle, true);
@@ -96,7 +101,7 @@ class Roulette extends React.Component {
                 ctx.translate(baseSize + Math.cos(angle + arc / 2) * textRadius,
                     baseSize + Math.sin(angle + arc / 2) * textRadius);
                 ctx.rotate(angle + arc / 2 + Math.PI / 2);
-                const text = options[i];
+                const text = this.props.options[i];
                 ctx.fillText(text, -ctx.measureText(text).width / 2, -5);
                 ctx.restore();
             }
@@ -154,7 +159,7 @@ class Roulette extends React.Component {
             i+=1;
         }
         console.log(index<0?i-1:i);
-        const text = options[index<0?i-1:i];
+        const text = this.props.options[index<0?i-1:i];
         console.log(text);
         ctx.fillText(text, baseSize - ctx.measureText(text).width / 2, baseSize / 3);
         ctx.restore();

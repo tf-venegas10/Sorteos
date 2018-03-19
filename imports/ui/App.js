@@ -27,12 +27,12 @@ export default class App extends Component {
                 "drink",
             ],
             persons: [
-                "Tomas","Juan", "Zeus"
+                "Tomas", "Juan", "Zeus"
             ],
             weightsActions: [
                 1, 1, 1, 4, 1, 2
             ],
-            weightsPersons:[1,1,1],
+            weightsPersons: [1, 1, 1],
             add: false
         };
 
@@ -40,6 +40,7 @@ export default class App extends Component {
         this.callbackNavbarIndex = this.callbackNavbarIndex.bind(this);
         this.adding = this.adding.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     callbackNavbarIndex(value) {
@@ -58,31 +59,65 @@ export default class App extends Component {
         this.setState({add: false});
     };
 
-
-
-    render() {
-
-        let navbar = null;
-
-
-        if (this.state.navbar === "index") {
-            navbar = <NavbarIndex onChange={this.callbackNavbarIndex}/>;
+    handleDelete(id, action) {
+        let i;
+        if (action) {
+            this.setState((prevState) => {
+                let newActions = [];
+                let newAWeights = [];
+                for (i = 0; i < prevState.actions.length; i++) {
+                    if (i !== id) {
+                        newActions.push(prevState.actions[i]);
+                        newAWeights.push(prevState.weightsActions[i]);
+                    }
+                }
+                return {actions: newActions, weightsActions: newAWeights};
+            })
         }
         else {
-            navbar = <NavbarUser onChange={this.callbackUserNavbar}/>;
+            this.setState((prevState) => {
+                let newpersons = [];
+                let newAWeights = [];
+                for (i = 0; i < prevState.persons.length; i++) {
+                    if (i !== id) {
+                        newpersons.push(prevState.persons[i]);
+                        newAWeights.push(prevState.weightsPersons[i]);
+                    }
+                }
+                return {persons: newpersons, weightsPersons: newAWeights};
+            })
+
         }
+}
 
 
-        return (
-            <div>
-                {navbar}
-                <Selector adding={this.adding} add={this.state.add}
-                          actions={this.state.actions} persons={this.state.persons} weightsActions={this.state.weightsActions} weightsPersons={this.state.weightsPersons} handleClose={this.handleClose}/>
+render()
+{
 
-            </div>
+    let navbar = null;
 
-        );
+
+    if (this.state.navbar === "index") {
+        navbar = <NavbarIndex onChange={this.callbackNavbarIndex}/>;
     }
+    else {
+        navbar = <NavbarUser onChange={this.callbackUserNavbar}/>;
+    }
+
+
+    return (
+        <div>
+            {navbar}
+            <Selector adding={this.adding} add={this.state.add}
+                      actions={this.state.actions} persons={this.state.persons}
+                      weightsActions={this.state.weightsActions} weightsPersons={this.state.weightsPersons}
+                      handleClose={this.handleClose}
+                      handleDelete={this.handleDelete}/>
+
+        </div>
+
+    );
+}
 }
 
 
