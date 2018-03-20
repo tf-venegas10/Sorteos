@@ -1,17 +1,15 @@
 import React, {Component} from "react";
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import Dialog from './CustomDialog.js';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {withTracker} from "meteor/react-meteor-data";
+
+import "./App.css";
 import NavbarIndex from './navbars/NavbarIndex.js';
 import NavbarUser from './navbars/NavbarUser.js';
-
-
-import Roulette from "./Roulette.js";
-import "./App.css";
+import LoginManager from './LoginManager.js';
 import Selector from "./Selector";
 
-export default class App extends Component {
+import Users from '../api/users';
+
+class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,6 +38,7 @@ export default class App extends Component {
 
         this.callbackUserNavbar = this.callbackUserNavbar.bind(this);
         this.callbackNavbarIndex = this.callbackNavbarIndex.bind(this);
+        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
         this.adding = this.adding.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -57,6 +56,14 @@ export default class App extends Component {
         this.setState({locationUser: value});
     }
 
+    handleLoginSubmit() {
+        Users.insert({
+            createdAt: new Date(), // current time
+            owner: Meteor.userId(),           // _id of logged in user
+            username: Meteor.user().username,  // username of logged in user
+        });
+    }
+
     adding() {
         this.setState({add: true});
     }
@@ -71,12 +78,12 @@ export default class App extends Component {
             this.setState((prevState) => {
                 let newActions = [];
                 let newAWeights = [];
-                if(id===-1){
+                if (id === -1) {
                     newActions = prevState.actions;
                     newAWeights = prevState.weightsActions;
                     newActions.pop();
                     newAWeights.pop();
-                }else {
+                } else {
                     for (i = 0; i < prevState.actions.length; i++) {
                         if (i !== id) {
                             newActions.push(prevState.actions[i]);
@@ -91,7 +98,7 @@ export default class App extends Component {
             this.setState((prevState) => {
                 let newpersons = [];
                 let newAWeights = [];
-                if(id===-1){
+                if (id === -1) {
                     newpersons = prevState.persons;
                     newAWeights = prevState.weightsPersons;
                     newpersons.pop();
@@ -130,7 +137,7 @@ export default class App extends Component {
             newAWeights = prevState.weightsPersons;
             newpersons.push(this.state.inputText);
             newAWeights.push(this.state.inputNumb);
-            return {persons: newpersons, weightsPersons: newAWeights , add:false};
+            return {persons: newpersons, weightsPersons: newAWeights, add: false};
         });
     }
 
@@ -140,39 +147,42 @@ export default class App extends Component {
             let newAWeights = prevState.weightsActions;
             newAWeights.push(this.state.inputNumb);
             newActions.push(this.state.inputText);
-            return {actions: newActions, weightsActions: newAWeights, add:false};
+            return {actions: newActions, weightsActions: newAWeights, add: false};
         });
 
     }
 
     render() {
 
-        let navbar = null;
-
-
-        if (this.state.navbar === "index") {
-            navbar = <NavbarIndex onChange={this.callbackNavbarIndex}/>;
-        }
-        else {
-            navbar = <NavbarUser onChange={this.callbackUserNavbar}/>;
-        }
-
-
         return (
             <div>
-                {navbar}
-                <Selector adding={this.adding} add={this.state.add}
-                          actions={this.state.actions} persons={this.state.persons}
-                          weightsActions={this.state.weightsActions} weightsPersons={this.state.weightsPersons}
-                          handleClose={this.handleClose}
-                          handleDelete={this.handleDelete} onTextChange={this.onTextChange}
-                          onNumberChange={this.onNumberChange}
-                          onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/>
+                {
+                    this.props.currentUser ?
+                        <NavbarUser onChange={this.callbackUserNavbar}/> :
+                        <NavbarIndex onChange={this.callbackNavbarIndex}/>
+                }
+                {
+                    this.props.currentUser ?
+                        <Selector adding={this.adding} add={this.state.add}
+                                  actions={this.state.actions} persons={this.state.persons}
+                                  weightsActions={this.state.weightsActions} weightsPersons={this.state.weightsPersons}
+                                  handleClose={this.handleClose}
+                                  handleDelete={this.handleDelete} onTextChange={this.onTextChange}
+                                  onNumberChange={this.onNumberChange}
+                                  onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/> :
+                        <LoginManager/>
+                }
 
             </div>
 
         );
     }
 }
+
+export default withTracker(() => {
+    return {
+        currentUser: Meteor.user(),
+    }
+})(App);
 
 
