@@ -7,7 +7,7 @@ import NavbarUser from './navbars/NavbarUser.js';
 import LoginManager from './LoginManager.js';
 import Selector from "./Selector";
 
-import Users from '../api/users';
+import Users from '../api/users.js';
 
 class App extends Component {
     constructor(props) {
@@ -39,6 +39,7 @@ class App extends Component {
         this.callbackUserNavbar = this.callbackUserNavbar.bind(this);
         this.callbackNavbarIndex = this.callbackNavbarIndex.bind(this);
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+        this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
         this.adding = this.adding.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -62,6 +63,11 @@ class App extends Component {
             owner: Meteor.userId(),           // _id of logged in user
             username: Meteor.user().username,  // username of logged in user
         });
+    }
+
+    handleLogoutSubmit(){
+        console.log("login out");
+        Meteor.logout();
     }
 
     adding() {
@@ -158,7 +164,7 @@ class App extends Component {
             <div>
                 {
                     this.props.currentUser ?
-                        <NavbarUser onChange={this.callbackUserNavbar}/> :
+                        <NavbarUser onChange={this.callbackUserNavbar} onLogoutCallback={this.handleLogoutSubmit}/> :
                         <NavbarIndex onChange={this.callbackNavbarIndex}/>
                 }
                 {

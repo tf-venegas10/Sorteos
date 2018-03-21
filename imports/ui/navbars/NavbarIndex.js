@@ -21,6 +21,7 @@ export default class NavbarIndex extends Component{
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     style={background}
                     titleStyle={titleStyle}
+                    showMenuIconButton={false}
                 />
             </MuiThemeProvider>
         );
