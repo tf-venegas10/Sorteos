@@ -30,13 +30,11 @@ class Roulette extends React.Component {
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.options.length!==this.props.options.length) {
-            console.log("holaaa");
             this.drawRouletteWheel();
         }
     }
     componentDidUpdate(prevProps){
-        console.log(prevProps.options);
-        console.log(this.props.options);
+
         if(prevProps.options.length!==this.props.options.length) {
             this.drawRouletteWheel();
         }
