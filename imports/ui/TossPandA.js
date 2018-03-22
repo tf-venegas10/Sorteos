@@ -152,6 +152,8 @@ export default class TossPandA extends Component {
                         message={this.state.chosenOne + ": " + this.state.value}
                         autoHideDuration={4000}
                         onRequestClose={this.handleRequestClose}
+                        bodyStyle={{ height: 200, width: 200, flexGrow: 0 }}
+                        contentStyle={{ fontSize:30}}
                     />
                 </MuiThemeProvider>
             </div>
