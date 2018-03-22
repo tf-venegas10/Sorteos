@@ -19,7 +19,7 @@ export default class Toss4All extends Component {
             selected: [],
             spin: false,
             matchParticipants: true,
-            repeat:true
+            repeat: true
 
         };
 
@@ -34,17 +34,18 @@ export default class Toss4All extends Component {
     handleRequestDelete(i, action) {
         this.props.handleDelete(i - 1, action);
     };
-    onRepeatToggle(){
+
+    onRepeatToggle() {
         this.setState((prevState) => {
             return {repeat: !prevState.repeat}
         });
     }
 
     click() {
-        let selected=[];
+        let selected = [];
         this.setState({spin: true, value: ""});
-        if(this.state.matchParticipants){
-            if(this.state.repeat){
+        if (this.state.matchParticipants) {
+            if (this.state.repeat) {
                 let arr = [];
                 let i;
                 let j = 0;
@@ -54,24 +55,24 @@ export default class Toss4All extends Component {
                     }
                     j++;
                 });
-                this.props.persons.forEach((person)=>{
+                this.props.persons.forEach((person) => {
                     let x = Math.round(Math.random() * (arr.length - 1));
                     let chosenOne = arr[x];
                     selected.push({person: person, action: chosenOne});
                 });
             }
-            else{
-                let actions=this.props.options.slice();
+            else {
+                let actions = this.props.options.slice();
                 this.shuffleArray(actions);
-                let i =0;
-                this.props.persons.forEach((p)=>{
-                    selected.push({person: p, action: actions[i%actions.length]});
+                let i = 0;
+                this.props.persons.forEach((p) => {
+                    selected.push({person: p, action: actions[i % actions.length]});
                     i++;
                 });
             }
         }
-        else{
-            if(this.state.repeat){
+        else {
+            if (this.state.repeat) {
                 let arr = [];
                 let i;
                 let j = 0;
@@ -81,26 +82,28 @@ export default class Toss4All extends Component {
                     }
                     j++;
                 });
-               this.props.options.forEach((action)=>{
+                this.props.options.forEach((action) => {
                     let x = Math.round(Math.random() * (arr.length - 1));
                     let chosenOne = arr[x];
                     selected.push({action: action, person: chosenOne});
                 });
-            }else{
-                let persons=this.props.persons.slice();
+            } else {
+                let persons = this.props.persons.slice();
                 this.shuffleArray(persons);
-                let i =0;
-                this.props.options.forEach((p)=>{
-                    selected.push({action: p, person: persons[i%persons.length]});
+                let i = 0;
+                this.props.options.forEach((p) => {
+                    selected.push({action: p, person: persons[i % persons.length]});
                     i++;
                 });
             }
         }
-        this.setState((prevState)=>{
-            let toSel=prevState.selected;
+        this.setState((prevState) => {
+            let toSel = prevState.selected;
             toSel.push(selected);
-            return{selected:toSel}});
+            return {selected: toSel}
+        });
     }
+
     /**
      * Randomize array element order in-place.
      * Using Durstenfeld shuffle algorithm.
@@ -149,7 +152,7 @@ export default class Toss4All extends Component {
         let results = [];
         this.state.selected.forEach((sorted) => {
 
-                sorted.forEach((op)=>{
+                sorted.forEach((op) => {
                     i += 1;
                     results.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
                 });
@@ -159,8 +162,24 @@ export default class Toss4All extends Component {
             }
         );
         const ink = {
-            backgroundColor: '#149bda'
+            color: '#149bda'
         };
+        let finalItem = results.pop();
+        i = 0;
+        let res = [];
+        if(this.state.selected.length>0) {
+            this.state.selected[this.state.selected.length - 1].forEach((op) => {
+                i += 1;
+                res.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
+            });
+        }
+        res.push(finalItem);
+        while (i > 0) {
+            i--;
+            results.pop();
+        }
+        results.push(finalItem);
+
 
         return (
             <div>
@@ -183,12 +202,16 @@ export default class Toss4All extends Component {
                             />
                         </MuiThemeProvider>
 
-<MuiThemeProvider>
+                        <MuiThemeProvider>
                             <Toggle
                                 label="Repetir"
                                 onToggle={this.onRepeatToggle}
                                 toggled={this.state.repeat}
                             />
+                        </MuiThemeProvider>
+                        <MuiThemeProvider>
+                            <RaisedButton label="Spin" style={ink} disabledBackgroundColor="true"
+                                          onClick={this.click}/>
                         </MuiThemeProvider>
 
                     </div>
@@ -198,16 +221,26 @@ export default class Toss4All extends Component {
                     </div>
                 </div>
                 <div className="container-fluid row">
+                    <div className="col-sm-2 col-6">
+                        <MuiThemeProvider>
+                            <Paper zDepth={2} rounded={false}>
+                                <List>
+                                    <ListItem><h5>History</h5></ListItem>
+                                    <Divider/>
+                                    {results}
+                                </List>
+                            </Paper>
+                        </MuiThemeProvider>
 
-                    <div className="col-sm-8 col-12">
+                    </div>
+
+                    <div className="col-sm-4 col-6">
                         <div className="roulette-container">
-                            <MuiThemeProvider>
-                                <RaisedButton label="Spin" style={ink} disabledBackgroundColor="#149bda" onClick={this.click}/>
-                            </MuiThemeProvider>
+
                             <MuiThemeProvider>
                                 <Paper zDepth={2} rounded={false}>
                                     <List>
-                                        {results}
+                                        {res}
                                     </List>
                                     <Divider/>
                                 </Paper>

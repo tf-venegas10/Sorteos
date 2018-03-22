@@ -164,10 +164,8 @@ class Roulette extends React.Component {
             index-=this.props.weights[i];
             i+=1;
         }
-        console.log(index<0?i-1:i);
         const text = this.props.options[index<0?i-1:i];
-        console.log(text);
-        ctx.fillText(text, baseSize - ctx.measureText(text).width / 2, baseSize / 3);
+        //ctx.fillText(text, baseSize - ctx.measureText(text).width / 2, baseSize / 3);
         ctx.restore();
         this.props.onComplete(text);
     }
