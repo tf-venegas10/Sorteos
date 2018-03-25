@@ -36,9 +36,9 @@ export default class RegisterManager extends Component {
     verifyInput() {
         let emailRegex = /^\S+@\S+(\.\S+)+$/;
         this.setState({
-            disableButton: !(this.state.email || this.state.email !== "") && (this.state.pswd && this.state.email !== "")
+            disableButton: !((this.state.email && this.state.email !== "") && (this.state.pswd && this.state.pswd !== "")
             && (this.state.pswdVer && this.state.pswdVer !== "") ?
-                emailRegex.test(this.state.email) && this.state.pswdVer === this.state.pswd : false
+                emailRegex.test(this.state.email) && this.state.pswdVer === this.state.pswd : false)
         });
     }
 
