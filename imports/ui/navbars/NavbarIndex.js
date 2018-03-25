@@ -17,8 +17,7 @@ export default class NavbarIndex extends Component{
         return(
             <MuiThemeProvider>
                 <AppBar
-                    title={<img className="col-4 col-sm-2 col-md-1" src="name.png"/>}
-                    iconClassNameRight="muidocs-icon-navigation-expand-more"
+                    title={<img className="col-4 col-sm-2 col-md-1" src="name.png" alt="Toss-App"/>}
                     style={background}
                     titleStyle={titleStyle}
                     showMenuIconButton={false}

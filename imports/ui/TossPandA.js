@@ -108,7 +108,7 @@ export default class TossPandA extends Component {
                     <div className="col-sm-8 col-12">
                         <div className="roulette-container">
                             <MuiThemeProvider>
-                                <RaisedButton label="Spin" style={ink} onClick={this.click}/>
+                                <RaisedButton label="Spin" style={ink} onClick={this.click} ariaLabel="Boton girar Ruleta"/>
                             </MuiThemeProvider>
                         </div>
                         <Roulette options={this.props.options} baseSize={250} spin={this.state.spin}
