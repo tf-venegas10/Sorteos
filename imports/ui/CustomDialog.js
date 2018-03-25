@@ -18,11 +18,13 @@ export default class CustomDialog extends Component {
                         primary={true}
                         keyboardFocused={true}
                         onClick={this.props.onAddAction}
+                        ariaLabel="Boton para agragar accion"
                     />,
                     <FlatButton
                         label="Cancel"
                         primary={true}
                         onClick={this.props.handleClose}
+                        ariaLabel="Cancelar"
                     />
                 ]
             }
@@ -35,11 +37,14 @@ export default class CustomDialog extends Component {
                         primary={true}
                         keyboardFocused={true}
                         onClick={this.props.onAddPerson}
+                        ariaLabel="Boton para agragar participante"
+
                     />,
                     <FlatButton
                         label="Cancel"
                         primary={true}
                         onClick={this.props.handleClose}
+                        ariaLabel="Cancelar"
                     />
                 ]
             }
@@ -52,17 +57,21 @@ export default class CustomDialog extends Component {
                         primary={true}
                         keyboardFocused={true}
                         onClick={this.props.onAddPerson}
+                        ariaLabel="Boton para agragar participante"
                     />,
                     <FlatButton
                         label="Add Action"
                         primary={true}
                         keyboardFocused={true}
                         onClick={this.props.onAddAction}
+                        ariaLabel="Boton para agragar accion"
+
                     />,
                     <FlatButton
                         label="Cancel"
                         primary={true}
                         onClick={this.props.handleClose}
+                        ariaLabel="Cancelar"
                     />
                 ]
             }

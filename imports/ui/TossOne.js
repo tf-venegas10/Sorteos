@@ -86,7 +86,7 @@ export default class TossOne extends Component {
                     <div className="col-sm-10 col-12">
                         <div className="roulette-container">
                             <MuiThemeProvider>
-                                <RaisedButton label="Spin" style={ink} onClick={this.click}/>
+                                <RaisedButton className="SpinButton" label="Spin" style={ink} onClick={this.click} ariaLabel="Boton girar Ruleta"/>
                             </MuiThemeProvider>
                         </div>
                         <Roulette options={this.props.options} baseSize={250} spin={this.state.spin}
