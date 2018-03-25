@@ -8,6 +8,7 @@ import LoginManager from './LoginManager.js';
 import Selector from "./Selector";
 
 import Users from '../api/users.js';
+import RegisterManager from "./RegisterManager";
 
 class App extends Component {
     constructor(props) {
@@ -176,7 +177,10 @@ class App extends Component {
                                   handleDelete={this.handleDelete} onTextChange={this.onTextChange}
                                   onNumberChange={this.onNumberChange}
                                   onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/> :
-                        <LoginManager/>
+                        <div className="container-fluid">
+                            <LoginManager/>
+                            <RegisterManager/>
+                        </div>
                 }
 
             </div>
