@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import EmailPassword from "./EmailPassword.js";
 
 export default class LoginManager extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             email: "",
@@ -16,30 +16,30 @@ export default class LoginManager extends Component {
         this.verifyInput = this.verifyInput.bind(this);
     }
 
-    handleEmailChange(val){
-        this.setState({email:val})
+    handleEmailChange(val) {
+        this.setState({email: val})
         this.verifyInput();
     }
 
-    handlePswdChange(val){
-        this.setState({pswd:val})
+    handlePswdChange(val) {
+        this.setState({pswd: val})
         this.verifyInput();
     }
 
-    verifyInput(){
+    verifyInput() {
         let emailRegex = /^\S+@\S+(\.\S+)+$/;
         this.setState({
-            disableButton: !(this.state.email||this.state.email!=="")&&(this.state.pswd&&this.state.email!=="")?
-                emailRegex.test(this.state.email) : false
+            disableButton: !((this.state.email && this.state.email !== "") && (this.state.pswd && this.state.pswd !== "") ?
+                emailRegex.test(this.state.email) : false)
         });
     }
 
-    loginWithPassword(e){
+    loginWithPassword(e) {
         e.preventDefault();
-        Meteor.loginWithPassword(this.state.email, this.state.pswd, (error)=>{
-           if(error){
-               console.log("Error: "+error.reason);
-           }
+        Meteor.loginWithPassword(this.state.email, this.state.pswd, (error) => {
+            if (error) {
+                console.log("Error: " + error.reason);
+            }
         });
     }
 

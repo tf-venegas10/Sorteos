@@ -26,7 +26,7 @@ export default class NavbarUser extends Component {
                     title={<img className="col-4 col-sm-2 col-md-1" src="name.png" alt="Toss-App"/>}
                     iconElementLeft={
                         <IconMenu
-                            iconButtonElement={<IconButton ariaLabel="Boton para expandir el menu"
+                            iconButtonElement={<IconButton aria-label="Boton para expandir el menu"
                             ><Menu color={white}/></IconButton>}
                             anchorOrigin={{horizontal: 'left', vertical: 'top'}}
                             targetOrigin={{horizontal: 'left', vertical: 'top'}}
