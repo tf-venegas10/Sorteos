@@ -1,0 +1,49 @@
+/*----------------------
+App Styles
+------------------------*/
+
+html, body {
+    height: 100%; /*Fixes the height to 100% of the viewport*/
+}
+
+.main-banner{
+
+    background-image: url("./resources/index-background.jpeg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height: 110vh;
+}
+
+.main-content{
+    background-color: rgba(55,55,55,0.6);
+    height: 110vh;
+}
+
+.user-banner{
+    background-color: #211836;
+    //background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height: inherit;
+}
+
+.center-items {
+    text-align: center;
+    margin: auto;
+    position: center;
+
+}
+
+.body-content{
+    height: 100vh;
+}

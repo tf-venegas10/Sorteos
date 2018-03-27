@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 
 import EmailPassword from "./EmailPassword.js";
 
+import "./Auth.css";
+
+// App component - represents the login component
+
 export default class LoginManager extends Component {
     constructor(props) {
         super(props);
@@ -45,7 +49,7 @@ export default class LoginManager extends Component {
 
     render() {
         return (
-            <div className="row justify-content-around">
+            <div className="row justify-content-around center-items">
                 <EmailPassword
                     submitAction={this.loginWithPassword}
                     typeAuth="Login"

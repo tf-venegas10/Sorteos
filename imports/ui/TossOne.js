@@ -55,11 +55,21 @@ export default class TossOne extends Component {
         let opt = [];
         let i = 0;
         let totalWeight = this.props.weights.reduce((a, w) => a + w);
+        const opStyle = {
+            color: "#FFFFFF"
+        }
         this.props.options.forEach((op) => {
                 i += 1;
                 opt.push(<ListItem primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}
                                    key={i}
-                                   rightIcon={<ActionDelete onClick={this.handleRequestDelete.bind(this, i)}/>}/>);
+                                   stylye={opStyle}
+                                   rightIcon={
+                                       <ActionDelete
+                                       onClick={this.handleRequestDelete.bind(this, i)}
+                                       style={opStyle}
+                                       />
+                                   }
+                />);
             }
         );
         i = 0;
@@ -71,6 +81,10 @@ export default class TossOne extends Component {
         );
         const ink = {
             backgroundColor: '#149bda'
+        };
+
+        const paperInk = {
+            backgroundColor: "#BBDBB8",
         };
 
         return (
@@ -86,7 +100,7 @@ export default class TossOne extends Component {
                     <div className="col-sm-10 col-12">
                         <div className="roulette-container">
                             <MuiThemeProvider>
-                                <RaisedButton className="SpinButton" label="Spin" style={ink} onClick={this.click} ariaLabel="Boton girar Ruleta"/>
+                                <RaisedButton className="SpinButton" label="Spin" style={ink} onClick={this.click} aria-label="Boton girar Ruleta"/>
                             </MuiThemeProvider>
                         </div>
                         <Roulette options={this.props.options} baseSize={250} spin={this.state.spin}
@@ -95,7 +109,7 @@ export default class TossOne extends Component {
                     </div>
                     <div className="col-sm-2 col-8">
                         <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false}>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
                                     {opt}
                                 </List>

@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
 import {Tab, Tabs} from 'material-ui/Tabs';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Roulette from "./Roulette.js";
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import Dialog from './CustomDialog.js';
-import AddButton from "./AddButton";
 import TossOne from "./TossOne";
 import TossPandA from "./TossPandA";
 import Toss4All from "./Toss4All";
@@ -18,10 +13,10 @@ export default class Selector extends Component {
 
     render() {
         const background = {
-            backgroundColor: '#002459'
+            backgroundColor: '#1498d5'
         };
         const ink = {
-            backgroundColor: '#149bda'
+            backgroundColor: '#BBDBB8'
         };
         const headline = {
             fontSize: 24,

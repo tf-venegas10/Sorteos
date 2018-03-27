@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 
 import EmailPassword from "./EmailPassword.js";
 
+import "./Auth.css"
+
+// App component - represents the registration component
+
 export default class RegisterManager extends Component {
     constructor(props) {
         super(props);
@@ -53,7 +57,7 @@ export default class RegisterManager extends Component {
 
     render() {
         return (
-            <div className="row justify-content-around">
+            <div className="row justify-content-around center-items complete-viewport">
                 <EmailPassword
                     submitAction={this.createUser}
                     typeAuth="Register"

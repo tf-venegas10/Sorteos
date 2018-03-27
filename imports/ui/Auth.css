@@ -1,0 +1,32 @@
+/*--------------------------
+Auth modules styles
+---------------------------*/
+
+.center-items {
+    text-align: center;
+    margin: auto;
+    position: center;
+
+}
+
+.auth-card{
+    background: #BBDBB8;
+    color: #211836;
+    margin-top: 50%;
+    margin-bottom: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.auth-card-title{
+    color: rgb(22,98,131);
+}
+
+.auth-button{
+    background: #211836;
+    color: #FFFFFF;
+}
+
+.complete-viewport{
+    /*width: 100vw;*/
+}

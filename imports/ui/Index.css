@@ -1,0 +1,16 @@
+/*---------------
+Index styles
+-----------------*/
+
+.complete-viewport{
+    height: 90%;
+}
+
+.to-login{
+    color: rgb(183, 183, 157);
+}
+
+.to-login:hover{
+    color: #1498D5;
+    cursor: pointer;
+}

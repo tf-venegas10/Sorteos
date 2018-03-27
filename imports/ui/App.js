@@ -4,19 +4,18 @@ import {withTracker} from "meteor/react-meteor-data";
 import "./App.css";
 import NavbarIndex from './navbars/NavbarIndex.js';
 import NavbarUser from './navbars/NavbarUser.js';
+import Index from './Index.js';
 import LoginManager from './LoginManager.js';
+import RegisterManager from "./RegisterManager";
 import Selector from "./Selector";
 
 import Users from '../api/users.js';
-import RegisterManager from "./RegisterManager";
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            navbar: "index",
             location: "index",
-            locationUser: "home",
             actions: [
                 "drink one",
                 "drink two",
@@ -37,8 +36,9 @@ class App extends Component {
             inputNumb: 1
         };
 
-        this.callbackUserNavbar = this.callbackUserNavbar.bind(this);
-        this.callbackNavbarIndex = this.callbackNavbarIndex.bind(this);
+        this.goToIndex = this.goToIndex.bind(this);
+        this.goToRegister = this.goToRegister.bind(this);
+        this.goToLogin = this.goToLogin.bind(this);
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
         this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
         this.adding = this.adding.bind(this);
@@ -50,12 +50,16 @@ class App extends Component {
         this.onAddAction = this.onAddAction.bind(this);
     }
 
-    callbackNavbarIndex(value) {
-        this.setState({location: value});
+    goToIndex(){
+        this.setState({location: "index"});
     }
 
-    callbackUserNavbar(value) {
-        this.setState({locationUser: value});
+    goToRegister() {
+        this.setState({location: "register"});
+    }
+
+    goToLogin() {
+        this.setState({location: "login"});
     }
 
     handleLoginSubmit() {
@@ -66,7 +70,7 @@ class App extends Component {
         });
     }
 
-    handleLogoutSubmit(){
+    handleLogoutSubmit() {
         console.log("login out");
         Meteor.logout();
     }
@@ -162,29 +166,37 @@ class App extends Component {
     render() {
 
         return (
-            <div>
-                {
-                    this.props.currentUser ?
-                        <NavbarUser onChange={this.callbackUserNavbar} onLogoutCallback={this.handleLogoutSubmit}/> :
-                        <NavbarIndex onChange={this.callbackNavbarIndex}/>
-                }
-                {
-                    this.props.currentUser ?
-                        <Selector adding={this.adding} add={this.state.add}
-                                  actions={this.state.actions} persons={this.state.persons}
-                                  weightsActions={this.state.weightsActions} weightsPersons={this.state.weightsPersons}
-                                  handleClose={this.handleClose}
-                                  handleDelete={this.handleDelete} onTextChange={this.onTextChange}
-                                  onNumberChange={this.onNumberChange}
-                                  onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/> :
-                        <div className="container-fluid">
-                            <LoginManager/>
-                            <RegisterManager/>
-                        </div>
-                }
+            <div className={this.props.currentUser ? "user-banner" : "main-banner"}>
+                <div className={this.props.currentUser ? null : "main-content center-items"}>
+                    {
+                        this.props.currentUser ?
+                            <NavbarUser onLogoutCallback={this.handleLogoutSubmit}/> :
+                            <NavbarIndex goToIndex={this.goToIndex}/>
+                    }
 
+                    {
+                        this.props.currentUser ?
+                            <Selector adding={this.adding} add={this.state.add}
+                                      actions={this.state.actions} persons={this.state.persons}
+                                      weightsActions={this.state.weightsActions}
+                                      weightsPersons={this.state.weightsPersons}
+                                      handleClose={this.handleClose}
+                                      handleDelete={this.handleDelete} onTextChange={this.onTextChange}
+                                      onNumberChange={this.onNumberChange}
+                                      onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/> :
+                            <div className="center-items body-content">
+                                {
+                                    this.state.location === "index" ?
+                                        <Index handleGetStarted={this.goToRegister}
+                                               goToLogin={this.goToLogin}/> :
+                                        this.state.location === "login" ?
+                                            <LoginManager/> :
+                                            <RegisterManager/>
+                                }
+                            </div>
+                    }
+                </div>
             </div>
-
         );
     }
 }
