@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Roulette from "../roulette/Roulette.js";
 import Dialog from '../adding/CustomDialog.js';
 import AddButton from "../adding/AddButton";
 import {List, ListItem} from 'material-ui/List';
