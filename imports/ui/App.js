@@ -4,11 +4,11 @@ import {withTracker} from "meteor/react-meteor-data";
 import "./App.css";
 import NavbarIndex from './navbars/NavbarIndex.js';
 import NavbarUser from './navbars/NavbarUser.js';
-import Index from './Index.js';
-import LoginManager from './LoginManager.js';
-import RegisterManager from "./RegisterManager.js";
+import Index from './index/Index.js';
+import LoginManager from './authentication/LoginManager.js';
+import RegisterManager from "./authentication/RegisterManager.js";
 import Selector from "./Selector.js";
-import Footer from "./Footer.js";
+import Footer from "./footer/Footer.js";
 
 import Users from '../api/users.js';
 
