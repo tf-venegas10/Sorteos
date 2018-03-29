@@ -23,18 +23,19 @@ export default class RegisterManager extends Component {
     }
 
     handleEmailChange(val) {
-        this.setState({email: val})
+        this.setState({email: val});
         this.verifyInput();
     }
 
     handlePswdChange(val) {
-        this.setState({pswd: val})
+        this.setState({pswd: val});
         this.verifyInput();
     }
 
     handlePswdVerChange(val) {
-        this.setState({pswdVer: val})
+        this.setState({pswdVer: val});
         this.verifyInput();
+        this.setState({disableButton: ((this.state.pswd===this.state.pswdVer) && this.state.disableButton)});
     }
 
     verifyInput() {
@@ -42,7 +43,7 @@ export default class RegisterManager extends Component {
         this.setState({
             disableButton: !((this.state.email && this.state.email !== "") && (this.state.pswd && this.state.pswd !== "")
             && (this.state.pswdVer && this.state.pswdVer !== "") ?
-                emailRegex.test(this.state.email) && this.state.pswdVer === this.state.pswd : false)
+                emailRegex.test(this.state.email): false)
         });
     }
 

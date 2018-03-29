@@ -21,12 +21,12 @@ export default class LoginManager extends Component {
     }
 
     handleEmailChange(val) {
-        this.setState({email: val})
+        this.setState({email: val});
         this.verifyInput();
     }
 
     handlePswdChange(val) {
-        this.setState({pswd: val})
+        this.setState({pswd: val});
         this.verifyInput();
     }
 

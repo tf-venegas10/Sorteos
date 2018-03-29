@@ -44,7 +44,7 @@ export default class EmailPassword extends Component {
                         {
                             this.props.typeAuth === "Register" ?
                                 <div className="form-group">
-                                    <label htmlFor="password">Password:</label>
+                                    <label htmlFor="password">Confirm Password:</label>
                                     <input placeholder="Password" type="password" id="passwordVer"
                                            className="form-control"
                                            onChange={this.handlePswdVerify.bind(this)}
