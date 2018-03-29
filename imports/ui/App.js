@@ -193,7 +193,7 @@ class App extends Component {
                             this.props.currentUser ?
                                 <NavbarUser onLogoutCallback={this.handleLogoutSubmit} open={this.state.newToss}
                                             handleClose={this.handleNotNew} onTextChange={this.nameChange}
-                                            handleNew={this.handleNewTossUp} openNew={this.handleNew}/> :
+                                            handleNew={this.handleNewTossUp} openNew={this.handleNew} sorteos={this.props.sorteos}/> :
                                 <NavbarIndex goToIndex={this.goToIndex}/>
                         }
 
@@ -228,9 +228,11 @@ class App extends Component {
 
 export default withTracker(() => {
     Meteor.subscribe("appusers");
+    Meteor.subscribe("tossUps");
 
     return {
         currentUser: Meteor.user(),
+        sorteos: []
     }
 })(App);
 

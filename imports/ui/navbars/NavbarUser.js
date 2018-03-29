@@ -28,6 +28,12 @@ export default class NavbarUser extends Component {
             textAlign: "center",
             fontWeight: "bold"
         };
+        let sorteos=[];
+        let i=0;
+        this.props.sorteos.forEach((sorteo)=>{
+            sorteos.append(<MenuItem primaryText={sorteo} style={titleStyle} key={i++}
+            />)
+        });
         return (
             <div>
             <MuiThemeProvider>
@@ -49,10 +55,7 @@ export default class NavbarUser extends Component {
                             <Divider/>
                             <MenuItem primaryText="Mis Sorteos" style={boldStyle}
                             />
-                            <MenuItem primaryText="Sorteo 1" style={titleStyle}
-                            />
-                            <MenuItem primaryText="Sorteo 2"  style={titleStyle}
-                            />
+                            {sorteos}
                         </IconMenu>
                     }
                     style={background}

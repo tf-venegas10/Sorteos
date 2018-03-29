@@ -13,9 +13,11 @@ if (Meteor.isServer) {
     Meteor.publish('tossUps', function tasksPublication(userId) {
 
          let all=TossUps.find();
-            all.filter((tossup)=>{
-                return (tossup.owners.indexOf(userId)!==-1);
-            });
+            if (all && all.length>0) {
+                all.filter((tossup) => {
+                    return (tossup.owners.indexOf(userId) !== -1);
+                });
+            }
         return all;
     });
 
