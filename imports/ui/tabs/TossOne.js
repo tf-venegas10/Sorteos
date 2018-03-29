@@ -54,10 +54,13 @@ export default class TossOne extends Component {
 
         let opt = [];
         let i = 0;
-        let totalWeight = this.props.weights.reduce((a, w) => a + w);
+        let totalWeight=0;
+        if(this.props.weights.length>0) {
+            totalWeight = this.props.weights.reduce((a, w) => a + w);
+        }
         const opStyle = {
             color: "#FFFFFF"
-        }
+        };
         this.props.options.forEach((op) => {
                 i += 1;
                 opt.push(<ListItem primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}

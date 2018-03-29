@@ -9,7 +9,8 @@ import {white} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Divider from 'material-ui/Divider';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import AddButton from "../adding/AddButton";
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 
 /**
  * This className contains all needed to display the nav bar on top.
@@ -28,6 +29,7 @@ export default class NavbarUser extends Component {
             fontWeight: "bold"
         };
         return (
+            <div>
             <MuiThemeProvider>
                 <AppBar
                     title={<img className="col-4 col-sm-2 col-md-1" src="name.png" alt="Toss-App"/>}
@@ -43,7 +45,7 @@ export default class NavbarUser extends Component {
                                       onClick={this.props.onLogoutCallback}/>
                             <Divider/>
                             <MenuItem primaryText="Nuevo Sorteo" leftIcon={<ContentAdd/>}
-                                      />
+                                      onClick={this.props.openNew}/>
                             <Divider/>
                             <MenuItem primaryText="Mis Sorteos" style={boldStyle}
                             />
@@ -57,6 +59,36 @@ export default class NavbarUser extends Component {
                     titleStyle={titleStyle}
                 />
             </MuiThemeProvider>
+            <MuiThemeProvider>
+                <Dialog
+                    actions={[
+
+                        <FlatButton
+                            label="Add New"
+                            primary={true}
+                            keyboardFocused={true}
+                            onClick={this.props.handleNew}
+                            ariaLabel="Boton para agragar accion"
+                        />,
+                        <FlatButton
+                            label="Cancel"
+                            primary={true}
+                            onClick={this.props.handleClose}
+                            ariaLabel="Cancelar"
+                        />
+                    ]}
+                    modal={false}
+                    open={this.props.open}
+                    onRequestClose={this.props.handleClose}
+                        >
+                        <label htmlFor="textInput">Nombre</label><input id="textInput" type="text"
+                    onChange={this.props.onTextChange}
+                    />
+
+            </Dialog>
+            </MuiThemeProvider>
+            </div>
+
         );
     }
 }

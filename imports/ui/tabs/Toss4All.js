@@ -129,8 +129,14 @@ export default class Toss4All extends Component {
         let opt = [];
         let persons = [];
         let i = 0;
-        let totalWeight = this.props.weights.reduce((a, w) => a + w);
-        let totalPWeight = this.props.weightsPersons.reduce((a, w) => a + w);
+        let totalWeight=0;
+        if(this.props.weights.length>0) {
+            totalWeight = this.props.weights.reduce((a, w) => a + w);
+        }
+        let totalPWeight= 0;
+        if(this.props.weightsPersons.length>0) {
+            totalWeight =  this.props.weightsPersons.reduce((a,w)=>a+w);
+        }
         this.props.options.forEach((op) => {
                 i += 1;
                 opt.push(<ListItem primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}

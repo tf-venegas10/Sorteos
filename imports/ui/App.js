@@ -9,6 +9,8 @@ import LoginManager from './authentication/LoginManager.js';
 import RegisterManager from "./authentication/RegisterManager.js";
 import Selector from "./tabs/Selector.js";
 import Footer from "./footer/Footer.js";
+import {TossUps} from "../api/tossUps"
+import { Meteor } from 'meteor/meteor';
 
 
 import Users from '../api/users.js';
@@ -18,6 +20,7 @@ class App extends Component {
         super(props);
         this.state = {
             location: "index",
+            newToss: false,
             actions: [
                 "drink one",
                 "drink two",
@@ -35,7 +38,8 @@ class App extends Component {
             weightsPersons: [1, 1, 1],
             add: false,
             inputText: "",
-            inputNumb: 1
+            inputNumb: 1,
+            inputName: ""
         };
 
         this.goToIndex = this.goToIndex.bind(this);
@@ -50,6 +54,10 @@ class App extends Component {
         this.onNumberChange = this.onNumberChange.bind(this);
         this.onAddPerson = this.onAddPerson.bind(this);
         this.onAddAction = this.onAddAction.bind(this);
+        this.handleNew = this.handleNew.bind(this);
+        this.handleNotNew = this.handleNotNew.bind(this);
+        this.nameChange = this.nameChange.bind(this);
+        this.handleNewTossUp = this.handleNewTossUp.bind(this);
     }
 
     goToIndex() {
@@ -73,8 +81,25 @@ class App extends Component {
     }
 
     handleLogoutSubmit() {
-        console.log("login out");
         Meteor.logout();
+    }
+
+    handleNew() {
+        this.setState({newToss: true});
+    }
+
+    handleNotNew() {
+        this.setState({newToss: false});
+    }
+
+    handleNewTossUp() {
+        this.setState({newToss: false});
+        this.setState({actions: [], persons: [], weightsPersons: [], weightsActions: []});
+        Meteor.call('tossUps.insert',this.state.inputName);
+    }
+
+    nameChange(e) {
+        this.setState({inputName: e.target.value})
     }
 
     adding() {
@@ -131,6 +156,7 @@ class App extends Component {
         }
     }
 
+
     onTextChange(e) {
         this.setState({inputText: e.target.value});
     }
@@ -173,7 +199,9 @@ class App extends Component {
                     <div className={this.props.currentUser ? null : "main-content center-items"}>
                         {
                             this.props.currentUser ?
-                                <NavbarUser onLogoutCallback={this.handleLogoutSubmit}/> :
+                                <NavbarUser onLogoutCallback={this.handleLogoutSubmit} open={this.state.newToss}
+                                            handleClose={this.handleNotNew} onTextChange={this.nameChange}
+                                            handleNew={this.handleNewTossUp} openNew={this.handleNew}/> :
                                 <NavbarIndex goToIndex={this.goToIndex}/>
                         }
 
