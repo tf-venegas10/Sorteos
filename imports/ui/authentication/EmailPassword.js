@@ -7,6 +7,10 @@ import "./Auth.css"
 
 export default class EmailPassword extends Component {
 
+    handleUsername(e){
+        this.props.onUsernameChange($("#username").val());
+    }
+
     handleEmail(e) {
         this.props.onEmailChange($("#email" + this.props.typeAuth).val());
     }
@@ -25,6 +29,18 @@ export default class EmailPassword extends Component {
                 <div className="card auth-card">
                     <h2 className="card-header auth-card-title">{this.props.typeAuth}</h2>
                     <form onSubmit={this.props.submitAction}>
+                        {
+                            this.props.typeAuth === "Register" ?
+                                <div className="form-group">
+                                    <label htmlFor="username">Username:</label>
+                                    <input placeholder="Username" type="username" id="username"
+                                           className="form-control"
+                                           onChange={this.handleUsername.bind(this)}
+                                           aria-label="Text input for username"
+                                    />
+                                </div>
+                                : null
+                        }
                         <div className="form-group">
                             <label htmlFor="email">Email:</label>
                             <input placeholder="Email" type="email" id={"email" + this.props.typeAuth}
@@ -71,6 +87,7 @@ export default class EmailPassword extends Component {
 EmailPassword.propTypes = {
     submitAction: PropTypes.func.isRequired,
     typeAuth: PropTypes.string.isRequired,
+    onUsernameChange: PropTypes.func.isRequired,
     onEmailChange: PropTypes.func.isRequired,
     onPswdChange: PropTypes.func.isRequired,
     disableButton: PropTypes.bool.isRequired,

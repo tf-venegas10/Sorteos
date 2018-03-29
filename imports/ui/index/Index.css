@@ -6,11 +6,25 @@ Index styles
     height: 90%;
 }
 
-.to-login{
+.slogan{
     color: rgb(183, 183, 157);
+    font-family: 'Nova Slim', cursive;
+    font-size: 60px;
+    padding-top: 5%;
+}
+
+.btn-started{
+    background-color: #1498D5;
+    color: white;
+    font-family: 'Hind Madurai', sans-serif;
+}
+
+.to-login{
+    color: #D73A6F;
+    font-family: 'Lora', serif;
 }
 
 .to-login:hover{
-    color: #1498D5;
+    color: rgb(183, 183, 157);
     cursor: pointer;
 }

@@ -15,7 +15,7 @@ export default class AddButton extends Component {
 
         return (
             <MuiThemeProvider>
-                <FloatingActionButton onClick={this.props.adding} style={background} ariaLabel="Boton para agregar mas participantes o acciones">
+                <FloatingActionButton onClick={this.props.adding} style={background} aria-label="Boton para agregar mas participantes o acciones">
                     <ContentAdd/>
                 </FloatingActionButton>
             </MuiThemeProvider>

@@ -4,14 +4,11 @@ import {withTracker} from "meteor/react-meteor-data";
 import "./App.css";
 import NavbarIndex from './navbars/NavbarIndex.js';
 import NavbarUser from './navbars/NavbarUser.js';
-import Index from './Index.js';
-import LoginManager from './LoginManager.js';
-import RegisterManager from "./RegisterManager.js";
+import Index from './index/Index.js';
+import LoginManager from './authentication/LoginManager.js';
+import RegisterManager from "./authentication/RegisterManager.js";
 import Selector from "./tabs/Selector.js";
-import Footer from "./Footer.js";
-
-
-import Users from '../api/users.js';
+import Footer from "./footer/Footer.js";
 
 class App extends Component {
     constructor(props) {
@@ -41,7 +38,6 @@ class App extends Component {
         this.goToIndex = this.goToIndex.bind(this);
         this.goToRegister = this.goToRegister.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
-        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
         this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
         this.adding = this.adding.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -62,14 +58,6 @@ class App extends Component {
 
     goToLogin() {
         this.setState({location: "login"});
-    }
-
-    handleLoginSubmit() {
-        Users.insert({
-            createdAt: new Date(), // current time
-            owner: Meteor.userId(),           // _id of logged in user
-            username: Meteor.user().username,  // username of logged in user
-        });
     }
 
     handleLogoutSubmit() {
@@ -207,6 +195,8 @@ class App extends Component {
 }
 
 export default withTracker(() => {
+    Meteor.subscribe("appusers");
+
     return {
         currentUser: Meteor.user(),
     }
