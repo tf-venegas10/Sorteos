@@ -10,7 +10,7 @@ import RegisterManager from "./authentication/RegisterManager.js";
 import Selector from "./tabs/Selector.js";
 import Footer from "./footer/Footer.js";
 import {TossUps} from "../api/tossUps"
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 
 
 import Users from '../api/users.js';
@@ -87,7 +87,7 @@ class App extends Component {
     handleNewTossUp() {
         this.setState({newToss: false});
         this.setState({actions: [], persons: [], weightsPersons: [], weightsActions: []});
-        Meteor.call('tossUps.insert',this.state.inputName);
+        Meteor.call('tossUps.insert', this.state.inputName);
     }
 
     nameChange(e) {
@@ -196,28 +196,25 @@ class App extends Component {
                                             handleNew={this.handleNewTossUp} openNew={this.handleNew}/> :
                                 <NavbarIndex goToIndex={this.goToIndex}/>
                         }
-
-                        {
-                            this.props.currentUser ?
-                                <Selector adding={this.adding} add={this.state.add}
-                                          actions={this.state.actions} persons={this.state.persons}
-                                          weightsActions={this.state.weightsActions}
-                                          weightsPersons={this.state.weightsPersons}
-                                          handleClose={this.handleClose}
-                                          handleDelete={this.handleDelete} onTextChange={this.onTextChange}
-                                          onNumberChange={this.onNumberChange}
-                                          onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/> :
-                                <div className="center-items body-content">
-                                    {
-                                        this.state.location === "index" ?
-                                            <Index handleGetStarted={this.goToRegister}
-                                                   goToLogin={this.goToLogin}/> :
-                                            this.state.location === "login" ?
-                                                <LoginManager/> :
-                                                <RegisterManager/>
-                                    }
-                                </div>
-                        }
+                        <div className="center-items body-content">
+                            {
+                                this.props.currentUser ?
+                                    <Selector adding={this.adding} add={this.state.add}
+                                              actions={this.state.actions} persons={this.state.persons}
+                                              weightsActions={this.state.weightsActions}
+                                              weightsPersons={this.state.weightsPersons}
+                                              handleClose={this.handleClose}
+                                              handleDelete={this.handleDelete} onTextChange={this.onTextChange}
+                                              onNumberChange={this.onNumberChange}
+                                              onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/> :
+                                    this.state.location === "index" ?
+                                        <Index handleGetStarted={this.goToRegister}
+                                               goToLogin={this.goToLogin}/> :
+                                        this.state.location === "login" ?
+                                            <LoginManager/> :
+                                            <RegisterManager/>
+                            }
+                        </div>
                     </div>
                 </div>
                 <Footer goToIndex={this.goToIndex}/>

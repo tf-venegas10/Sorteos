@@ -1,8 +1,8 @@
 import {Meteor} from 'meteor/meteor';
-
 import {Mongo} from 'meteor/mongo';
-
 import {check} from 'meteor/check';
+
+import {Users} from "./users.js";
 
 export const TossUps = new Mongo.Collection('tossUps');
 
@@ -12,10 +12,10 @@ if (Meteor.isServer) {
 
     Meteor.publish('tossUps', function tasksPublication(userId) {
 
-         let all=TossUps.find();
-            all.filter((tossup)=>{
-                return (tossup.owners.indexOf(userId)!==-1);
-            });
+        let all = TossUps.find();
+        all.filter((tossup) => {
+            return (tossup.owners.indexOf(userId) !== -1);
+        });
         return all;
     });
 
@@ -64,22 +64,35 @@ Meteor.methods({
         check(tossUpId, String);
         check(userName, String);
 
-        let thisToss= TossUps.findOne(tossUpId);
-        let persons= thisToss.persons;
-        persons.push({userName:userName, id: personId});
+        let thisToss = TossUps.findOne(tossUpId);
+        let persons = thisToss.persons;
+        persons.push({userName: userName, id: personId});
         TossUps.update(tossUpId, {$set: {persons: persons}});
 
     },
+
     'tossUps.addAction'(tossUpId, action) {
 
-            check(tossUpId, String);
-            check(action, String);
+        check(tossUpId, String);
+        check(action, String);
 
-            let thisToss= TossUps.findOne(tossUpId);
-            let actions= thisToss.actions;
-            actions.push(action);
-            TossUps.update(tossUpId, {$set: {actions: actions}});
+        let thisToss = TossUps.findOne(tossUpId);
+        let actions = thisToss.actions;
+        actions.push(action);
+        TossUps.update(tossUpId, {$set: {actions: actions}});
 
-        },
+    },
+
+    'tossUps.addOwner'(tossUpId, username) {
+
+        check(tossUpId, String);
+        check(username, String);
+
+        let thisToss = TossUps.findOne(tossUpId);
+        let owners = thisToss.owners;
+        let userId = Users.findOne({username: username}).userId;
+        owners.push(userId);
+        TossUps.update(tossUpId, {$set: {owners: owners}});
+    },
 
 });

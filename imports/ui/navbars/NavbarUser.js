@@ -68,13 +68,13 @@ export default class NavbarUser extends Component {
                             primary={true}
                             keyboardFocused={true}
                             onClick={this.props.handleNew}
-                            ariaLabel="Boton para agragar accion"
+                            aria-label="Boton para agragar accion"
                         />,
                         <FlatButton
                             label="Cancel"
                             primary={true}
                             onClick={this.props.handleClose}
-                            ariaLabel="Cancelar"
+                            aria-label="Cancelar"
                         />
                     ]}
                     modal={false}

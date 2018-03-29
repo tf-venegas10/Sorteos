@@ -87,9 +87,7 @@ export default class EmailPassword extends Component {
 EmailPassword.propTypes = {
     submitAction: PropTypes.func.isRequired,
     typeAuth: PropTypes.string.isRequired,
-    onUsernameChange: PropTypes.func.isRequired,
     onEmailChange: PropTypes.func.isRequired,
     onPswdChange: PropTypes.func.isRequired,
     disableButton: PropTypes.bool.isRequired,
-    onPswdVerChange: PropTypes.func,
 };
