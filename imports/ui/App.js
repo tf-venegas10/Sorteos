@@ -6,8 +6,9 @@ import NavbarIndex from './navbars/NavbarIndex.js';
 import NavbarUser from './navbars/NavbarUser.js';
 import Index from './Index.js';
 import LoginManager from './LoginManager.js';
-import RegisterManager from "./RegisterManager";
-import Selector from "./Selector";
+import RegisterManager from "./RegisterManager.js";
+import Selector from "./Selector.js";
+import Footer from "./Footer.js";
 
 import Users from '../api/users.js';
 
@@ -50,7 +51,7 @@ class App extends Component {
         this.onAddAction = this.onAddAction.bind(this);
     }
 
-    goToIndex(){
+    goToIndex() {
         this.setState({location: "index"});
     }
 
@@ -166,36 +167,39 @@ class App extends Component {
     render() {
 
         return (
-            <div className={this.props.currentUser ? "user-banner" : "main-banner"}>
-                <div className={this.props.currentUser ? null : "main-content center-items"}>
-                    {
-                        this.props.currentUser ?
-                            <NavbarUser onLogoutCallback={this.handleLogoutSubmit}/> :
-                            <NavbarIndex goToIndex={this.goToIndex}/>
-                    }
+            <div>
+                <div className={this.props.currentUser ? "user-banner" : "main-banner"}>
+                    <div className={this.props.currentUser ? null : "main-content center-items"}>
+                        {
+                            this.props.currentUser ?
+                                <NavbarUser onLogoutCallback={this.handleLogoutSubmit}/> :
+                                <NavbarIndex goToIndex={this.goToIndex}/>
+                        }
 
-                    {
-                        this.props.currentUser ?
-                            <Selector adding={this.adding} add={this.state.add}
-                                      actions={this.state.actions} persons={this.state.persons}
-                                      weightsActions={this.state.weightsActions}
-                                      weightsPersons={this.state.weightsPersons}
-                                      handleClose={this.handleClose}
-                                      handleDelete={this.handleDelete} onTextChange={this.onTextChange}
-                                      onNumberChange={this.onNumberChange}
-                                      onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/> :
-                            <div className="center-items body-content">
-                                {
-                                    this.state.location === "index" ?
-                                        <Index handleGetStarted={this.goToRegister}
-                                               goToLogin={this.goToLogin}/> :
-                                        this.state.location === "login" ?
-                                            <LoginManager/> :
-                                            <RegisterManager/>
-                                }
-                            </div>
-                    }
+                        {
+                            this.props.currentUser ?
+                                <Selector adding={this.adding} add={this.state.add}
+                                          actions={this.state.actions} persons={this.state.persons}
+                                          weightsActions={this.state.weightsActions}
+                                          weightsPersons={this.state.weightsPersons}
+                                          handleClose={this.handleClose}
+                                          handleDelete={this.handleDelete} onTextChange={this.onTextChange}
+                                          onNumberChange={this.onNumberChange}
+                                          onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/> :
+                                <div className="center-items body-content">
+                                    {
+                                        this.state.location === "index" ?
+                                            <Index handleGetStarted={this.goToRegister}
+                                                   goToLogin={this.goToLogin}/> :
+                                            this.state.location === "login" ?
+                                                <LoginManager/> :
+                                                <RegisterManager/>
+                                    }
+                                </div>
+                        }
+                    </div>
                 </div>
+                <Footer goToIndex={this.goToIndex}/>
             </div>
         );
     }

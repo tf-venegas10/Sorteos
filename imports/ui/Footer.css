@@ -1,0 +1,28 @@
+/*-------------------------
+Footer styles
+-------------------------*/
+
+footer{
+    background-color: #373737;
+    color: #1498D5;
+}
+
+.img-footer{
+    padding: 5%;
+}
+
+.img-footer:hover{
+    cursor: pointer;
+}
+
+.fill-parent{
+    height: 100%;
+}
+
+.github-link{
+    color: #1498D5;
+}
+
+.github-link:hover{
+    color: rgb(183, 183, 157);
+}
