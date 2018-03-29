@@ -10,7 +10,7 @@ export default class AddButton extends Component {
 
     render() {
         const background={
-            backgroundColor: '#149bda'
+            backgroundColor: '#1498D5'
         };
 
         return (
