@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Roulette from "./Roulette.js";
-import Dialog from './CustomDialog.js';
-import AddButton from "./AddButton";
+import Roulette from "../roulette/Roulette.js";
+import Dialog from '../adding/CustomDialog.js';
+import AddButton from "../adding/AddButton";
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
@@ -13,14 +13,13 @@ import Snackbar from 'material-ui/Snackbar';
 
 // App component - represents the random person sorting app
 
-export default class TossPandA extends Component {
+export default class TossOne extends Component {
     constructor(props) {
         super(props);
         this.state = {
             selected: [],
             spin: false,
-            value: "",
-            chosenOne: null
+            value: ""
         };
         this.handleRouletteSpin = this.handleRouletteSpin.bind(this);
         this.onSpin = this.onSpin.bind(this);
@@ -31,15 +30,15 @@ export default class TossPandA extends Component {
     handleRouletteSpin(value) {
         this.setState((prevState) => {
             let actions = prevState.selected;
-            actions.push({person: prevState.chosenOne, action: value});
+            actions.push(value);
             return ({selected: actions, value: value});
         })
 
     };
 
     //TODO: handle request delete
-    handleRequestDelete(i, action) {
-        this.props.handleDelete(i - 1, action);
+    handleRequestDelete(i) {
+        this.props.handleDelete(i - 1, this.props.action);
     };
 
     click() {
@@ -47,52 +46,45 @@ export default class TossPandA extends Component {
     }
 
     onSpin(callback) {
-        //let's choose the lucky person
-        let arr=[];
-        let i;
-        let j=0;
-        this.props.weightsPersons.forEach((p)=>{
-           for(i=0; i<p; i++){
-               arr.push(this.props.persons[j]);
-           }
-           j++;
-        });
-        let x = Math.round(Math.random() * (arr.length-1));
-        let chosenOne = arr[x];
-        this.setState({spin: false, value: "", chosenOne: chosenOne},
+        this.setState({spin: false, value: ""},
             callback);
     }
 
     render() {
 
         let opt = [];
-        let persons = [];
         let i = 0;
-        let totalWeight= this.props.weights.reduce((a,w)=>a+w);
-        let totalPWeight= this.props.weightsPersons.reduce((a,w)=>a+w);
+        let totalWeight = this.props.weights.reduce((a, w) => a + w);
+        const opStyle = {
+            color: "#FFFFFF"
+        }
         this.props.options.forEach((op) => {
                 i += 1;
-                opt.push(<ListItem primaryText={op +" :"+Math.round(this.props.weights[i-1]/totalWeight*100)+"%"} key={i}
-                                   rightIcon={<ActionDelete onClick={this.handleRequestDelete.bind(this, i, true)}/>}/>);
-            }
-        );
-        i=0;
-        this.props.persons.forEach((op) => {
-                i += 1;
-                persons.push(<ListItem primaryText={op+" :"+Math.round(this.props.weights[i-1]/totalPWeight*100)+"%"} key={i}
-                                       rightIcon={<ActionDelete
-                                           onClick={this.handleRequestDelete.bind(this, i, false)}/>}/>);
+                opt.push(<ListItem primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}
+                                   key={i}
+                                   stylye={opStyle}
+                                   rightIcon={
+                                       <ActionDelete
+                                       onClick={this.handleRequestDelete.bind(this, i)}
+                                       style={opStyle}
+                                       />
+                                   }
+                />);
             }
         );
         i = 0;
         let results = [];
         this.state.selected.forEach((op) => {
                 i += 1;
-                results.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
+                results.push(<ListItem primaryText={op} key={i}/>);
             }
         );
         const ink = {
             backgroundColor: '#149bda'
+        };
+
+        const paperInk = {
+            backgroundColor: "#BBDBB8",
         };
 
         return (
@@ -105,19 +97,19 @@ export default class TossPandA extends Component {
                 </div>
                 <div className="container-fluid row">
 
-                    <div className="col-sm-8 col-12">
+                    <div className="col-sm-10 col-12">
                         <div className="roulette-container">
                             <MuiThemeProvider>
-                                <RaisedButton label="Spin" style={ink} onClick={this.click} ariaLabel="Boton girar Ruleta"/>
+                                <RaisedButton className="SpinButton" label="Spin" style={ink} onClick={this.click} aria-label="Boton girar Ruleta"/>
                             </MuiThemeProvider>
                         </div>
                         <Roulette options={this.props.options} baseSize={250} spin={this.state.spin}
                                   onSpin={this.onSpin}
                                   onComplete={this.handleRouletteSpin} weights={this.props.weights}/>
                     </div>
-                    <div className="col-sm-2 col-6">
+                    <div className="col-sm-2 col-8">
                         <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false}>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
                                     {opt}
                                 </List>
@@ -129,32 +121,21 @@ export default class TossPandA extends Component {
                         </MuiThemeProvider>
 
                     </div>
-                    <div className="col-sm-2 col-6">
-                        <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false}>
-                                <List>
-                                    {persons}
-                                </List>
-                                <Divider/>
-                            </Paper>
-                        </MuiThemeProvider>
-
-                    </div>
 
 
                 </div>
                 <Dialog open={this.props.add} handleClose={this.props.handleClose} action={this.props.action}
                         person={this.props.person} onTextChange={this.props.onTextChange}
-                        onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction} onAddPerson={this.props.onAddPerson}/>
+                        onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
+                        onAddPerson={this.props.onAddPerson}/>
                 <MuiThemeProvider>
                     <Snackbar
                         open={this.state.value !== ""}
-                        message={this.state.chosenOne + ": " + this.state.value}
+                        message={this.state.value}
                         autoHideDuration={4000}
                         onRequestClose={this.handleRequestClose}
-                        bodyStyle={{ height: 200, width: 200, flexGrow: 0 }}
-                        contentStyle={{ fontSize:30}}
-                    />
+                        bodyStyle={{height: 200, width: 200, flexGrow: 0}}
+                        contentStyle={{fontSize: 30}}/>
                 </MuiThemeProvider>
             </div>
 

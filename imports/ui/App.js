@@ -7,7 +7,7 @@ import NavbarUser from './navbars/NavbarUser.js';
 import Index from './Index.js';
 import LoginManager from './LoginManager.js';
 import RegisterManager from "./RegisterManager.js";
-import Selector from "./Selector.js";
+import Selector from "./tabs/Selector.js";
 import Footer from "./Footer.js";
 
 import Users from '../api/users.js';

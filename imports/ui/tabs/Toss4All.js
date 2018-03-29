@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Roulette from "./Roulette.js";
-import Dialog from './CustomDialog.js';
-import AddButton from "./AddButton";
+import Roulette from "../roulette/Roulette.js";
+import Dialog from '../adding/CustomDialog.js';
+import AddButton from "../adding/AddButton";
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
