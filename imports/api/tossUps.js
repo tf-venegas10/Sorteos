@@ -49,7 +49,10 @@ Meteor.methods({
             weightsActions: [],
             createdAt: new Date(),
             owners: [this.userId],
-
+            resultsP:[],
+            resultsA:[],
+            resultsPandAs:[],
+            results4All:[],
             usernames: [userName],//[Meteor.users.findOne(this.userId).username],
 
         });
@@ -89,6 +92,50 @@ Meteor.methods({
         weights.push(weight);
         actions.push(action);
         TossUps.update({_id:tossUpId}, {$set: {actions: actions, weightsActions:weights}});
+
+    },
+     'tossUps.addResultP'(tossUpId, result) {
+
+        check(tossUpId, String);
+        check(action, String);
+
+        let thisToss = TossUps.findOne(tossUpId);
+        let results = thisToss.resultsP;
+        results.push(result);
+        TossUps.update({_id:tossUpId}, {$set: {resultsP: results}});
+
+    },
+    'tossUps.addResultPandAs'(tossUpId, result) {
+
+        check(tossUpId, String);
+        check(action, String);
+
+        let thisToss = TossUps.findOne(tossUpId);
+        let results = thisToss.resultsPandAs;
+        results.push(result);
+        TossUps.update({_id:tossUpId}, {$set: {resultsPandAs: results}});
+
+    },
+    'tossUps.addResultA'(tossUpId, result) {
+
+        check(tossUpId, String);
+        check(action, String);
+
+        let thisToss = TossUps.findOne(tossUpId);
+        let results = thisToss.resultsA;
+        results.push(result);
+        TossUps.update({_id:tossUpId}, {$set: {resultsA: results}});
+
+    },
+    'tossUps.addResult4All'(tossUpId, result) {
+
+        check(tossUpId, String);
+        check(action, String);
+
+        let thisToss = TossUps.findOne(tossUpId);
+        let results = thisToss.results4All;
+        results.push(result);
+        TossUps.update({_id:tossUpId}, {$set: {results4All: results}});
 
     },
     'tossUps.switchActions'(tossUpId, actions, weights){

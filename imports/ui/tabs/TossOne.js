@@ -32,7 +32,8 @@ export default class TossOne extends Component {
             let actions = prevState.selected;
             actions.push(value);
             return ({selected: actions, value: value});
-        })
+        });
+
 
     };
 
