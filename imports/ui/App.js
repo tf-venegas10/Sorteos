@@ -45,6 +45,7 @@ class App extends Component {
         this.nameChange = this.nameChange.bind(this);
         this.handleNewTossUp = this.handleNewTossUp.bind(this);
         this.switchSorteo = this.switchSorteo.bind(this);
+        this.handleTossDelete = this.handleTossDelete.bind(this);
     }
 
     goToIndex() {
@@ -73,7 +74,7 @@ class App extends Component {
 
     handleNewTossUp() {
         this.setState({newToss: false});
-        this.setState({sorteo:0});
+        this.setState({sorteo: 0});
         Meteor.call('tossUps.insert', this.state.inputName);
     }
 
@@ -92,50 +93,52 @@ class App extends Component {
     handleDelete(id, action) {
         let i;
         if (action) {
-            this.setState((prevState) => {
-                let newActions = [];
-                let newAWeights = [];
-                if (id === -1) {
-                    newActions = prevState.actions;
-                    newAWeights = prevState.weightsActions;
-                    newActions.pop();
-                    newAWeights.pop();
-                } else {
-                    for (i = 0; i < prevState.actions.length; i++) {
-                        if (i !== id) {
-                            newActions.push(prevState.actions[i]);
-                            newAWeights.push(prevState.weightsActions[i]);
-                        }
+
+            let newActions = [];
+            let newAWeights = [];
+            if (id === -1) {
+                newActions = this.props.sorteos[this.state.sorteo].actions;
+                newAWeights = this.props.sorteos[this.state.sorteo].weightsActions;
+                newActions.pop();
+                newAWeights.pop();
+            } else {
+                for (i = 0; i < this.props.sorteos[this.state.sorteo].actions.length; i++) {
+                    if (i !== id) {
+                        newActions.push(this.props.sorteos[this.state.sorteo].actions[i]);
+                        newAWeights.push(this.props.sorteos[this.state.sorteo].weightsActions[i]);
                     }
                 }
+            }
+            Meteor.call("tossUps.switchActions", this.props.sorteos[this.state.sorteo]._id, newActions, newAWeights);
 
-                return {actions: newActions, weightsActions: newAWeights};
-            })
         }
         else {
-            this.setState((prevState) => {
-                let newpersons = [];
-                let newAWeights = [];
-                if (id === -1) {
-                    newpersons = prevState.persons;
-                    newAWeights = prevState.weightsPersons;
-                    newpersons.pop();
-                    newAWeights.pop();
-                }
-                else {
-                    for (i = 0; i < prevState.persons.length; i++) {
-                        if (i !== id) {
-                            newpersons.push(prevState.persons[i]);
-                            newAWeights.push(prevState.weightsPersons[i]);
-                        }
+
+            let newpersons = [];
+            let newAWeights = [];
+            if (id === -1) {
+                newpersons = this.props.sorteos[this.state.sorteo].persons;
+                newAWeights = this.props.sorteos[this.state.sorteo].weightsPersons;
+                newpersons.pop();
+                newAWeights.pop();
+            }
+            else {
+                for (i = 0; i < this.props.sorteos[this.state.sorteo].persons.length; i++) {
+                    if (i !== id) {
+                        newpersons.push(this.props.sorteos[this.state.sorteo].persons[i]);
+                        newAWeights.push(this.props.sorteos[this.state.sorteo].weightsPersons[i]);
                     }
                 }
-                return {persons: newpersons, weightsPersons: newAWeights};
-            })
+            }
+            Meteor.call("tossUps.switchPersons", this.props.sorteos[this.state.sorteo]._id, newpersons, newAWeights);
 
         }
     }
-
+    handleTossDelete(id){
+        let idd=this.props.sorteos[id]._id;
+        Meteor.call('tossUps.deleteMyOwnership',idd);
+        this.switchSorteo(0);
+    }
 
     onTextChange(e) {
         this.setState({inputText: e.target.value});
@@ -151,30 +154,18 @@ class App extends Component {
     }
 
     onAddPerson() {
-        /*
-        this.setState((prevState) => {
-            newpersons = prevState.persons;
-            newAWeights = prevState.weightsPersons;
-            newpersons.push(this.state.inputText);
-            newAWeights.push(this.state.inputNumb);
-            return {persons: newpersons, weightsPersons: newAWeights, add: false};
-        });
-        */
-        Meteor.call('tossUps.addPerson',this.props.sorteos[this.state.sorteo].ObjectID, this.state.inputText, this.state.inputNumb);
+        Meteor.call('tossUps.addPerson', this.props.sorteos[this.state.sorteo]._id, this.state.inputText, this.state.inputNumb);
+        this.setState({add: false});
     }
 
     onAddAction() {
-        this.setState((prevState) => {
-            let newActions = prevState.actions;
-            let newAWeights = prevState.weightsActions;
-            newAWeights.push(this.state.inputNumb);
-            newActions.push(this.state.inputText);
-            return {actions: newActions, weightsActions: newAWeights, add: false};
-        });
+        Meteor.call('tossUps.addAction', this.props.sorteos[this.state.sorteo]._id, this.state.inputText, this.state.inputNumb);
+        this.setState({add: false});
 
     }
-    switchSorteo(id){
-        this.setState({sorteo:id});
+
+    switchSorteo(id) {
+        this.setState({sorteo: id});
     }
 
     render() {
@@ -188,17 +179,18 @@ class App extends Component {
                                 <NavbarUser onLogoutCallback={this.handleLogoutSubmit} open={this.state.newToss}
                                             handleClose={this.handleNotNew} onTextChange={this.nameChange}
                                             handleNew={this.handleNewTossUp} openNew={this.handleNew}
-                                            sorteos={this.props.sorteos} switchSorteo={this.switchSorteo}/> :
+                                            sorteos={this.props.sorteos} switchSorteo={this.switchSorteo}
+                                            handleTossDelete={this.handleTossDelete}/> :
                                 <NavbarIndex goToIndex={this.goToIndex}/>
                         }
                         <div className="center-items body-content">
                             {
                                 this.props.currentUser ?
                                     <Selector adding={this.adding} add={this.state.add}
-                                              actions={(this.props.sorteos && this.props.sorteos.length>0)?this.props.sorteos[this.state.sorteo].actions:[]}
-                                              persons={(this.props.sorteos && this.props.sorteos.length>0)?this.props.sorteos[this.state.sorteo].persons:[]}
-                                              weightsActions={(this.props.sorteos && this.props.sorteos.length>0)?this.props.sorteos[this.state.sorteo].weightsActions:[]}
-                                              weightsPersons={(this.props.sorteos && this.props.sorteos.length>0)?this.props.sorteos[this.state.sorteo].weightsPersons:[]}
+                                              actions={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].actions : []}
+                                              persons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].persons : []}
+                                              weightsActions={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].weightsActions : []}
+                                              weightsPersons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].weightsPersons : []}
                                               handleClose={this.handleClose}
                                               handleDelete={this.handleDelete} onTextChange={this.onTextChange}
                                               onNumberChange={this.onNumberChange}

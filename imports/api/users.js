@@ -24,5 +24,8 @@ Meteor.methods({
             username: Meteor.user().username
         });
     },
+    'appusers.find'(userId){
+        return Users.findOne({userId:userId});
+    }
 });
 

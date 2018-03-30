@@ -6,6 +6,7 @@ import {Users} from "./users.js";
 
 export const TossUps = new Mongo.Collection('tossUps');
 
+
 if (Meteor.isServer) {
 
     // This code only runs on the server
@@ -37,18 +38,19 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
 
         }
-
+        let userName = Meteor.call("appusers.find", this.userId);
+        console.log(userName);
 
         TossUps.insert({
             name: name,
             actions: [],
-            persons: [this.userName],
+            persons: [userName],
             weightsPersons: [1],
             weightsActions: [],
             createdAt: new Date(),
             owners: [this.userId],
 
-            usernames: [this.username],//[Meteor.users.findOne(this.userId).username],
+            usernames: [userName],//[Meteor.users.findOne(this.userId).username],
 
         });
 
@@ -67,13 +69,12 @@ Meteor.methods({
         check(tossUpId, String);
         check(userName, String);
 
-        let thisToss = TossUps.findOne({ObjectID:tossUpId});
-        console.log(thisToss);
+        let thisToss = TossUps.findOne({_id:tossUpId});
         let persons = thisToss.persons;
         let weights = thisToss.weightsPersons;
         persons.push(userName);
         weights.push(weight);
-        TossUps.update({ObjectID:tossUpId}, {$set: {persons: persons, weightsPersons:weights}});
+        TossUps.update({_id:tossUpId}, {$set: {persons: persons, weightsPersons:weights}});
 
     },
 
@@ -87,18 +88,20 @@ Meteor.methods({
         let weights = thisToss.weightsActions;
         weights.push(weight);
         actions.push(action);
-        TossUps.update(tossUpId, {$set: {actions: actions, weightsActions:weights}});
+        TossUps.update({_id:tossUpId}, {$set: {actions: actions, weightsActions:weights}});
 
     },
-    'tossUps.switchActions'(tossUpId, actions){
+    'tossUps.switchActions'(tossUpId, actions, weights){
         check(tossUpId, String);
         check(actions, Array);
-        TossUps.update(tossUpId, {$set: {actions: actions}});
+        check(weights,Array);
+        TossUps.update({_id:tossUpId}, {$set: {actions: actions, weightsActions:weights}});
     },
-    'tossUps.switchPersons'(tossUpId, persons){
+    'tossUps.switchPersons'(tossUpId, persons, weights){
         check(tossUpId, String);
         check(persons, Array);
-        TossUps.update(tossUpId, {$set: {persons: persons}});
+        check(weights,Array);
+        TossUps.update({_id:tossUpId}, {$set: {persons: persons, weightsPersons:weights}});
     },
 
     'tossUps.addOwner'(tossUpId, username) {
@@ -110,7 +113,22 @@ Meteor.methods({
         let owners = thisToss.owners;
         let userId = Users.findOne({username: username}).userId;
         owners.push(userId);
-        TossUps.update(tossUpId, {$set: {owners: owners}});
+        TossUps.update({_id:tossUpId}, {$set: {owners: owners}});
     },
+    'tossUps.deleteMyOwnership'(tossUpId){
+        let owners=TossUps.findOne(tossUpId).owners;
+        let newOwners=[];
+        owners.forEach((o)=>{
+            if(o!==this.userId){
+                newOwners.push(o);
+            }
+        });
+        if(newOwners.length===0){
+            TossUps.remove(tossUpId);
+        }
+        else {
+            TossUps.update({_id: tossUpId}, {$set: {owners: newOwners}});
+        }
+    }
 
 });

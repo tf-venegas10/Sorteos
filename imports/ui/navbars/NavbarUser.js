@@ -11,6 +11,7 @@ import Divider from 'material-ui/Divider';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import ActionDelete from 'material-ui/svg-icons/action/delete';
 
 /**
  * This className contains all needed to display the nav bar on top.
@@ -33,6 +34,7 @@ export default class NavbarUser extends Component {
         this.props.sorteos.sort((s1,s2)=>s2.createdAt-s1.createdAt);
         this.props.sorteos.forEach((sorteo)=>{
             sorteos.push(<MenuItem primaryText={sorteo.name} style={titleStyle} key={i++} onClick={this.props.switchSorteo.bind(this,i-1)}
+                                   rightIcon={<ActionDelete onClick={this.props.handleTossDelete.bind(this,i-1)}/>}
             />)
         });
         return (
