@@ -22,21 +22,7 @@ class App extends Component {
         this.state = {
             location: "index",
             newToss: false,
-            actions: [
-                "drink one",
-                "drink two",
-                "drink three",
-                "give drink",
-                "drink bottle",
-                "drink",
-            ],
-            persons: [
-                "Tomas", "Juan", "Zeus"
-            ],
-            weightsActions: [
-                1, 1, 1, 4, 1, 2
-            ],
-            weightsPersons: [1, 1, 1],
+            sorteo: 0,
             add: false,
             inputText: "",
             inputNumb: 1,
@@ -58,6 +44,7 @@ class App extends Component {
         this.handleNotNew = this.handleNotNew.bind(this);
         this.nameChange = this.nameChange.bind(this);
         this.handleNewTossUp = this.handleNewTossUp.bind(this);
+        this.switchSorteo = this.switchSorteo.bind(this);
     }
 
     goToIndex() {
@@ -86,7 +73,7 @@ class App extends Component {
 
     handleNewTossUp() {
         this.setState({newToss: false});
-        this.setState({actions: [], persons: [], weightsPersons: [], weightsActions: []});
+        this.setState({sorteo:0});
         Meteor.call('tossUps.insert', this.state.inputName);
     }
 
@@ -121,6 +108,7 @@ class App extends Component {
                         }
                     }
                 }
+
                 return {actions: newActions, weightsActions: newAWeights};
             })
         }
@@ -163,6 +151,7 @@ class App extends Component {
     }
 
     onAddPerson() {
+        /*
         this.setState((prevState) => {
             newpersons = prevState.persons;
             newAWeights = prevState.weightsPersons;
@@ -170,6 +159,8 @@ class App extends Component {
             newAWeights.push(this.state.inputNumb);
             return {persons: newpersons, weightsPersons: newAWeights, add: false};
         });
+        */
+        Meteor.call('tossUps.addPerson',this.props.sorteos[this.state.sorteo].ObjectID, this.state.inputText, this.state.inputNumb);
     }
 
     onAddAction() {
@@ -182,6 +173,9 @@ class App extends Component {
         });
 
     }
+    switchSorteo(id){
+        this.setState({sorteo:id});
+    }
 
     render() {
 
@@ -193,16 +187,18 @@ class App extends Component {
                             this.props.currentUser ?
                                 <NavbarUser onLogoutCallback={this.handleLogoutSubmit} open={this.state.newToss}
                                             handleClose={this.handleNotNew} onTextChange={this.nameChange}
-                                            handleNew={this.handleNewTossUp} openNew={this.handleNew} sorteos={this.props.sorteos}/> :
+                                            handleNew={this.handleNewTossUp} openNew={this.handleNew}
+                                            sorteos={this.props.sorteos} switchSorteo={this.switchSorteo}/> :
                                 <NavbarIndex goToIndex={this.goToIndex}/>
                         }
                         <div className="center-items body-content">
                             {
                                 this.props.currentUser ?
                                     <Selector adding={this.adding} add={this.state.add}
-                                              actions={this.state.actions} persons={this.state.persons}
-                                              weightsActions={this.state.weightsActions}
-                                              weightsPersons={this.state.weightsPersons}
+                                              actions={(this.props.sorteos && this.props.sorteos.length>0)?this.props.sorteos[this.state.sorteo].actions:[]}
+                                              persons={(this.props.sorteos && this.props.sorteos.length>0)?this.props.sorteos[this.state.sorteo].persons:[]}
+                                              weightsActions={(this.props.sorteos && this.props.sorteos.length>0)?this.props.sorteos[this.state.sorteo].weightsActions:[]}
+                                              weightsPersons={(this.props.sorteos && this.props.sorteos.length>0)?this.props.sorteos[this.state.sorteo].weightsPersons:[]}
                                               handleClose={this.handleClose}
                                               handleDelete={this.handleDelete} onTextChange={this.onTextChange}
                                               onNumberChange={this.onNumberChange}
@@ -225,11 +221,10 @@ class App extends Component {
 
 export default withTracker(() => {
     Meteor.subscribe("appusers");
-    Meteor.subscribe("tossUps");
-
+    Meteor.subscribe("sorteos");
     return {
         currentUser: Meteor.user(),
-        sorteos: []
+        sorteos: TossUps.find().fetch()
     }
 })(App);
 

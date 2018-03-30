@@ -55,26 +55,29 @@ export default class TossOne extends Component {
         let opt = [];
         let i = 0;
         let totalWeight=0;
-        if(this.props.weights.length>0) {
+        if(this.props.weights && this.props.weights.length>0) {
             totalWeight = this.props.weights.reduce((a, w) => a + w);
         }
         const opStyle = {
             color: "#FFFFFF"
         };
-        this.props.options.forEach((op) => {
-                i += 1;
-                opt.push(<ListItem primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}
-                                   key={i}
-                                   stylye={opStyle}
-                                   rightIcon={
-                                       <ActionDelete
-                                       onClick={this.handleRequestDelete.bind(this, i)}
-                                       style={opStyle}
-                                       />
-                                   }
-                />);
-            }
-        );
+        if(this.props.weights&& this.props.weights.length>0 && this.props.options && this.props.options.length>0) {
+            this.props.options.forEach((op) => {
+                    i += 1;
+                    opt.push(<ListItem
+                        primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}
+                        key={i}
+                        stylye={opStyle}
+                        rightIcon={
+                            <ActionDelete
+                                onClick={this.handleRequestDelete.bind(this, i)}
+                                style={opStyle}
+                            />
+                        }
+                    />);
+                }
+            );
+        }
         i = 0;
         let results = [];
         this.state.selected.forEach((op) => {
@@ -100,9 +103,9 @@ export default class TossOne extends Component {
                                 <RaisedButton className="SpinButton" label="Spin" style={ink} onClick={this.click} aria-label="Boton girar Ruleta"/>
                             </MuiThemeProvider>
                         </div>
-                        <Roulette options={this.props.options} baseSize={250} spin={this.state.spin}
+                        <Roulette options={(this.props.options)?this.props.options:[]} baseSize={250} spin={this.state.spin}
                                   onSpin={this.onSpin}
-                                  onComplete={this.handleRouletteSpin} weights={this.props.weights}/>
+                                  onComplete={this.handleRouletteSpin} weights={(this.props.weights)?this.props.weights:[]}/>
                     </div>
                     <div className="col-sm-3 col-8 center-items">
                         <MuiThemeProvider>

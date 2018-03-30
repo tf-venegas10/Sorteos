@@ -30,8 +30,9 @@ export default class NavbarUser extends Component {
         };
         let sorteos=[];
         let i=0;
+        this.props.sorteos.sort((s1,s2)=>s2.createdAt-s1.createdAt);
         this.props.sorteos.forEach((sorteo)=>{
-            sorteos.append(<MenuItem primaryText={sorteo} style={titleStyle} key={i++}
+            sorteos.push(<MenuItem primaryText={sorteo.name} style={titleStyle} key={i++} onClick={this.props.switchSorteo.bind(this,i-1)}
             />)
         });
         return (

@@ -129,30 +129,34 @@ export default class Toss4All extends Component {
         let opt = [];
         let persons = [];
         let i = 0;
-        let totalWeight=0;
-        if(this.props.weights.length>0) {
+        let totalWeight = 0;
+        if (this.props.weights && this.props.weights.length > 0) {
             totalWeight = this.props.weights.reduce((a, w) => a + w);
-        }
-        let totalPWeight= 0;
-        if(this.props.weightsPersons.length>0) {
-            totalWeight =  this.props.weightsPersons.reduce((a,w)=>a+w);
-        }
-        this.props.options.forEach((op) => {
-                i += 1;
-                opt.push(<ListItem primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}
-                                   key={i}
-                                   rightIcon={<ActionDelete onClick={this.handleRequestDelete.bind(this, i, true)}/>}/>);
+
+            let totalPWeight = 0;
+            if (this.props.weightsPersons && this.props.weightsPersons.length > 0) {
+                totalWeight = this.props.weightsPersons.reduce((a, w) => a + w);
+
+                this.props.options.forEach((op) => {
+                        i += 1;
+                        opt.push(<ListItem
+                            primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}
+                            key={i}
+                            rightIcon={<ActionDelete onClick={this.handleRequestDelete.bind(this, i, true)}/>}/>);
+                    }
+                );
+                i = 0;
+                this.props.persons.forEach((op) => {
+                        i += 1;
+                        persons.push(<ListItem
+                            primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalPWeight * 100) + "%"}
+                            key={i}
+                            rightIcon={<ActionDelete
+                                onClick={this.handleRequestDelete.bind(this, i, false)}/>}/>);
+                    }
+                );
             }
-        );
-        i = 0;
-        this.props.persons.forEach((op) => {
-                i += 1;
-                persons.push(<ListItem
-                    primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalPWeight * 100) + "%"} key={i}
-                    rightIcon={<ActionDelete
-                        onClick={this.handleRequestDelete.bind(this, i, false)}/>}/>);
-            }
-        );
+        }
         i = 0;
         let results = [];
         this.state.selected.forEach((sorted) => {
@@ -172,7 +176,7 @@ export default class Toss4All extends Component {
         let finalItem = results.pop();
         i = 0;
         let res = [];
-        if(this.state.selected.length>0) {
+        if (this.state.selected.length > 0) {
             this.state.selected[this.state.selected.length - 1].forEach((op) => {
                 i += 1;
                 res.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);

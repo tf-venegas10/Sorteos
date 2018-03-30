@@ -10,12 +10,12 @@ if (Meteor.isServer) {
 
     // This code only runs on the server
 
-    Meteor.publish('tossUps', function tasksPublication(userId) {
+    Meteor.publish('sorteos', function tasksPublication() {
 
          let all=TossUps.find();
             if (all && all.length>0) {
                 all.filter((tossup) => {
-                    return (tossup.owners.indexOf(userId) !== -1);
+                    return (tossup.owners.indexOf(this.userId) !== -1);
                 });
             }
         return all;
@@ -40,14 +40,15 @@ Meteor.methods({
 
 
         TossUps.insert({
-
             name: name,
             actions: [],
-            persons: [],
+            persons: [this.userName],
+            weightsPersons: [1],
+            weightsActions: [],
             createdAt: new Date(),
             owners: [this.userId],
 
-            usernames: [Meteor.users.findOne(this.userId).username],
+            usernames: [this.username],//[Meteor.users.findOne(this.userId).username],
 
         });
 
@@ -61,28 +62,43 @@ Meteor.methods({
 
     },
 
-    'tossUps.addPerson'(tossUpId, personId, userName) {
+    'tossUps.addPerson'(tossUpId, userName, weight) {
 
         check(tossUpId, String);
         check(userName, String);
 
-        let thisToss = TossUps.findOne(tossUpId);
+        let thisToss = TossUps.findOne({ObjectID:tossUpId});
+        console.log(thisToss);
         let persons = thisToss.persons;
-        persons.push({userName: userName, id: personId});
-        TossUps.update(tossUpId, {$set: {persons: persons}});
+        let weights = thisToss.weightsPersons;
+        persons.push(userName);
+        weights.push(weight);
+        TossUps.update({ObjectID:tossUpId}, {$set: {persons: persons, weightsPersons:weights}});
 
     },
 
-    'tossUps.addAction'(tossUpId, action) {
+    'tossUps.addAction'(tossUpId, action, weight) {
 
         check(tossUpId, String);
         check(action, String);
 
         let thisToss = TossUps.findOne(tossUpId);
         let actions = thisToss.actions;
+        let weights = thisToss.weightsActions;
+        weights.push(weight);
         actions.push(action);
-        TossUps.update(tossUpId, {$set: {actions: actions}});
+        TossUps.update(tossUpId, {$set: {actions: actions, weightsActions:weights}});
 
+    },
+    'tossUps.switchActions'(tossUpId, actions){
+        check(tossUpId, String);
+        check(actions, Array);
+        TossUps.update(tossUpId, {$set: {actions: actions}});
+    },
+    'tossUps.switchPersons'(tossUpId, persons){
+        check(tossUpId, String);
+        check(persons, Array);
+        TossUps.update(tossUpId, {$set: {persons: persons}});
     },
 
     'tossUps.addOwner'(tossUpId, username) {
