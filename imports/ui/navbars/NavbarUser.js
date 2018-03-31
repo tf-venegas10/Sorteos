@@ -13,6 +13,8 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 
+import "./NavbarUser.css";
+
 /**
  * This className contains all needed to display the nav bar on top.
  */
@@ -41,7 +43,7 @@ export default class NavbarUser extends Component {
             <div>
             <MuiThemeProvider>
                 <AppBar
-                    title={<img className="col-4 col-sm-2 col-md-1" src="name.png" alt="Toss-App"/>}
+                    title={<img onClick={this.props.goToIndex} className="col-4 col-sm-2 col-md-1 appbar-logo" src="name.png" alt="Toss-App"/>}
                     iconElementLeft={
                         <IconMenu
                             iconButtonElement={<IconButton aria-label="Boton para expandir el menu"

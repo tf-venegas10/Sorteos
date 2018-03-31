@@ -7,6 +7,7 @@ import NavbarUser from './navbars/NavbarUser.js';
 import Index from './index/Index.js';
 import LoginManager from './authentication/LoginManager.js';
 import RegisterManager from "./authentication/RegisterManager.js";
+import UserIndex from "./index/UserIndex.js";
 import Selector from "./tabs/Selector.js";
 import Footer from "./footer/Footer.js";
 import {TossUps} from "../api/tossUps"
@@ -21,6 +22,7 @@ class App extends Component {
         super(props);
         this.state = {
             location: "index",
+            userLocation: "index",
             newToss: false,
             sorteo: 0,
             add: false,
@@ -30,6 +32,7 @@ class App extends Component {
         };
 
         this.goToIndex = this.goToIndex.bind(this);
+        this.goToIndexUser = this.goToIndexUser.bind(this);
         this.goToRegister = this.goToRegister.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
         this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
@@ -52,6 +55,10 @@ class App extends Component {
         this.setState({location: "index"});
     }
 
+    goToIndexUser(){
+        this.setState({userLocation: "index"});
+    }
+
     goToRegister() {
         this.setState({location: "register"});
     }
@@ -65,7 +72,7 @@ class App extends Component {
     }
 
     handleNew() {
-        this.setState({newToss: true});
+        this.setState({newToss: true, userLocation:"sorteo"});
     }
 
     handleNotNew() {
@@ -134,9 +141,10 @@ class App extends Component {
 
         }
     }
-    handleTossDelete(id){
-        let idd=this.props.sorteos[id]._id;
-        Meteor.call('tossUps.deleteMyOwnership',idd);
+
+    handleTossDelete(id) {
+        let idd = this.props.sorteos[id]._id;
+        Meteor.call('tossUps.deleteMyOwnership', idd);
         this.switchSorteo(0);
     }
 
@@ -165,7 +173,7 @@ class App extends Component {
     }
 
     switchSorteo(id) {
-        this.setState({sorteo: id});
+        this.setState({sorteo: id, userLocation:"sorteo"});
     }
 
     render() {
@@ -180,21 +188,28 @@ class App extends Component {
                                             handleClose={this.handleNotNew} onTextChange={this.nameChange}
                                             handleNew={this.handleNewTossUp} openNew={this.handleNew}
                                             sorteos={this.props.sorteos} switchSorteo={this.switchSorteo}
-                                            handleTossDelete={this.handleTossDelete}/> :
+                                            handleTossDelete={this.handleTossDelete} goToIndex={this.goToIndexUser}
+                                /> :
                                 <NavbarIndex goToIndex={this.goToIndex}/>
                         }
                         <div className="center-items body-content">
                             {
                                 this.props.currentUser ?
-                                    <Selector adding={this.adding} add={this.state.add}
-                                              actions={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].actions : []}
-                                              persons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].persons : []}
-                                              weightsActions={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].weightsActions : []}
-                                              weightsPersons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].weightsPersons : []}
-                                              handleClose={this.handleClose}
-                                              handleDelete={this.handleDelete} onTextChange={this.onTextChange}
-                                              onNumberChange={this.onNumberChange}
-                                              onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}/> :
+                                    this.state.userLocation === "sorteo" ?
+                                        <Selector adding={this.adding} add={this.state.add}
+                                                  actions={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].actions : []}
+                                                  persons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].persons : []}
+                                                  weightsActions={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].weightsActions : []}
+                                                  weightsPersons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].weightsPersons : []}
+                                                  handleClose={this.handleClose}
+                                                  handleDelete={this.handleDelete} onTextChange={this.onTextChange}
+                                                  onNumberChange={this.onNumberChange}
+                                                  onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}
+                                                  sorteoName={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].name : null}
+                                        />
+                                        :
+                                        <UserIndex sorteos={this.props.sorteos}/>
+                                    :
                                     this.state.location === "index" ?
                                         <Index handleGetStarted={this.goToRegister}
                                                goToLogin={this.goToLogin}/> :

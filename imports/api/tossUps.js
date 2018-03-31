@@ -94,6 +94,7 @@ Meteor.methods({
         TossUps.update({_id:tossUpId}, {$set: {actions: actions, weightsActions:weights}});
 
     },
+
      'tossUps.addResultP'(tossUpId, result) {
 
         check(tossUpId, String);
@@ -105,6 +106,7 @@ Meteor.methods({
         TossUps.update({_id:tossUpId}, {$set: {resultsP: results}});
 
     },
+
     'tossUps.addResultPandAs'(tossUpId, result) {
 
         check(tossUpId, String);
@@ -116,6 +118,7 @@ Meteor.methods({
         TossUps.update({_id:tossUpId}, {$set: {resultsPandAs: results}});
 
     },
+
     'tossUps.addResultA'(tossUpId, result) {
 
         check(tossUpId, String);
@@ -127,6 +130,7 @@ Meteor.methods({
         TossUps.update({_id:tossUpId}, {$set: {resultsA: results}});
 
     },
+
     'tossUps.addResult4All'(tossUpId, result) {
 
         check(tossUpId, String);
@@ -138,12 +142,14 @@ Meteor.methods({
         TossUps.update({_id:tossUpId}, {$set: {results4All: results}});
 
     },
+
     'tossUps.switchActions'(tossUpId, actions, weights){
         check(tossUpId, String);
         check(actions, Array);
         check(weights,Array);
         TossUps.update({_id:tossUpId}, {$set: {actions: actions, weightsActions:weights}});
     },
+
     'tossUps.switchPersons'(tossUpId, persons, weights){
         check(tossUpId, String);
         check(persons, Array);
@@ -162,6 +168,7 @@ Meteor.methods({
         owners.push(userId);
         TossUps.update({_id:tossUpId}, {$set: {owners: owners}});
     },
+
     'tossUps.deleteMyOwnership'(tossUpId){
         let owners=TossUps.findOne(tossUpId).owners;
         let newOwners=[];

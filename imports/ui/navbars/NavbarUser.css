@@ -1,0 +1,7 @@
+/*-----------------
+User navbar styles
+ -----------------*/
+
+.appbar-logo:hover{
+    cursor: pointer;
+}

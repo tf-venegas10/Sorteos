@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Tab, Tabs} from 'material-ui/Tabs';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
 import TossOne from "./TossOne";
 import TossPandA from "./TossPandA";
 import Toss4All from "./Toss4All";
@@ -15,6 +16,7 @@ export default class Selector extends Component {
         const background = {
             backgroundColor: '#1498d5'
         };
+
         const ink = {
             backgroundColor: '#BBDBB8'
         };
@@ -24,8 +26,17 @@ export default class Selector extends Component {
             marginBottom: 12,
             fontWeight: 400
         };
+        const titleStyle = {
+            textAlign: "center"
+        };
         return (
             <MuiThemeProvider>
+                <AppBar
+                    title={this.props.sorteoName}
+                    iconElementLeft={<div></div>}
+                    style={background}
+                    titleStyle={titleStyle}
+                />
                 <Tabs inkBarStyle={ink}>
                     <Tab label="Persona" buttonStyle={background}>
                         <TossOne options={this.props.persons} baseSize={250}
