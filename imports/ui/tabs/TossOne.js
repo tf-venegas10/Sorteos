@@ -17,7 +17,7 @@ export default class TossOne extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: [],
+            selected: this.props.selected,
             spin: false,
             value: ""
         };
@@ -33,8 +33,7 @@ export default class TossOne extends Component {
             actions.push(value);
             return ({selected: actions, value: value});
         });
-
-
+        this.props.onSelection(value);
     };
 
     //TODO: handle request delete
@@ -55,14 +54,14 @@ export default class TossOne extends Component {
 
         let opt = [];
         let i = 0;
-        let totalWeight=0;
-        if(this.props.weights && this.props.weights.length>0) {
+        let totalWeight = 0;
+        if (this.props.weights && this.props.weights.length > 0) {
             totalWeight = this.props.weights.reduce((a, w) => a + w);
         }
         const opStyle = {
             color: "#FFFFFF"
         };
-        if(this.props.weights&& this.props.weights.length>0 && this.props.options && this.props.options.length>0) {
+        if (this.props.weights && this.props.weights.length > 0 && this.props.options && this.props.options.length > 0) {
             this.props.options.forEach((op) => {
                     i += 1;
                     opt.push(<ListItem
@@ -105,13 +104,15 @@ export default class TossOne extends Component {
                                     label="Spin" style={ink}
                                     onClick={this.click}
                                     aria-label="Boton girar Ruleta"
-                                    disabled={this.props.options===[]||!this.props.options}
+                                    disabled={this.props.options === [] || !this.props.options}
                                 />
                             </MuiThemeProvider>
                         </div>
-                        <Roulette options={(this.props.options)?this.props.options:[]} baseSize={250} spin={this.state.spin}
+                        <Roulette options={(this.props.options) ? this.props.options : []} baseSize={250}
+                                  spin={this.state.spin}
                                   onSpin={this.onSpin}
-                                  onComplete={this.handleRouletteSpin} weights={(this.props.weights)?this.props.weights:[]}/>
+                                  onComplete={this.handleRouletteSpin}
+                                  weights={(this.props.weights) ? this.props.weights : []}/>
                     </div>
                     <div className="col-sm-3 col-8 center-items">
                         <MuiThemeProvider>

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from "prop-types";
 import {Tab, Tabs} from 'material-ui/Tabs';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -45,7 +46,10 @@ export default class Selector extends Component {
                                  person={true} adding={this.props.adding} handleDelete={this.props.handleDelete}
                                  onTextChange={this.props.onTextChange}
                                  onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                                 onAddPerson={this.props.onAddPerson}/>
+                                 onAddPerson={this.props.onAddPerson}
+                                 onSelection={this.props.handleSelectedTossOnePerson}
+                                 selected={this.props.tossData.resultsP}
+                        />
                     </Tab>
                     <Tab label="Acción" buttonStyle={background}>
                         <TossOne options={this.props.actions} baseSize={250}
@@ -54,7 +58,10 @@ export default class Selector extends Component {
                                  person={false} adding={this.props.adding} handleDelete={this.props.handleDelete}
                                  onTextChange={this.props.onTextChange}
                                  onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                                 onAddPerson={this.props.onAddPerson}/>
+                                 onAddPerson={this.props.onAddPerson}
+                                 onSelection={this.props.handleSelectedTossOneAction}
+                                 selected={this.props.tossData.resultsA}
+                        />
                     </Tab>
                     <Tab label="Persona y Acción" buttonStyle={background}>
                         <TossPandA options={this.props.actions} baseSize={250}
@@ -64,7 +71,10 @@ export default class Selector extends Component {
                                    persons={this.props.persons} weightsPersons={this.props.weightsPersons}
                                    onTextChange={this.props.onTextChange}
                                    onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                                   onAddPerson={this.props.onAddPerson}/>
+                                   onAddPerson={this.props.onAddPerson}
+                                   onSelection={this.props.handleSelectedTossPandA}
+                                   selected={this.props.tossData.resultsPandAs}
+                        />
                     </Tab>
                     <Tab label="Acción para cada persona" buttonStyle={background}>
                         <Toss4All options={this.props.actions} baseSize={250}
@@ -74,7 +84,10 @@ export default class Selector extends Component {
                                   persons={this.props.persons} weightsPersons={this.props.weightsPersons}
                                   onTextChange={this.props.onTextChange}
                                   onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                                  onAddPerson={this.props.onAddPerson}/>
+                                  onAddPerson={this.props.onAddPerson}
+                                  onSelection={this.props.handleSelectedToss4All}
+                                  selected={this.props.tossData.results4All}
+                        />
                     </Tab>
                 </Tabs>
             </MuiThemeProvider>
@@ -83,3 +96,7 @@ export default class Selector extends Component {
     }
 
 }
+
+Selector.propTypes = {
+    tossData: PropTypes.object.isRequired
+};

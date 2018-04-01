@@ -107,18 +107,6 @@ Meteor.methods({
 
     },
 
-    'tossUps.addResultPandAs'(tossUpId, result) {
-
-        check(tossUpId, String);
-        check(action, String);
-
-        let thisToss = TossUps.findOne(tossUpId);
-        let results = thisToss.resultsPandAs;
-        results.push(result);
-        TossUps.update({_id:tossUpId}, {$set: {resultsPandAs: results}});
-
-    },
-
     'tossUps.addResultA'(tossUpId, result) {
 
         check(tossUpId, String);
@@ -128,6 +116,18 @@ Meteor.methods({
         let results = thisToss.resultsA;
         results.push(result);
         TossUps.update({_id:tossUpId}, {$set: {resultsA: results}});
+
+    },
+
+    'tossUps.addResultPandAs'(tossUpId, result) {
+
+        check(tossUpId, String);
+        check(action, String);
+
+        let thisToss = TossUps.findOne(tossUpId);
+        let results = thisToss.resultsPandAs;
+        results.push(result);
+        TossUps.update({_id:tossUpId}, {$set: {resultsPandAs: results}});
 
     },
 

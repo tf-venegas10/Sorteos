@@ -13,12 +13,14 @@ export default class UserIndex extends Component {
         let sorteos = [];
         let i = 0;
         this.props.sorteos.forEach((s)=>{
-            sorteos.push(<ListItem key={i} primaryText={s.name}/>);
+            sorteos.push(<ListItem key={i} primaryText={s.name} onClick={this.props.switchSorteo.bind(this,i)}/>);
             i++;
         });
 
         const paperStyle = {
             width: "70%",
+            backgroundColor: "#BBDBB8",
+            color: "#211836"
         };
 
         return (
@@ -34,7 +36,9 @@ export default class UserIndex extends Component {
                                 Also you can explore and manage your toss-ups. If you haven't made any toss-ups, give it
                                 a
                                 try right now!</p>
-                            <button className="btn btn-new">NEW TOSS-UP</button>
+                            <button
+                                onClick={this.props.openNew}
+                                className="btn btn-new">NEW TOSS-UP</button>
                         </div>
                     </div>
                 </div>

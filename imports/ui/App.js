@@ -49,13 +49,17 @@ class App extends Component {
         this.handleNewTossUp = this.handleNewTossUp.bind(this);
         this.switchSorteo = this.switchSorteo.bind(this);
         this.handleTossDelete = this.handleTossDelete.bind(this);
+        this.handleSelectedTossOnePerson = this.handleSelectedTossOnePerson.bind(this);
+        this.handleSelectedTossOneAction = this.handleSelectedTossOneAction.bind(this);
+        this.handleSelectedTossPandA = this.handleSelectedTossPandA.bind(this);
+        this.handleSelectedToss4All = this.handleSelectedToss4All.bind(this);
     }
 
     goToIndex() {
         this.setState({location: "index"});
     }
 
-    goToIndexUser(){
+    goToIndexUser() {
         this.setState({userLocation: "index"});
     }
 
@@ -72,7 +76,7 @@ class App extends Component {
     }
 
     handleNew() {
-        this.setState({newToss: true, userLocation:"sorteo"});
+        this.setState({newToss: true, userLocation: "sorteo"});
     }
 
     handleNotNew() {
@@ -145,7 +149,7 @@ class App extends Component {
     handleTossDelete(id) {
         let idd = this.props.sorteos[id]._id;
         Meteor.call('tossUps.deleteMyOwnership', idd);
-        this.switchSorteo(0);
+        this.setState({userLocation: "index"});
     }
 
     onTextChange(e) {
@@ -173,7 +177,23 @@ class App extends Component {
     }
 
     switchSorteo(id) {
-        this.setState({sorteo: id, userLocation:"sorteo"});
+        this.setState({sorteo: id, userLocation: "sorteo"});
+    }
+
+    handleSelectedTossOnePerson(selected){
+        Meteor.call("tossUps.addResultP", this.props.sorteos[this.state.sorteo]._id, selected);
+    }
+
+    handleSelectedTossOneAction(selected){
+        Meteor.call("tossUps.addResultA", this.props.sorteos[this.state.sorteo]._id, selected);
+    }
+
+    handleSelectedTossPandA(selected){
+        Meteor.call("tossUps.addResultPandAs", this.props.sorteos[this.state.sorteo]._id, selected);
+    }
+
+    handleSelectedToss4All(selected){
+        Meteor.call("tossUps.addResult4All", this.props.sorteos[this.state.sorteo]._id, selected);
     }
 
     render() {
@@ -206,9 +226,18 @@ class App extends Component {
                                                   onNumberChange={this.onNumberChange}
                                                   onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}
                                                   sorteoName={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].name : null}
+                                                  handleSelectedPerson={this.handleSelectedTossOnePerson}
+                                                  handleSelectedAction={this.handleSelectedTossOneAction}
+                                                  handleSelectedPandA={this.handleSelectedTossPandA}
+                                                  handleSelectedToss4All={this.handleSelectedToss4All}
+                                                  tossData={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo]:[]}
                                         />
                                         :
-                                        <UserIndex sorteos={this.props.sorteos}/>
+                                        <UserIndex
+                                            sorteos={this.props.sorteos}
+                                            openNew={this.handleNew}
+                                            switchSorteo={this.switchSorteo}
+                                        />
                                     :
                                     this.state.location === "index" ?
                                         <Index handleGetStarted={this.goToRegister}
