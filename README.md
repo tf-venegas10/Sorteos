@@ -23,4 +23,4 @@ MIT
 - Juan M. Lovera Lozano
 
 ## Demo
-[https://toss-app.herokuapp.com](toss-app)
+[Toss-app](https://toss-app.herokuapp.com)
