@@ -44,7 +44,7 @@ Meteor.methods({
             name: name,
             actions: [],
             persons: [],
-            weightsPersons: [1],
+            weightsPersons: [],
             weightsActions: [],
             createdAt: new Date(),
             owners: [this.userId],
