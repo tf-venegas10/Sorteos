@@ -96,11 +96,13 @@ export default class Toss4All extends Component {
                 });
             }
         }
-        this.setState((prevState) => {
+        /*this.setState((prevState) => {
             let toSel = prevState.selected;
             toSel.push(selected);
             return {selected: toSel}
-        });
+        });*/
+        Meteor.call("tossUps.addResult4All", this.props.selected._id, selected);
+
     }
 
     /**
@@ -159,25 +161,27 @@ export default class Toss4All extends Component {
         }
         i = 0;
         let results = [];
-        this.state.selected.forEach((sorted) => {
+        if(this.props.selected.results4All) {
+            this.props.selected.results4All.forEach((sorted) => {
 
-                sorted.forEach((op) => {
-                    i += 1;
-                    results.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
-                });
-                i++;
-                results.push(<Divider key={i}/>);
+                    sorted.forEach((op) => {
+                        i += 1;
+                        results.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
+                    });
+                    i++;
+                    results.push(<Divider key={i}/>);
 
-            }
-        );
+                }
+            );
+        }
         const ink = {
             color: '#149bda'
         };
         let finalItem = results.pop();
         i = 0;
         let res = [];
-        if (this.state.selected.length > 0) {
-            this.state.selected[this.state.selected.length - 1].forEach((op) => {
+        if (this.props.selected.results4All && this.props.selected.results4All.length > 0) {
+            this.props.selected.results4All[this.props.selected.results4All.length - 1].forEach((op) => {
                 i += 1;
                 res.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
             });

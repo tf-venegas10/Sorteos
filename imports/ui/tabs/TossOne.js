@@ -29,11 +29,12 @@ export default class TossOne extends Component {
     }
 
     handleRouletteSpin(value) {
-        this.setState((prevState) => {
+      /*  this.setState((prevState) => {
             let actions = prevState.selected;
             actions.push(value);
             return ({selected: actions, value: value});
-        });
+        });*/
+        Meteor.call("tossUps.addResultP", this.props.selected._id, value);
     };
 
     //TODO: handle request delete
@@ -80,11 +81,13 @@ export default class TossOne extends Component {
         }
         i = 0;
         let results = [];
-        this.state.selected.forEach((op) => {
-                i += 1;
-                results.push(<ListItem primaryText={op} key={i}/>);
-            }
-        );
+        if(this.props.selected.resultsP) {
+            this.props.selected.resultsP.forEach((op) => {
+                    i += 1;
+                    results.push(<ListItem primaryText={op} key={i}/>);
+                }
+            );
+        }
         const ink = {
             backgroundColor: '#149bda'
         };

@@ -47,7 +47,7 @@ export default class Selector extends Component {
                                  onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
                                  onAddPerson={this.props.onAddPerson}
                                  onSelection={this.props.handleSelectedTossOnePerson}
-                                 selected={this.props.tossData.resultsP}
+                                 selected={this.props.tossData}
                         />
                     </Tab>
                     <Tab label="Acción" buttonStyle={background}>
@@ -59,7 +59,7 @@ export default class Selector extends Component {
                                  onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
                                  onAddPerson={this.props.onAddPerson}
                                  onSelection={this.props.handleSelectedTossOneAction}
-                                 selected={this.props.tossData.resultsA}
+                                 selected={this.props.tossData}
                         />
                     </Tab>
                     <Tab label="Persona y Acción" buttonStyle={background}>
@@ -72,7 +72,7 @@ export default class Selector extends Component {
                                    onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
                                    onAddPerson={this.props.onAddPerson}
                                    onSelection={this.props.handleSelectedTossPandA}
-                                   selected={this.props.tossData.resultsPandAs}
+                                   selected={this.props.tossData}
                         />
                     </Tab>
                     <Tab label="Acción para cada persona" buttonStyle={background}>
@@ -85,7 +85,7 @@ export default class Selector extends Component {
                                   onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
                                   onAddPerson={this.props.onAddPerson}
                                   onSelection={this.props.handleSelectedToss4All}
-                                  selected={this.props.tossData.results4All}
+                                  selected={this.props.tossData}
                         />
                     </Tab>
                 </Tabs>

@@ -180,19 +180,19 @@ class App extends Component {
         this.setState({sorteo: id, userLocation: "sorteo"});
     }
 
-    handleSelectedTossOnePerson(selected){
+    handleSelectedTossOnePerson(selected) {
         Meteor.call("tossUps.addResultP", this.props.sorteos[this.state.sorteo]._id, selected);
     }
 
-    handleSelectedTossOneAction(selected){
+    handleSelectedTossOneAction(selected) {
         Meteor.call("tossUps.addResultA", this.props.sorteos[this.state.sorteo]._id, selected);
     }
 
-    handleSelectedTossPandA(selected){
+    handleSelectedTossPandA(selected) {
         Meteor.call("tossUps.addResultPandAs", this.props.sorteos[this.state.sorteo]._id, selected);
     }
 
-    handleSelectedToss4All(selected){
+    handleSelectedToss4All(selected) {
         Meteor.call("tossUps.addResult4All", this.props.sorteos[this.state.sorteo]._id, selected);
     }
 
@@ -223,7 +223,7 @@ class App extends Component {
                                                   weightsPersons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].weightsPersons : []}
                                                   handleClose={this.handleClose}
                                                   handleDelete={this.handleDelete} onTextChange={this.onTextChange}
-                                                  tossData={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo]:[]}
+                                                  tossData={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo] : {}}
                                                   onNumberChange={this.onNumberChange}
                                                   onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}
                                                   sorteoName={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].name : null}

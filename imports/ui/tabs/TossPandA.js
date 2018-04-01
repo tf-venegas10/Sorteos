@@ -29,11 +29,12 @@ export default class TossPandA extends Component {
     }
 
     handleRouletteSpin(value) {
-        this.setState((prevState) => {
+        /*this.setState((prevState) => {
             let actions = prevState.selected;
             actions.push({person: prevState.chosenOne, action: value});
             return ({selected: actions, value: value});
-        })
+        })*/
+        Meteor.call("tossUps.addResultPandAs", this.props.selected._id, value);
 
     };
 
@@ -99,11 +100,13 @@ export default class TossPandA extends Component {
         }
         i = 0;
         let results = [];
-        this.state.selected.forEach((op) => {
-                i += 1;
-                results.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
-            }
-        );
+        if(this.props.selected.resultsPandAs) {
+            this.props.selected.resultsPandAs.forEach((op) => {
+                    i += 1;
+                    results.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
+                }
+            );
+        }
         const ink = {
             backgroundColor: '#149bda'
         };

@@ -98,7 +98,7 @@ Meteor.methods({
      'tossUps.addResultP'(tossUpId, result) {
 
         check(tossUpId, String);
-        check(action, String);
+        //do checking
 
         let thisToss = TossUps.findOne(tossUpId);
         let results = thisToss.resultsP;
@@ -110,7 +110,6 @@ Meteor.methods({
     'tossUps.addResultA'(tossUpId, result) {
 
         check(tossUpId, String);
-        check(action, String);
 
         let thisToss = TossUps.findOne(tossUpId);
         let results = thisToss.resultsA;
@@ -122,7 +121,6 @@ Meteor.methods({
     'tossUps.addResultPandAs'(tossUpId, result) {
 
         check(tossUpId, String);
-        check(action, String);
 
         let thisToss = TossUps.findOne(tossUpId);
         let results = thisToss.resultsPandAs;
@@ -134,7 +132,6 @@ Meteor.methods({
     'tossUps.addResult4All'(tossUpId, result) {
 
         check(tossUpId, String);
-        check(action, String);
 
         let thisToss = TossUps.findOne(tossUpId);
         let results = thisToss.results4All;
