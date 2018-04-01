@@ -29,16 +29,11 @@ export default class TossPandA extends Component {
     }
 
     handleRouletteSpin(value) {
-        /*this.setState((prevState) => {
-            let actions = prevState.selected;
-            actions.push({person: prevState.chosenOne, action: value});
-            return ({selected: actions, value: value});
-        })*/
+
         Meteor.call("tossUps.addResultPandAs", this.props.selected._id, {person: this.state.chosenOne, action:value});
 
     };
 
-    //TODO: handle request delete
     handleRequestDelete(i, action) {
         this.props.handleDelete(i - 1, action);
     };

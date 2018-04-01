@@ -39,12 +39,11 @@ Meteor.methods({
 
         }
         let userName = Meteor.call("appusers.find", this.userId);
-        console.log(userName);
-
+        //TODO: add username
         TossUps.insert({
             name: name,
             actions: [],
-            persons: [userName],
+            persons: [],
             weightsPersons: [1],
             weightsActions: [],
             createdAt: new Date(),
@@ -53,7 +52,7 @@ Meteor.methods({
             resultsA:[],
             resultsPandAs:[],
             results4All:[],
-            usernames: [userName],//[Meteor.users.findOne(this.userId).username],
+            usernames: [],//[Meteor.users.findOne(this.userId).username],
 
         });
 
@@ -102,8 +101,12 @@ Meteor.methods({
 
         let thisToss = TossUps.findOne(tossUpId);
         let results = thisToss.resultsP;
-        results.push(result);
-        TossUps.update({_id:tossUpId}, {$set: {resultsP: results}});
+         if(results) {
+             results.push(result);
+         } else{
+             results=[result];
+         }
+         TossUps.update({_id:tossUpId}, {$set: {resultsP: results}});
 
     },
 
@@ -113,7 +116,11 @@ Meteor.methods({
 
         let thisToss = TossUps.findOne(tossUpId);
         let results = thisToss.resultsA;
-        results.push(result);
+        if(results) {
+            results.push(result);
+        } else{
+            results=[result];
+        }
         TossUps.update({_id:tossUpId}, {$set: {resultsA: results}});
 
     },
@@ -124,7 +131,11 @@ Meteor.methods({
 
         let thisToss = TossUps.findOne(tossUpId);
         let results = thisToss.resultsPandAs;
-        results.push(result);
+        if(results) {
+            results.push(result);
+        } else{
+            results=[result];
+        }
         TossUps.update({_id:tossUpId}, {$set: {resultsPandAs: results}});
 
     },
@@ -135,7 +146,11 @@ Meteor.methods({
 
         let thisToss = TossUps.findOne(tossUpId);
         let results = thisToss.results4All;
-        results.push(result);
+        if(results) {
+            results.push(result);
+        } else{
+            results=[result];
+        }
         TossUps.update({_id:tossUpId}, {$set: {results4All: results}});
 
     },

@@ -31,9 +31,11 @@ export default class Index extends Component {
                         </div>
                     </div>
                     <a className="carousel-control-prev" href="#demo" data-slide="prev">
+                        prev
                         <span className="carousel-control-prev-icon"/>
                     </a>
                     <a className="carousel-control-next" href="#demo" data-slide="next">
+                        next
                         <span className="carousel-control-next-icon"/>
                     </a>
                 </div>
@@ -42,6 +44,7 @@ export default class Index extends Component {
                         className="btn btn-started"
                         onClick={this.props.handleGetStarted}
                         aria-label="Getting started with an account button"
+                        style={{color:"black"}}
                     >
                         GET STARTED
                     </button>

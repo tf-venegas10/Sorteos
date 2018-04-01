@@ -27,16 +27,23 @@ class Roulette extends React.Component {
 
     componentDidMount() {
         this.drawRouletteWheel();
+        if(this.props.spin){
+            this.handleOnClick();
+        }
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.options.length!==this.props.options.length) {
             this.drawRouletteWheel();
         }
+
     }
     componentDidUpdate(prevProps){
 
         if(prevProps.options.length!==this.props.options.length) {
             this.drawRouletteWheel();
+        }
+        if(this.props.spin){
+            this.handleOnClick();
         }
     }
 
@@ -180,9 +187,6 @@ class Roulette extends React.Component {
 
     render() {
         const { baseSize } = this.props;
-        if(this.props.spin){
-            this.handleOnClick();
-        }
 
         return (
             <div className="roulette">

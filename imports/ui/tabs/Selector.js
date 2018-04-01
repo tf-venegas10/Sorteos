@@ -30,6 +30,7 @@ export default class Selector extends Component {
             textAlign: "center"
         };
         return (
+            <div>
             <MuiThemeProvider>
                 <AppBar
                     title={this.props.sorteoName}
@@ -37,6 +38,8 @@ export default class Selector extends Component {
                     style={background}
                     titleStyle={titleStyle}
                 />
+            </MuiThemeProvider>
+            <MuiThemeProvider>
                 <Tabs inkBarStyle={ink}>
                     <Tab label="Persona" buttonStyle={background}>
                         <TossOne options={this.props.persons} baseSize={250}
@@ -90,6 +93,7 @@ export default class Selector extends Component {
                     </Tab>
                 </Tabs>
             </MuiThemeProvider>
+            </div>
         );
 
     }

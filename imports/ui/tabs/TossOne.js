@@ -17,7 +17,6 @@ export default class TossOne extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: this.props.selected,
             spin: false,
             value: "",
         };
@@ -29,11 +28,7 @@ export default class TossOne extends Component {
     }
 
     handleRouletteSpin(value) {
-        /*  this.setState((prevState) => {
-              let actions = prevState.selected;
-              actions.push(value);
-              return ({selected: actions, value: value});
-          });*/
+
         if (this.props.action) {
             Meteor.call("tossUps.addResultA", this.props.selected._id, value);
         }
