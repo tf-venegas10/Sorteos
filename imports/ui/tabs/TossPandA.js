@@ -34,7 +34,7 @@ export default class TossPandA extends Component {
             actions.push({person: prevState.chosenOne, action: value});
             return ({selected: actions, value: value});
         })*/
-        Meteor.call("tossUps.addResultPandAs", this.props.selected._id, value);
+        Meteor.call("tossUps.addResultPandAs", this.props.selected._id, {person: this.state.chosenOne, action:value});
 
     };
 
@@ -110,6 +110,9 @@ export default class TossPandA extends Component {
         const ink = {
             backgroundColor: '#149bda'
         };
+        const paperInk = {
+            backgroundColor: "#BBDBB8",
+        };
 
         return (
             <div>
@@ -134,7 +137,7 @@ export default class TossPandA extends Component {
                     </div>
                     <div className="col-sm-2 col-6">
                         <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false}>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
                                     {opt}
                                 </List>
@@ -148,7 +151,7 @@ export default class TossPandA extends Component {
                     </div>
                     <div className="col-sm-2 col-6">
                         <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false}>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
                                     {persons}
                                 </List>

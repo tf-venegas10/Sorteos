@@ -29,12 +29,17 @@ export default class TossOne extends Component {
     }
 
     handleRouletteSpin(value) {
-      /*  this.setState((prevState) => {
-            let actions = prevState.selected;
-            actions.push(value);
-            return ({selected: actions, value: value});
-        });*/
-        Meteor.call("tossUps.addResultP", this.props.selected._id, value);
+        /*  this.setState((prevState) => {
+              let actions = prevState.selected;
+              actions.push(value);
+              return ({selected: actions, value: value});
+          });*/
+        if (this.props.action) {
+            Meteor.call("tossUps.addResultA", this.props.selected._id, value);
+        }
+        else {
+            Meteor.call("tossUps.addResultP", this.props.selected._id, value);
+        }
     };
 
     //TODO: handle request delete
@@ -81,12 +86,23 @@ export default class TossOne extends Component {
         }
         i = 0;
         let results = [];
-        if(this.props.selected.resultsP) {
-            this.props.selected.resultsP.forEach((op) => {
-                    i += 1;
-                    results.push(<ListItem primaryText={op} key={i}/>);
-                }
-            );
+        if (!this.props.action) {
+            if (this.props.selected.resultsP) {
+                this.props.selected.resultsP.forEach((op) => {
+                        i += 1;
+                        results.push(<ListItem primaryText={op} key={i}/>);
+                    }
+                );
+            }
+        }
+        else {
+            if (this.props.selected.resultsA) {
+                this.props.selected.resultsA.forEach((op) => {
+                        i += 1;
+                        results.push(<ListItem primaryText={op} key={i}/>);
+                    }
+                );
+            }
         }
         const ink = {
             backgroundColor: '#149bda'

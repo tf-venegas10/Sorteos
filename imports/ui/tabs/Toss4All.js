@@ -126,6 +126,7 @@ export default class Toss4All extends Component {
     }
 
 
+
     render() {
 
         let opt = [];
@@ -176,6 +177,9 @@ export default class Toss4All extends Component {
         }
         const ink = {
             color: '#149bda'
+        };
+        const paperInk = {
+            backgroundColor: "#BBDBB8",
         };
         let finalItem = results.pop();
         i = 0;
@@ -236,7 +240,7 @@ export default class Toss4All extends Component {
                 <div className="container-fluid row">
                     <div className="col-sm-2 col-6">
                         <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false}>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
                                     <ListItem><h5>History</h5></ListItem>
                                     <Divider/>
@@ -251,7 +255,7 @@ export default class Toss4All extends Component {
                         <div className="roulette-container">
 
                             <MuiThemeProvider>
-                                <Paper zDepth={2} rounded={false}>
+                                <Paper zDepth={2} rounded={false} style={paperInk}>
                                     <List>
                                         {res}
                                     </List>
@@ -263,7 +267,7 @@ export default class Toss4All extends Component {
                     </div>
                     <div className="col-sm-2 col-6">
                         <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false}>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
                                     {opt}
                                 </List>
@@ -273,7 +277,7 @@ export default class Toss4All extends Component {
                     </div>
                     <div className="col-sm-2 col-6">
                         <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false}>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
                                     {persons}
                                 </List>
