@@ -19,5 +19,5 @@ meteor
 MIT
 
 ## Autores
-Tomas F. Venegas Bernal
-Juan M. Lovera Lozano
+- Tomas F. Venegas Bernal
+- Juan M. Lovera Lozano
