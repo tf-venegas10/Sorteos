@@ -223,6 +223,7 @@ class App extends Component {
                                                   weightsPersons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].weightsPersons : []}
                                                   handleClose={this.handleClose}
                                                   handleDelete={this.handleDelete} onTextChange={this.onTextChange}
+                                                  tossData={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo]:[]}
                                                   onNumberChange={this.onNumberChange}
                                                   onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}
                                                   sorteoName={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].name : null}
@@ -230,7 +231,6 @@ class App extends Component {
                                                   handleSelectedAction={this.handleSelectedTossOneAction}
                                                   handleSelectedPandA={this.handleSelectedTossPandA}
                                                   handleSelectedToss4All={this.handleSelectedToss4All}
-                                                  tossData={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo]:[]}
                                         />
                                         :
                                         <UserIndex

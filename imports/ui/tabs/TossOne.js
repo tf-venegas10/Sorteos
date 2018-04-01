@@ -19,8 +19,9 @@ export default class TossOne extends Component {
         this.state = {
             selected: this.props.selected,
             spin: false,
-            value: ""
+            value: "",
         };
+
         this.handleRouletteSpin = this.handleRouletteSpin.bind(this);
         this.onSpin = this.onSpin.bind(this);
         this.click = this.click.bind(this);
@@ -33,7 +34,6 @@ export default class TossOne extends Component {
             actions.push(value);
             return ({selected: actions, value: value});
         });
-        this.props.onSelection(value);
     };
 
     //TODO: handle request delete

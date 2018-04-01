@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from "prop-types";
 import {Tab, Tabs} from 'material-ui/Tabs';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -96,7 +95,3 @@ export default class Selector extends Component {
     }
 
 }
-
-Selector.propTypes = {
-    tossData: PropTypes.object.isRequired
-};
