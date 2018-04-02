@@ -13,6 +13,22 @@ Index styles
     padding-top: 5%;
 }
 
+.subtitle{
+    color: rgb(173, 173, 147);
+    font-family: "Lora",sans-serif;
+    font-size: 45px;
+}
+
+.content{
+    color: rgb(163, 163, 137);
+    font-family: "Hind Madurai",sans-serif;
+    font-size: 45px;
+}
+
+.selected{
+    color: #1498D5;
+}
+
 .btn-started{
     background-color: #1498D5;
     color: white;
