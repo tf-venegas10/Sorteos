@@ -176,9 +176,17 @@ Meteor.methods({
 
         let thisToss = TossUps.findOne(tossUpId);
         let owners = thisToss.owners;
-        let userId = Users.findOne({username: username}).userId;
-        owners.push(userId);
-        TossUps.update({_id:tossUpId}, {$set: {owners: owners}});
+        let user = Users.findOne({username: username});
+        if(user) {
+            if(!owners.includes(user.userId)) {
+                owners.push(user.userId);
+                TossUps.update({_id: tossUpId}, {$set: {owners: owners}});
+            }else{
+                throw new Error("The user specified is already owner");
+            }
+        }else{
+            throw new Error("The user specified doesn't exist");
+        }
     },
 
     'tossUps.deleteMyOwnership'(tossUpId){

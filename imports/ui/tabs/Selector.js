@@ -44,11 +44,13 @@ export default class Selector extends Component {
                     <Tab label="Persona" buttonStyle={background}>
                         <TossOne options={this.props.persons} baseSize={250}
                                  weights={this.props.weightsPersons}
-                                 add={this.props.add} handleClose={this.props.handleClose} action={false}
+                                 add={this.props.add} handleClose={this.props.handleClose}
+                                 addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner} action={false}
                                  person={true} adding={this.props.adding} handleDelete={this.props.handleDelete}
                                  onTextChange={this.props.onTextChange}
                                  onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
                                  onAddPerson={this.props.onAddPerson}
+                                 onAddOwner={this.props.onAddOwner}
                                  onSelection={this.props.handleSelectedTossOnePerson}
                                  selected={this.props.tossData}
                         />
@@ -56,11 +58,13 @@ export default class Selector extends Component {
                     <Tab label="Acción" buttonStyle={background}>
                         <TossOne options={this.props.actions} baseSize={250}
                                  weights={this.props.weightsActions}
-                                 add={this.props.add} handleClose={this.props.handleClose} action={true}
+                                 add={this.props.add} handleClose={this.props.handleClose}
+                                 addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner} action={true}
                                  person={false} adding={this.props.adding} handleDelete={this.props.handleDelete}
                                  onTextChange={this.props.onTextChange}
                                  onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
                                  onAddPerson={this.props.onAddPerson}
+                                 onAddOwner={this.props.onAddOwner}
                                  onSelection={this.props.handleSelectedTossOneAction}
                                  selected={this.props.tossData}
                         />
@@ -68,12 +72,14 @@ export default class Selector extends Component {
                     <Tab label="Persona y Acción" buttonStyle={background}>
                         <TossPandA options={this.props.actions} baseSize={250}
                                    weights={this.props.weightsActions}
-                                   add={this.props.add} handleClose={this.props.handleClose} action={true}
+                                   add={this.props.add} handleClose={this.props.handleClose}
+                                   addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner} action={true}
                                    person={true} adding={this.props.adding}  handleDelete={this.props.handleDelete}
                                    persons={this.props.persons} weightsPersons={this.props.weightsPersons}
                                    onTextChange={this.props.onTextChange}
                                    onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
                                    onAddPerson={this.props.onAddPerson}
+                                   onAddOwner={this.props.onAddOwner}
                                    onSelection={this.props.handleSelectedTossPandA}
                                    selected={this.props.tossData}
                         />
@@ -81,12 +87,14 @@ export default class Selector extends Component {
                     <Tab label="Acción para cada persona" buttonStyle={background}>
                         <Toss4All options={this.props.actions} baseSize={250}
                                   weights={this.props.weightsActions}
-                                  add={this.props.add} handleClose={this.props.handleClose} action={true}
+                                  add={this.props.add} handleClose={this.props.handleClose}
+                                  addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner} action={true}
                                   person={true} adding={this.props.adding}  handleDelete={this.props.handleDelete}
                                   persons={this.props.persons} weightsPersons={this.props.weightsPersons}
                                   onTextChange={this.props.onTextChange}
                                   onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
                                   onAddPerson={this.props.onAddPerson}
+                                  onAddOwner={this.props.onAddOwner}
                                   onSelection={this.props.handleSelectedToss4All}
                                   selected={this.props.tossData}
                         />

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Roulette from "../roulette/Roulette.js";
 import Dialog from '../adding/CustomDialog.js';
+import OwnerDialog from '../adding/OwnerDialog.js';
 import AddButton from "../adding/AddButton";
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -152,6 +153,8 @@ export default class TossOne extends Component {
                         person={this.props.person} onTextChange={this.props.onTextChange}
                         onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
                         onAddPerson={this.props.onAddPerson}/>
+                <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
+                             onTextChange={this.props.onTextChange} onAddOwner={this.props.onAddOwner}/>
                 <MuiThemeProvider>
                     <Snackbar
                         open={this.state.value !== ""}

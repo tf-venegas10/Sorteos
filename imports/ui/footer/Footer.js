@@ -10,13 +10,13 @@ export default class Footer extends Component {
                     <div className="row justify-content-around">
                         <div className="col-3 center-items">
                             <div className="row">
-                                <h5 className="col-12" style={{color:"white"}}>&copy; Juan Manuel Lovera & Tomas Felipe Venegas.</h5>
+                                <h5 className="col-12">&copy; Juan Manuel Lovera & Tomas Felipe Venegas.</h5>
                             </div>
                             <div className="row">
-                                <h6 className="col-12" style={{color:"white"}}>All rights reserved.</h6>
+                                <h6 className="col-12">All rights reserved.</h6>
                             </div>
                         </div>
-                        <div className="col-6 center-items" style={{color:"white"}}>
+                        <div className="col-6 center-items">
                             <img
                                 className="img-fluid img-footer"
                                 src="logo-min.png"

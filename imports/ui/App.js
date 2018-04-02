@@ -26,6 +26,7 @@ class App extends Component {
             newToss: false,
             sorteo: 0,
             add: false,
+            addOwner: false,
             inputText: "",
             inputNumb: 1,
             inputName: ""
@@ -37,12 +38,15 @@ class App extends Component {
         this.goToLogin = this.goToLogin.bind(this);
         this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
         this.adding = this.adding.bind(this);
+        this.addingOwner = this.addingOwner.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleCloseOwner = this.handleCloseOwner.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onNumberChange = this.onNumberChange.bind(this);
         this.onAddPerson = this.onAddPerson.bind(this);
         this.onAddAction = this.onAddAction.bind(this);
+        this.onAddOwner = this.onAddOwner.bind(this);
         this.handleNew = this.handleNew.bind(this);
         this.handleNotNew = this.handleNotNew.bind(this);
         this.nameChange = this.nameChange.bind(this);
@@ -53,6 +57,7 @@ class App extends Component {
         this.handleSelectedTossOneAction = this.handleSelectedTossOneAction.bind(this);
         this.handleSelectedTossPandA = this.handleSelectedTossPandA.bind(this);
         this.handleSelectedToss4All = this.handleSelectedToss4All.bind(this);
+
     }
 
     goToIndex() {
@@ -97,9 +102,17 @@ class App extends Component {
         this.setState({add: true});
     }
 
+    addingOwner(){
+        this.setState({addOwner:true});
+    }
+
     handleClose() {
         this.setState({add: false});
-    };
+    }
+
+    handleCloseOwner(){
+        this.setState({addOwner:false});
+    }
 
     handleDelete(id, action) {
         let i;
@@ -176,6 +189,11 @@ class App extends Component {
 
     }
 
+    onAddOwner(){
+        Meteor.call("tossUps.addOwner",this.props.sorteos[this.state.sorteo]._id,this.state.inputText);
+        this.setState({addOwner:false})
+    }
+
     switchSorteo(id) {
         this.setState({sorteo: id, userLocation: "sorteo"});
     }
@@ -209,6 +227,7 @@ class App extends Component {
                                             handleNew={this.handleNewTossUp} openNew={this.handleNew}
                                             sorteos={this.props.sorteos} switchSorteo={this.switchSorteo}
                                             handleTossDelete={this.handleTossDelete} goToIndex={this.goToIndexUser}
+                                            addOwner={this.addingOwner} userLocation={this.state.userLocation}
                                 /> :
                                 <NavbarIndex goToIndex={this.goToIndex}/>
                         }
@@ -216,16 +235,16 @@ class App extends Component {
                             {
                                 this.props.currentUser ?
                                     this.state.userLocation === "sorteo" ?
-                                        <Selector adding={this.adding} add={this.state.add}
+                                        <Selector adding={this.adding} add={this.state.add} addOwner={this.state.addOwner}
                                                   actions={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].actions : []}
                                                   persons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].persons : []}
                                                   weightsActions={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].weightsActions : []}
                                                   weightsPersons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].weightsPersons : []}
-                                                  handleClose={this.handleClose}
+                                                  handleClose={this.handleClose} handleCloseOwner={this.handleCloseOwner}
                                                   handleDelete={this.handleDelete} onTextChange={this.onTextChange}
                                                   tossData={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo] : {}}
                                                   onNumberChange={this.onNumberChange}
-                                                  onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}
+                                                  onAddAction={this.onAddAction} onAddPerson={this.onAddPerson} onAddOwner={this.onAddOwner}
                                                   sorteoName={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].name : null}
                                                   handleSelectedPerson={this.handleSelectedTossOnePerson}
                                                   handleSelectedAction={this.handleSelectedTossOneAction}

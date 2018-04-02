@@ -44,7 +44,6 @@ export default class Index extends Component {
                         className="btn btn-started"
                         onClick={this.props.handleGetStarted}
                         aria-label="Getting started with an account button"
-                        style={{color:"black"}}
                     >
                         GET STARTED
                     </button>
