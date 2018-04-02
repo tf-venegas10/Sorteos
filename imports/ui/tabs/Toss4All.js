@@ -207,6 +207,7 @@ export default class Toss4All extends Component {
                     <div className="col-2">
                         <MuiThemeProvider>
                             <Toggle
+                                style={{color:"white"}}
                                 label="Match Participantes"
                                 onToggle={this.onToggle}
                                 toggled={this.state.matchParticipants}
@@ -214,6 +215,7 @@ export default class Toss4All extends Component {
                         </MuiThemeProvider>
                         <MuiThemeProvider>
                             <Toggle
+                                style={{color:"white"}}
                                 label="Match Acciones"
                                 onToggle={this.onToggle}
                                 toggled={!this.state.matchParticipants}
@@ -222,6 +224,7 @@ export default class Toss4All extends Component {
 
                         <MuiThemeProvider>
                             <Toggle
+                                style={{color:"white"}}
                                 label="Repetir"
                                 onToggle={this.onRepeatToggle}
                                 toggled={this.state.repeat}
