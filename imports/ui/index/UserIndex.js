@@ -4,6 +4,7 @@ import {List, ListItem} from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Subheader from 'material-ui/Subheader';
+import ActionDelete from 'material-ui/svg-icons/action/delete';
 
 import "./UserIndex.css";
 
@@ -13,7 +14,8 @@ export default class UserIndex extends Component {
         let sorteos = [];
         let i = 0;
         this.props.sorteos.forEach((s)=>{
-            sorteos.push(<ListItem key={i} primaryText={s.name} onClick={this.props.switchSorteo.bind(this,i)}/>);
+            sorteos.push(<ListItem key={i} primaryText={s.name} onClick={this.props.switchSorteo.bind(this,i)}
+                                   rightIcon={<ActionDelete onClick={this.props.handleTossDelete.bind(this, i)}/>}/>);
             i++;
         });
 

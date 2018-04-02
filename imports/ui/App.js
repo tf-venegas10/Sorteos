@@ -253,9 +253,10 @@ class App extends Component {
                                         />
                                         :
                                         <UserIndex
-                                            sorteos={this.props.sorteos}
+                                            sorteos={(this.props.sorteos)?this.props.sorteos:[]}
                                             openNew={this.handleNew}
                                             switchSorteo={this.switchSorteo}
+                                            handleTossDelete={this.handleTossDelete}
                                         />
                                     :
                                     this.state.location === "index" ?
@@ -277,9 +278,15 @@ class App extends Component {
 export default withTracker(() => {
     Meteor.subscribe("appusers");
     Meteor.subscribe("sorteos");
+    let all=TossUps.find().fetch();
+    if (all && all.length>0) {
+        all.filter((tossup) => {
+            return (tossup.owners.indexOf(this.userId) !== -1);
+        });
+    }
     return {
         currentUser: Meteor.user(),
-        sorteos: TossUps.find().fetch()
+        sorteos: all
     }
 })(App);
 
