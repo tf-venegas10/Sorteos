@@ -61,4 +61,4 @@ export default class UserIndex extends Component {
 
 UserIndex.propTypes = {
     sorteos: PropTypes.array.isRequired,
-}
+};

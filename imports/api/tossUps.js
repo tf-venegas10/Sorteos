@@ -16,7 +16,7 @@ if (Meteor.isServer) {
          let all=TossUps.find();
             if (all && all.length>0) {
                 all.filter((tossup) => {
-                    return (tossup.owners.indexOf(this.userId) !== -1);
+                    return (tossup.owners.includes(this.userId));
                 });
             }
         return all;

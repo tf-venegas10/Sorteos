@@ -280,14 +280,19 @@ export default withTracker(() => {
     Meteor.subscribe("appusers");
     Meteor.subscribe("sorteos");
     let all=TossUps.find().fetch();
+    let thissotrteos=[];
     if (all && all.length>0) {
-        all.filter((tossup) => {
-            return (tossup.owners.indexOf(this.userId) !== -1);
+        all.forEach((tossup) => {   
+            if(Meteor.user() && tossup.owners.includes(Meteor.user()._id) ){
+                console.log(Meteor.user().userId);
+                console.log(tossup.owners);
+                thissotrteos.push(tossup);
+            }
         });
     }
     return {
         currentUser: Meteor.user(),
-        sorteos: all
+        sorteos: thissotrteos
     }
 })(App);
 
