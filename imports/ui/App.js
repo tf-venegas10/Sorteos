@@ -250,6 +250,7 @@ class App extends Component {
                                                   handleSelectedAction={this.handleSelectedTossOneAction}
                                                   handleSelectedPandA={this.handleSelectedTossPandA}
                                                   handleSelectedToss4All={this.handleSelectedToss4All}
+                                                  owners={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].owners : []}
                                         />
                                         :
                                         <UserIndex
