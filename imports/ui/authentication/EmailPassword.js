@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import "./Auth.css"
 
 // App component - represents the email and password component
+// Andrés Olivares: En términos de usabilidad, sería conveniente ofrecer la posibilidad que un usuario que ha hecho click en
+//                  login/registrar pueda alternar entre registrar/login en caso de haber seleccionado la opción incorrecta.
+//                  Así no tendría que refrescar la página para seleccionar la opción correcta
 
 export default class EmailPassword extends Component {
 
