@@ -12,7 +12,11 @@ if (Meteor.isServer) {
     // This code only runs on the server
 
     Meteor.publish('sorteos', function tasksPublication() {
-
+    
+        //Se pueden ahorrar el filter si realizan una query a mongo que indique que quieren los TossUps que
+        //tengan como dueno a this.userId
+        //Seria como TossUps.find({owners: this.userId}), no importa que owners sea un arreglo, si hay un elemento igual
+        //que this.userId en el arreglo, se cumple la condicion
          let all=TossUps.find();
             if (all && all.length>0) {
                 all.filter((tossup) => {
