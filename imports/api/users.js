@@ -19,7 +19,7 @@ Meteor.methods({
             throw new Meteor.Error("not-authorized");
         }
         Users.insert({
-            userId: Meteor.userId,
+            userId: Meteor.user()._id,
             email: Meteor.user().email,
             username: Meteor.user().username
         });

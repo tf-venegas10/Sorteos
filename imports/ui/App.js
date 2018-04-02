@@ -282,7 +282,7 @@ export default withTracker(() => {
     let all=TossUps.find().fetch();
     let thissotrteos=[];
     if (all && all.length>0) {
-        all.forEach((tossup) => {   
+        all.forEach((tossup) => {
             if(Meteor.user() && tossup.owners.includes(Meteor.user()._id) ){
                 console.log(Meteor.user().userId);
                 console.log(tossup.owners);

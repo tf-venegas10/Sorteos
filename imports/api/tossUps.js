@@ -178,8 +178,8 @@ Meteor.methods({
         let owners = thisToss.owners;
         let user = Users.findOne({username: username});
         if(user) {
-            if(!owners.includes(user.userId)) {
-                owners.push(user.userId);
+            if(!owners.includes(user._id)) {
+                owners.push(user._id);
                 TossUps.update({_id: tossUpId}, {$set: {owners: owners}});
             }else{
                 throw new Error("The user specified is already owner");
