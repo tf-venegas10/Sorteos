@@ -13,17 +13,31 @@ export default class UserIndex extends Component {
     render() {
         let sorteos = [];
         let i = 0;
-        this.props.sorteos.forEach((s)=>{
-            sorteos.push(<ListItem key={i} primaryText={s.name} onClick={this.props.switchSorteo.bind(this,i)}
-                                   rightIcon={<ActionDelete onClick={this.props.handleTossDelete.bind(this, i)}/>}/>);
-            i++;
-        });
 
         const paperStyle = {
             width: "70%",
             backgroundColor: "#BBDBB8",
-            color: "#211836"
         };
+
+        const itemStyle = {
+            fontFamily: "\'Lora\', cursive",
+            fontSize: "30px",
+            color: "#211836",
+        };
+
+        const subHeaderStyle = {
+            color: "#211836",
+            fontSize: "50px",
+            fontFamily: "\'Nova Slim\', cursive",
+        };
+
+        this.props.sorteos.forEach((s)=>{
+            sorteos.push(<ListItem style={itemStyle} key={i} primaryText={s.name}
+                                   onClick={this.props.switchSorteo.bind(this,i)}
+                                   rightIcon={<ActionDelete style={itemStyle}
+                                                            onClick={this.props.handleTossDelete.bind(this, i)}/>}/>);
+            i++;
+        });
 
         return (
             <div className="row justify-content-around center-items">
@@ -48,7 +62,7 @@ export default class UserIndex extends Component {
                     <MuiThemeProvider>
                         <Paper zDepth={2} rounded={false} style={paperStyle}>
                             <List>
-                                <Subheader>Your Toss-ups</Subheader>
+                                <Subheader style={subHeaderStyle}>Your Toss-ups</Subheader>
                                 {sorteos}
                             </List>
                         </Paper>

@@ -30,3 +30,17 @@ Auth modules styles
 .complete-viewport{
     /*width: 100vw;*/
 }
+
+.circular-progress{
+    margin-top: 40%;
+    margin-bottom: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.auth-text{
+    color: rgb(183, 183, 157);
+    font-family: 'Nova Slim', cursive;
+    font-size: 60px;
+    padding-top: 5%;
+}

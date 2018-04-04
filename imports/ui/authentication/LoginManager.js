@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-
 import EmailPassword from "./EmailPassword.js";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import "./Auth.css";
 
@@ -13,6 +14,7 @@ export default class LoginManager extends Component {
             email: "",
             pswd: "",
             disableButton: true,
+            processingAuth: false,
         }
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePswdChange = this.handlePswdChange.bind(this);
@@ -40,9 +42,11 @@ export default class LoginManager extends Component {
 
     loginWithPassword(e) {
         e.preventDefault();
+        this.setState({processingAuth: true});
         Meteor.loginWithPassword(this.state.email, this.state.pswd, (error) => {
             if (error) {
                 console.log("Error: " + error.reason);
+                this.setState({processingAuth: false});
             }
         });
     }
@@ -50,13 +54,22 @@ export default class LoginManager extends Component {
     render() {
         return (
             <div className="row justify-content-around center-items">
-                <EmailPassword
-                    submitAction={this.loginWithPassword}
-                    typeAuth="Login"
-                    onEmailChange={this.handleEmailChange}
-                    onPswdChange={this.handlePswdChange}
-                    disableButton={this.state.disableButton}
-                />
+                {
+                    this.state.processingAuth ?
+                        <MuiThemeProvider>
+                            <div className="circular-progress">
+                                <CircularProgress size={80} thickness={7}/>
+                                <h1 className="auth-text">Logging in</h1>
+                            </div>
+                        </MuiThemeProvider>
+                        : < EmailPassword
+                            submitAction={this.loginWithPassword}
+                            typeAuth="Login"
+                            onEmailChange={this.handleEmailChange}
+                            onPswdChange={this.handlePswdChange}
+                            disableButton={this.state.disableButton}
+                        />
+                }
             </div>
         );
     }

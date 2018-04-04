@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Meteor} from "meteor/meteor";
 import EmailPassword from "./EmailPassword.js";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import CircularProgress from 'material-ui/CircularProgress';
 
-import {Users} from "../../api/users.js";
 import "./Auth.css"
 
 // App component - represents the registration component
@@ -16,6 +17,7 @@ export default class RegisterManager extends Component {
             pswd: null,
             pswdVer: null,
             disableButton: true,
+            processingAuth: false,
         }
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -56,6 +58,7 @@ export default class RegisterManager extends Component {
     }
 
     createUser(e) {
+        this.setState({processingAuth: true});
         e.preventDefault();
         Accounts.createUser({
             email: this.state.email,
@@ -64,8 +67,9 @@ export default class RegisterManager extends Component {
         }, (error) => {
             if (error) {
                 console.log("Error: " + error.reason);
-            }else{
-                Meteor.call('appusers.insert',true);
+                this.setState({processingAuth: false});
+            } else {
+                Meteor.call('appusers.insert', true);
             }
         });
     }
@@ -73,15 +77,24 @@ export default class RegisterManager extends Component {
     render() {
         return (
             <div className="row justify-content-around center-items complete-viewport">
-                <EmailPassword
-                    submitAction={this.createUser}
-                    typeAuth="Register"
-                    onUsernameChange={this.handleUsernameChange}
-                    onEmailChange={this.handleEmailChange}
-                    onPswdChange={this.handlePswdChange}
-                    onPswdVerChange={this.handlePswdVerChange}
-                    disableButton={this.state.disableButton}
-                />
+                {
+                    this.state.processingAuth ?
+                        <MuiThemeProvider>
+                            <div className="circular-progress">
+                                <CircularProgress size={80} thickness={7}/>
+                                <h1 className="auth-text">Logging in</h1>
+                            </div>
+                        </MuiThemeProvider>
+                        : <EmailPassword
+                            submitAction={this.createUser}
+                            typeAuth="Register"
+                            onUsernameChange={this.handleUsernameChange}
+                            onEmailChange={this.handleEmailChange}
+                            onPswdChange={this.handlePswdChange}
+                            onPswdVerChange={this.handlePswdVerChange}
+                            disableButton={this.state.disableButton}
+                        />
+                }
             </div>
         );
     }
