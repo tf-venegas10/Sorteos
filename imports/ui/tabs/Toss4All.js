@@ -10,6 +10,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
 
+import "./Toss4All.css";
+
 // App component - represents the random persons fit actions sorting app
 
 export default class Toss4All extends Component {
@@ -127,7 +129,6 @@ export default class Toss4All extends Component {
     }
 
 
-
     render() {
 
         let opt = [];
@@ -163,7 +164,7 @@ export default class Toss4All extends Component {
         }
         i = 0;
         let results = [];
-        if(this.props.selected.results4All) {
+        if (this.props.selected.results4All) {
             this.props.selected.results4All.forEach((sorted) => {
 
                     sorted.forEach((op) => {
@@ -206,35 +207,38 @@ export default class Toss4All extends Component {
                     <div className="col-3"></div>
                     <div className="col-2">
                         <MuiThemeProvider>
-                            <Toggle
-                                style={{color:"white"}}
-                                label="Match Participantes"
-                                onToggle={this.onToggle}
-                                toggled={this.state.matchParticipants}
-                            />
-                        </MuiThemeProvider>
-                        <MuiThemeProvider>
-                            <Toggle
-                                style={{color:"white"}}
-                                label="Match Acciones"
-                                onToggle={this.onToggle}
-                                toggled={!this.state.matchParticipants}
-                            />
-                        </MuiThemeProvider>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
+                                <MuiThemeProvider>
+                                    <Toggle
+                                        style={{color: "white"}}
+                                        label="Match Participants"
+                                        onToggle={this.onToggle}
+                                        toggled={this.state.matchParticipants}
+                                    />
+                                </MuiThemeProvider>
+                                <MuiThemeProvider>
+                                    <Toggle
+                                        style={{color: "white"}}
+                                        label="Match Actions"
+                                        onToggle={this.onToggle}
+                                        toggled={!this.state.matchParticipants}
+                                    />
+                                </MuiThemeProvider>
 
-                        <MuiThemeProvider>
-                            <Toggle
-                                style={{color:"white"}}
-                                label="Repetir"
-                                onToggle={this.onRepeatToggle}
-                                toggled={this.state.repeat}
-                            />
+                                <MuiThemeProvider>
+                                    <Toggle
+                                        style={{color: "white"}}
+                                        label="Repeat"
+                                        onToggle={this.onRepeatToggle}
+                                        toggled={this.state.repeat}
+                                    />
+                                </MuiThemeProvider>
+                            </Paper>
+                            <MuiThemeProvider>
+                                <RaisedButton label="Spin" style={ink} disabledBackgroundColor="true"
+                                              onClick={this.click} aria-label="Boton girar Ruleta"/>
+                            </MuiThemeProvider>
                         </MuiThemeProvider>
-                        <MuiThemeProvider>
-                            <RaisedButton label="Spin" style={ink} disabledBackgroundColor="true"
-                                          onClick={this.click} aria-label="Boton girar Ruleta"/>
-                        </MuiThemeProvider>
-
                     </div>
                     <div className="col-6"></div>
                     <div className="col-1">

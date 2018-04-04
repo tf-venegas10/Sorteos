@@ -81,7 +81,7 @@ export default class RegisterManager extends Component {
                     this.state.processingAuth ?
                         <MuiThemeProvider>
                             <div className="circular-progress">
-                                <CircularProgress size={80} thickness={7}/>
+                                <CircularProgress color={"#BBDBB8"} size={80} thickness={7}/>
                                 <h1 className="auth-text">Logging in</h1>
                             </div>
                         </MuiThemeProvider>

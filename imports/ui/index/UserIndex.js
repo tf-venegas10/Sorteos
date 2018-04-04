@@ -5,6 +5,7 @@ import Paper from 'material-ui/Paper';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Subheader from 'material-ui/Subheader';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
+import Divider from 'material-ui/Divider';
 
 import "./UserIndex.css";
 
@@ -20,15 +21,16 @@ export default class UserIndex extends Component {
         };
 
         const itemStyle = {
-            fontFamily: "\'Lora\', cursive",
-            fontSize: "30px",
+            fontFamily: "\'Hind Madurai\', cursive",
+            fontSize: "20px",
             color: "#211836",
         };
 
         const subHeaderStyle = {
             color: "#211836",
-            fontSize: "50px",
-            fontFamily: "\'Nova Slim\', cursive",
+            fontSize: "23px",
+            fontFamily: "\'Lora\', cursive",
+            paddingRight: "5%",
         };
 
         this.props.sorteos.forEach((s)=>{
@@ -63,6 +65,7 @@ export default class UserIndex extends Component {
                         <Paper zDepth={2} rounded={false} style={paperStyle}>
                             <List>
                                 <Subheader style={subHeaderStyle}>Your Toss-ups</Subheader>
+                                <Divider/>
                                 {sorteos}
                             </List>
                         </Paper>
