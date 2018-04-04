@@ -10,6 +10,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
 
+import "./Toss4All.css";
+
 // App component - represents the random persons fit actions sorting app
 
 export default class Toss4All extends Component {

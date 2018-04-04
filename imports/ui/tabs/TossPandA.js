@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
 
+import "./TossPandA.css";
 
 // App component - represents the random person sorting app
 
@@ -113,15 +114,8 @@ export default class TossPandA extends Component {
 
         return (
             <div>
-                <div className="row">
-                    <div className="col-11"></div>
-                    <div className="col-1">
-                        <AddButton adding={this.props.adding}/>
-                    </div>
-                </div>
-                <div className="container-fluid row">
-
-                    <div className="col-sm-8 col-12">
+                <div className="container-fluid row toss-content">
+                    <div className="col-sm-6 col-12">
                         <div className="roulette-container">
                             <MuiThemeProvider>
                                 <RaisedButton label="Spin" style={ink} onClick={this.click}
@@ -132,7 +126,7 @@ export default class TossPandA extends Component {
                                   onSpin={this.onSpin}
                                   onComplete={this.handleRouletteSpin} weights={(this.props.weights)?this.props.weights:[]}/>
                     </div>
-                    <div className="col-sm-2 col-6">
+                    <div className="col-sm-3 col-6">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
@@ -146,7 +140,7 @@ export default class TossPandA extends Component {
                         </MuiThemeProvider>
 
                     </div>
-                    <div className="col-sm-2 col-6">
+                    <div className="col-sm-3 col-6">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
@@ -155,7 +149,12 @@ export default class TossPandA extends Component {
                                 <Divider/>
                             </Paper>
                         </MuiThemeProvider>
-
+                        <div className="row justify-content-end">
+                            <div className="col-11"></div>
+                            <div className="col-2">
+                                <AddButton adding={this.props.adding}/>
+                            </div>
+                        </div>
                     </div>
 
 

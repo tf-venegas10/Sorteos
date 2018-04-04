@@ -41,7 +41,7 @@ export default class Selector extends Component {
             </MuiThemeProvider>
             <MuiThemeProvider>
                 <Tabs inkBarStyle={ink}>
-                    <Tab label="Persona" buttonStyle={background}>
+                    <Tab label="Person" buttonStyle={background}>
                         <TossOne options={this.props.persons} baseSize={250}
                                  weights={this.props.weightsPersons}
                                  add={this.props.add} handleClose={this.props.handleClose}
@@ -55,7 +55,7 @@ export default class Selector extends Component {
                                  selected={this.props.tossData}
                         />
                     </Tab>
-                    <Tab label="Acción" buttonStyle={background}>
+                    <Tab label="Action" buttonStyle={background}>
                         <TossOne options={this.props.actions} baseSize={250}
                                  weights={this.props.weightsActions}
                                  add={this.props.add} handleClose={this.props.handleClose}
@@ -69,7 +69,7 @@ export default class Selector extends Component {
                                  selected={this.props.tossData}
                         />
                     </Tab>
-                    <Tab label="Persona y Acción" buttonStyle={background}>
+                    <Tab label="Person & Action" buttonStyle={background}>
                         <TossPandA options={this.props.actions} baseSize={250}
                                    weights={this.props.weightsActions}
                                    add={this.props.add} handleClose={this.props.handleClose}
@@ -84,7 +84,7 @@ export default class Selector extends Component {
                                    selected={this.props.tossData}
                         />
                     </Tab>
-                    <Tab label="Acción para cada persona" buttonStyle={background}>
+                    <Tab label="Action for each Person" buttonStyle={background}>
                         <Toss4All options={this.props.actions} baseSize={250}
                                   weights={this.props.weightsActions}
                                   add={this.props.add} handleClose={this.props.handleClose}
