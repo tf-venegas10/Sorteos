@@ -89,8 +89,7 @@ class App extends Component {
     }
 
     handleNewTossUp() {
-        this.setState({newToss: false});
-        this.setState({sorteo: 0});
+        this.setState({newToss: false, sorteo: 0});
         Meteor.call('tossUps.insert', this.state.inputName);
     }
 
