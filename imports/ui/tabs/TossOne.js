@@ -36,6 +36,7 @@ export default class TossOne extends Component {
         else {
             Meteor.call("tossUps.addResultP", this.props.selected._id, value);
         }
+        this.setState({value:value});
     };
 
     //TODO: handle request delete
