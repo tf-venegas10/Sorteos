@@ -58,15 +58,18 @@ Meteor.methods({
 
     },
 
-    'tossUps.remove'(tossUpId) {
+    'tossUps.remove'(tossUpId, callback) {
 
         check(tossUpId, String);
 
         TossUps.remove(tossUpId);
+        if(callback){
+            callback();
+        }
 
     },
 
-    'tossUps.addPerson'(tossUpId, userName, weight) {
+    'tossUps.addPerson'(tossUpId, userName, weight, callback) {
 
         check(tossUpId, String);
         check(userName, String);
@@ -77,10 +80,13 @@ Meteor.methods({
         persons.push(userName);
         weights.push(weight);
         TossUps.update({_id:tossUpId}, {$set: {persons: persons, weightsPersons:weights}});
+        if(callback){
+            callback();
+        }
 
     },
 
-    'tossUps.addAction'(tossUpId, action, weight) {
+    'tossUps.addAction'(tossUpId, action, weight, callback) {
 
         check(tossUpId, String);
         check(action, String);
@@ -91,10 +97,13 @@ Meteor.methods({
         weights.push(weight);
         actions.push(action);
         TossUps.update({_id:tossUpId}, {$set: {actions: actions, weightsActions:weights}});
+        if(callback){
+            callback();
+        }
 
     },
 
-     'tossUps.addResultP'(tossUpId, result) {
+     'tossUps.addResultP'(tossUpId, result, callback) {
 
         check(tossUpId, String);
         //do checking
@@ -107,10 +116,13 @@ Meteor.methods({
              results=[result];
          }
          TossUps.update({_id:tossUpId}, {$set: {resultsP: results}});
+         if(callback){
+             callback();
+         }
 
     },
 
-    'tossUps.addResultA'(tossUpId, result) {
+    'tossUps.addResultA'(tossUpId, result, callback) {
 
         check(tossUpId, String);
 
@@ -122,10 +134,13 @@ Meteor.methods({
             results=[result];
         }
         TossUps.update({_id:tossUpId}, {$set: {resultsA: results}});
+        if(callback){
+            callback();
+        }
 
     },
 
-    'tossUps.addResultPandAs'(tossUpId, result) {
+    'tossUps.addResultPandAs'(tossUpId, result, callback) {
 
         check(tossUpId, String);
 
@@ -137,10 +152,12 @@ Meteor.methods({
             results=[result];
         }
         TossUps.update({_id:tossUpId}, {$set: {resultsPandAs: results}});
-
+        if(callback){
+            callback();
+        }
     },
 
-    'tossUps.addResult4All'(tossUpId, result) {
+    'tossUps.addResult4All'(tossUpId, result, callback) {
 
         check(tossUpId, String);
 
@@ -152,24 +169,33 @@ Meteor.methods({
             results=[result];
         }
         TossUps.update({_id:tossUpId}, {$set: {results4All: results}});
+        if(callback){
+            callback();
+        }
 
     },
 
-    'tossUps.switchActions'(tossUpId, actions, weights){
+    'tossUps.switchActions'(tossUpId, actions, weights, callback){
         check(tossUpId, String);
         check(actions, Array);
         check(weights,Array);
         TossUps.update({_id:tossUpId}, {$set: {actions: actions, weightsActions:weights}});
+        if(callback){
+            callback();
+        }
     },
 
-    'tossUps.switchPersons'(tossUpId, persons, weights){
+    'tossUps.switchPersons'(tossUpId, persons, weights, callback){
         check(tossUpId, String);
         check(persons, Array);
         check(weights,Array);
         TossUps.update({_id:tossUpId}, {$set: {persons: persons, weightsPersons:weights}});
+        if(callback){
+            callback();
+        }
     },
 
-    'tossUps.addOwner'(tossUpId, username) {
+    'tossUps.addOwner'(tossUpId, username, callback) {
 
         check(tossUpId, String);
         check(username, String);
@@ -187,9 +213,12 @@ Meteor.methods({
         }else{
             throw new Error("The user specified doesn't exist");
         }
+        if(callback){
+            callback();
+        }
     },
 
-    'tossUps.deleteMyOwnership'(tossUpId){
+    'tossUps.deleteMyOwnership'(tossUpId, callback){
         let owners=TossUps.findOne(tossUpId).owners;
         let newOwners=[];
         owners.forEach((o)=>{
@@ -202,6 +231,9 @@ Meteor.methods({
         }
         else {
             TossUps.update({_id: tossUpId}, {$set: {owners: newOwners}});
+        }
+        if(callback){
+            callback();
         }
     }
 
