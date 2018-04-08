@@ -136,7 +136,7 @@ export default class TossOne extends Component {
         return (
             <div>
                 <div className="container-fluid row toss-content">
-                    <div className="col-sm-9 col-12">
+                    <div className="col-sm-8 col-12">
                         {instructions}
                         <div className="roulette-container">
                             <MuiThemeProvider>
