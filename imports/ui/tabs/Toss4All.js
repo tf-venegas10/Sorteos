@@ -300,10 +300,7 @@ export default class Toss4All extends Component {
 
 
                 </div>
-                <Dialog open={this.props.add} handleClose={this.props.handleClose} action={this.props.action}
-                        person={this.props.person} onTextChange={this.props.onTextChange}
-                        onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                        onAddPerson={this.props.onAddPerson}/>
+
                 <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
                              onTextChange={this.props.onTextChange} onAddOwner={this.props.onAddOwner}/>
             </div>

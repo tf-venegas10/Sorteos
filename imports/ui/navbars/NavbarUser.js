@@ -77,34 +77,6 @@ export default class NavbarUser extends Component {
                         titleStyle={titleStyle}
                     />
                 </MuiThemeProvider>
-                <MuiThemeProvider>
-                    <Dialog
-                        actions={[
-
-                            <FlatButton
-                                label="Add New"
-                                primary={true}
-                                keyboardFocused={true}
-                                onClick={this.props.handleNew}
-                                aria-label="Boton para agragar accion"
-                            />,
-                            <FlatButton
-                                label="Cancel"
-                                primary={true}
-                                onClick={this.props.handleClose}
-                                aria-label="Cancelar"
-                            />
-                        ]}
-                        modal={false}
-                        open={this.props.open}
-                        onRequestClose={this.props.handleClose}
-                    >
-                        <label htmlFor="textInput">Nombre</label><input id="textInput" type="text"
-                                                                        onChange={this.props.onTextChange}
-                    />
-
-                    </Dialog>
-                </MuiThemeProvider>
             </div>
 
         );

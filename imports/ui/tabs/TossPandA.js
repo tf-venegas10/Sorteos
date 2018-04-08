@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Roulette from "../roulette/Roulette.js";
-import Dialog from '../adding/CustomDialog.js';
 import OwnerDialog from '../adding/OwnerDialog.js';
 import AddButton from "../adding/AddButton";
 import {List, ListItem} from 'material-ui/List';
@@ -111,11 +110,20 @@ export default class TossPandA extends Component {
         const paperInk = {
             backgroundColor: "#BBDBB8",
         };
+        instructions=null;
+        if(this.props.options.length===0 || this.props.persons.length===0){
+
+            instructions = (
+                <Paper style={paperInk}><p>This tab allows you to select one action for one participant both at random.</p>
+                    <p>For this to work correctly you'll need to add both actions and participants.</p></Paper>);
+
+        }
 
         return (
             <div>
                 <div className="container-fluid row toss-content">
                     <div className="col-sm-6 col-12">
+                        {instructions}
                         <div className="roulette-container">
                             <MuiThemeProvider>
                                 <RaisedButton label="Spin" style={ink} onClick={this.click}
@@ -170,10 +178,6 @@ export default class TossPandA extends Component {
 
 
                 </div>
-                <Dialog open={this.props.add} handleClose={this.props.handleClose} action={this.props.action}
-                        person={this.props.person} onTextChange={this.props.onTextChange}
-                        onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                        onAddPerson={this.props.onAddPerson}/>
                 <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
                              onTextChange={this.props.onTextChange} onAddOwner={this.props.onAddOwner}/>
                 <MuiThemeProvider>

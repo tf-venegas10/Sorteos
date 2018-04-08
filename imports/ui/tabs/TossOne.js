@@ -108,6 +108,20 @@ export default class TossOne extends Component {
         const paperInk = {
             backgroundColor: "#BBDBB8",
         };
+        instructions=null;
+        if(opt.length===0){
+            if(!this.props.action) {
+                instructions = (
+                    <Paper style={paperInk}><p>To start, you'll need to add some participants and actions to your Toss-up. Use the +
+                        button to do this.</p>
+                        <p>Your toss-up has 4 different views. In each one of them you will get different results.
+                            This tab allows you to select one participant at random.</p></Paper>)
+            }
+            else{
+                instructions = (
+                <Paper style={paperInk}><p>This tab allows you to select one action at random.</p></Paper>)
+            }
+        }
 
         const listScroll = {
             overflowY: opt.length>5?"scroll":"auto",
@@ -122,7 +136,8 @@ export default class TossOne extends Component {
         return (
             <div>
                 <div className="container-fluid row toss-content">
-                    <div className="col-sm-8 col-12">
+                    <div className="col-sm-9 col-12">
+                        {instructions}
                         <div className="roulette-container">
                             <MuiThemeProvider>
                                 <RaisedButton
@@ -139,6 +154,7 @@ export default class TossOne extends Component {
                                   onSpin={this.onSpin}
                                   onComplete={this.handleRouletteSpin}
                                   weights={(this.props.weights) ? this.props.weights : []}/>
+
                     </div>
                     <div className="col-sm-2 col-8">
                         <MuiThemeProvider>
@@ -168,10 +184,6 @@ export default class TossOne extends Component {
                         </MuiThemeProvider>
                     </div>
                 </div>
-                <Dialog open={this.props.add} handleClose={this.props.handleClose} action={this.props.action}
-                        person={this.props.person} onTextChange={this.props.onTextChange}
-                        onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                        onAddPerson={this.props.onAddPerson}/>
                 <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
                              onTextChange={this.props.onTextChange} onAddOwner={this.props.onAddOwner}/>
                 <MuiThemeProvider>
