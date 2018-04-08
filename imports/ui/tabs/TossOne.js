@@ -54,6 +54,9 @@ export default class TossOne extends Component {
     }
 
     render() {
+        const alertInk={
+            backgroundColor:"#D73A6F"
+        };
 
         let opt = [];
         let i = 0;
@@ -112,14 +115,14 @@ export default class TossOne extends Component {
         if(opt.length===0){
             if(!this.props.action) {
                 instructions = (
-                    <Paper style={paperInk}><p>To start, you'll need to add some participants and actions to your Toss-up. Use the +
+                    <Paper style={alertInk} zDepth={5}><p>To start, you'll need to add some participants and actions to your Toss-up. Use the +
                         button to do this.</p>
                         <p>Your toss-up has 4 different views. In each one of them you will get different results.
                             This tab allows you to select one participant at random.</p></Paper>)
             }
             else{
                 instructions = (
-                <Paper style={paperInk}><p>This tab allows you to select one action at random.</p></Paper>)
+                <Paper style={alertInk} zDepth={5}><p>This tab allows you to select one action at random.</p></Paper>)
             }
         }
 

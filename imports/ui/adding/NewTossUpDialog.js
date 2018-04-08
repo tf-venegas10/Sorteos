@@ -35,7 +35,7 @@ export default class NewTossUpDialog extends Component {
         };
         let Help=null;
         if(this.state.help){
-            Help=<Paper><p>Choose a name for your new Toss-up you'll be able to find it later by this name.</p>
+            Help=<Paper zDepth={5}><p>Choose a name for your new Toss-up you'll be able to find it later by this name.</p>
                 </Paper>
         }
 
@@ -63,9 +63,9 @@ export default class NewTossUpDialog extends Component {
                     open={this.props.open}
                     onRequestClose={this.props.handleClose}
                 >
-                    <label htmlFor="textInput">Toss-up Name</label><input id="textInput" type="text"
-                                                                          onChange={this.props.onTextChange}
-                />
+                    <label htmlFor="textInput">Toss-up Name <input id="textInput" type="text"
+                                                                   onChange={this.props.onTextChange}
+                    /></label>
                     <ActionHelp onClick={this.help}/>
                     {Help}
                 </Dialog>

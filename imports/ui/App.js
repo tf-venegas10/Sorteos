@@ -306,7 +306,7 @@ class App extends Component {
                         <div className="center-items body-content">
                             {
                                 this.props.currentUser ?
-                                    this.state.userLocation === "sorteo" ?
+                                    (this.state.userLocation === "sorteo" && this.props.sorteos && this.props.sorteos.length>0) ?
                                         <Selector adding={this.adding} add={this.state.add} addOwner={this.state.addOwner}
                                                   actions={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].actions : []}
                                                   persons={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].persons : []}
@@ -346,8 +346,8 @@ class App extends Component {
                     </div>
                 </div>
                 <Footer goToIndex={this.goToIndex}/>
-                <CustomDialog open={this.state.add} handleClose={this.handleClose} action={this.state.action}
-                        person={this.state.person} onTextChange={this.onTextChange}
+                <CustomDialog open={this.state.add} handleClose={this.handleClose} action={true}
+                        person={true} onTextChange={this.onTextChange}
                         onNumberChange={this.onNumberChange} onAddAction={this.onAddAction}
                         onAddPerson={this.onAddPerson} inputNumb={this.state.inputNumb}/>
                 <NewTossUpDialog open={this.state.newToss}

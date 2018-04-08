@@ -61,8 +61,11 @@ export default class TossPandA extends Component {
             callback);
     }
 
-    render() {
 
+    render() {
+        const alertInk={
+            backgroundColor:"#D73A6F"
+        };
         let opt = [];
         let persons = [];
         let i = 0;
@@ -72,8 +75,7 @@ export default class TossPandA extends Component {
 
             let totalPWeight = 0;
             if (this.props.weightsPersons && this.props.weightsPersons.length > 0) {
-                totalWeight = this.props.weightsPersons.reduce((a, w) => a + w);
-
+                totalPWeight = this.props.weightsPersons.reduce((a, w) => a + w);
 
                 this.props.options.forEach((op) => {
                         i += 1;
@@ -114,7 +116,7 @@ export default class TossPandA extends Component {
         if(this.props.options.length===0 || this.props.persons.length===0){
 
             instructions = (
-                <Paper style={paperInk}><p>This tab allows you to select one action for one participant both at random.</p>
+                <Paper style={alertInk} zDepth={5}><p>This tab allows you to select one action for one participant both at random.</p>
                     <p>For this to work correctly you'll need to add both actions and participants.</p></Paper>);
 
         }
