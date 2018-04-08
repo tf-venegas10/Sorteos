@@ -5,11 +5,40 @@ import Paper from 'material-ui/Paper';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Subheader from 'material-ui/Subheader';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
+import ActionHelp from 'material-ui/svg-icons/action/help-outline';
 import Divider from 'material-ui/Divider';
 
 import "./UserIndex.css";
 
 export default class UserIndex extends Component {
+    componentDidMount()
+    {
+        this.props.addSteps([{
+            title: "Create new Toss-up",
+            text: "To start first create a new toss-up",
+            selector: "#newTossUpButton",
+            type: 'hover',
+            position: 'bottom',
+            allowClicksThruHole: true,
+            style: {
+                backgroundColor: '#ccc',
+                mainColor: '#000',
+                header: {
+                    color: '#f04',
+                    fontSize: '3rem',
+                    textAlign: 'center',
+                },
+                footer: {
+                    display: 'none',
+                },
+                beacon: {
+                    inner: '#000',
+                    outer: '#000',
+                },
+            },
+            trigger: 'div.col-3:nth-child(2) > svg:nth-child(1)'
+        }]);
+    }
 
     render() {
         let sorteos = [];
@@ -40,7 +69,14 @@ export default class UserIndex extends Component {
                                                             onClick={this.props.handleTossDelete.bind(this, i)}/>}/>);
             i++;
         });
-
+        if (sorteos.length===0){
+            sorteos.push(<ListItem style={itemStyle} key={i++} primaryText={"Let's start by creating a new toss-up." +
+            " Once you have toss-ups you'll see them here. Enter a name that characterizes your toss-up when prompted."}/>);
+            sorteos.push(<button
+                key={i++}
+                onClick={this.props.openNew}
+                className="btn btn-new">NEW TOSS-UP</button>);
+        }
         return (
             <div className="row justify-content-around center-items">
                 <div className="col-8 center-items">
@@ -55,6 +91,7 @@ export default class UserIndex extends Component {
                                 a
                                 try right now!</p>
                             <button
+                                id={"newTossUpButton"}
                                 onClick={this.props.openNew}
                                 className="btn btn-new">NEW TOSS-UP</button>
                         </div>

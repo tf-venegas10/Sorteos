@@ -15,7 +15,9 @@ import {Meteor} from 'meteor/meteor';
 
 
 import Users from '../api/users.js';
-
+import Joyride from 'react-joyride';
+import CustomDialog from "./adding/CustomDialog";
+import NewTossUpDialog from "./adding/NewTossUpDialog";
 
 class App extends Component {
     constructor(props) {
@@ -29,7 +31,15 @@ class App extends Component {
             addOwner: false,
             inputText: "",
             inputNumb: 1,
-            inputName: ""
+            inputName: "",
+            //joyride state vars
+            joyrideOverlay: true,
+            joyrideType: 'continuous',
+            isReady: false,
+            isRunning: false,
+            stepIndex: 0,
+            steps: [],
+            selector: '',
         };
 
         this.goToIndex = this.goToIndex.bind(this);
@@ -56,7 +66,9 @@ class App extends Component {
         this.handleSelectedTossOnePerson = this.handleSelectedTossOnePerson.bind(this);
         this.handleSelectedTossOneAction = this.handleSelectedTossOneAction.bind(this);
         this.handleSelectedTossPandA = this.handleSelectedTossPandA.bind(this);
-        this.handleSelectedToss4All = this.handleSelectedToss4All.bind(this);
+        this.handleSelectedToss4All = this.handleSelectedToss4All.bind(this)
+        this.addSteps = this.addSteps.bind(this);
+        this.callback = this.callback.bind(this);
 
     }
 
@@ -212,11 +224,72 @@ class App extends Component {
     handleSelectedToss4All(selected) {
         Meteor.call("tossUps.addResult4All", this.props.sorteos[this.state.sorteo]._id, selected);
     }
+    addSteps(steps) {
+        let newSteps = steps;
+
+        if (!Array.isArray(newSteps)) {
+            newSteps = [newSteps];
+        }
+
+        if (!newSteps.length) {
+            return;
+        }
+
+        // Force setState to be synchronous to keep step order.
+        this.setState(currentState => {
+            currentState.steps = currentState.steps.concat(newSteps);
+            return currentState;
+        });
+    }
+    addTooltip(data) {
+        this.joyride.addTooltip(data);
+    }
+
+    next() {
+        this.joyride.next();
+    }
+
+    callback(data) {
+        console.log('%ccallback', 'color: #47AAAC; font-weight: bold; font-size: 13px;'); //eslint-disable-line no-console
+        console.log(data); //eslint-disable-line no-console
+
+        this.setState({
+            selector: data.type === 'tooltip:before' ? data.step.selector : '',
+        });
+    }
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                isReady: true,
+                isRunning: true,
+            });
+        }, 1000);
+    }
 
     render() {
 
         return (
             <div>
+                <Joyride
+                    ref={c => (this.joyride = c)}
+                    callback={this.callback}
+                    debug={false}
+                    disableOverlay={this.state.selector === '.btn'}
+                    locale={{
+                        back: (<span>Back</span>),
+                        close: (<span>Close</span>),
+                        last: (<span>Last</span>),
+                        next: (<span>Next</span>),
+                        skip: (<span>Skip</span>),
+                    }}
+                    run={this.state.isRunning}
+                    showOverlay={this.state.joyrideOverlay}
+                    showSkipButton={true}
+                    showStepsProgress={true}
+                    stepIndex={this.state.stepIndex}
+                    steps={this.state.steps}
+                    type={this.state.joyrideType}
+                />
                 <div className={this.props.currentUser ? "user-banner" : "main-banner"}>
                     <div className={this.props.currentUser ? null : "main-content center-items"}>
                         {
@@ -250,6 +323,8 @@ class App extends Component {
                                                   handleSelectedPandA={this.handleSelectedTossPandA}
                                                   handleSelectedToss4All={this.handleSelectedToss4All}
                                                   owners={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].owners : []}
+                                                  addSteps={this.addSteps}
+                                                  inputNumb={this.state.inputNumb}
                                         />
                                         :
                                         <UserIndex
@@ -257,6 +332,7 @@ class App extends Component {
                                             openNew={this.handleNew}
                                             switchSorteo={this.switchSorteo}
                                             handleTossDelete={this.handleTossDelete}
+                                            addSteps={this.addSteps}
                                         />
                                     :
                                     this.state.location === "index" ?
@@ -270,6 +346,13 @@ class App extends Component {
                     </div>
                 </div>
                 <Footer goToIndex={this.goToIndex}/>
+                <CustomDialog open={this.state.add} handleClose={this.handleClose} action={this.state.action}
+                        person={this.state.person} onTextChange={this.onTextChange}
+                        onNumberChange={this.onNumberChange} onAddAction={this.onAddAction}
+                        onAddPerson={this.onAddPerson} inputNumb={this.state.inputNumb}/>
+                <NewTossUpDialog open={this.state.newToss}
+                                 handleClose={this.handleNotNew} onTextChange={this.nameChange}
+                                 handleNew={this.handleNewTossUp} openNew={this.handleNew}/>
             </div>
         );
     }
@@ -283,8 +366,6 @@ export default withTracker(() => {
     if (all && all.length>0) {
         all.forEach((tossup) => {
             if(Meteor.user() && tossup.owners.includes(Meteor.user()._id) ){
-                console.log(Meteor.user().userId);
-                console.log(tossup.owners);
                 thissotrteos.push(tossup);
             }
         });
