@@ -238,8 +238,8 @@ export default class Toss4All extends Component {
             <div>
                 <div className="container-fluid row toss-content">
                     {instructions}
-                    <div className="col-3"></div>
-                    <div className="col-2">
+                    <div className="col-sm-4 col-12">
+
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <MuiThemeProvider>
@@ -276,14 +276,11 @@ export default class Toss4All extends Component {
                             </MuiThemeProvider>
                         </MuiThemeProvider>
                     </div>
-                </div>
-                <div className="container-fluid row">
-
-                    <div className="col-sm-2 col-6">
-                        <MuiThemeProvider>
+                    <div className="col-sm-2 col-8">
+                            <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
-                                    <ListItem><h5>History</h5></ListItem>
+                                    <h1 className="head-title">History</h1>
                                     <Divider/>
                                     {results}
                                 </List>
@@ -292,21 +289,18 @@ export default class Toss4All extends Component {
 
                     </div>
 
-                    <div className="col-sm-4 col-6">
-                        <div className="roulette-container">
-
-                            <MuiThemeProvider>
-                                <Paper zDepth={2} rounded={false} style={paperInk}>
-                                    <List>
-                                        {res}
-                                    </List>
-                                    <Divider/>
-                                </Paper>
-                            </MuiThemeProvider>
-                        </div>
-
+                    <div className="col-sm-2 col-8">
+                        <MuiThemeProvider>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
+                                <h1 className="head-title">Results</h1>
+                                <Divider/>
+                                <List>
+                                    {res}
+                                </List>
+                            </Paper>
+                        </MuiThemeProvider>
                     </div>
-                    <div className="col-sm-2 col-6">
+                    <div className="col-sm-2 col-8">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <h1 className="head-title">Actions</h1>
@@ -316,31 +310,26 @@ export default class Toss4All extends Component {
                                 </List>
                             </Paper>
                         </MuiThemeProvider>
-
                     </div>
-                    <div className="col-sm-2 col-6">
+                    <div className="col-sm-2 col-8">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
-                                <h1 className="head-title">Persons</h1>
+                                <div className="row justify-content-center">
+                                    <h1 className="head-title col-10">Persons</h1>
+                                    <div className="col-2">
+                                        <AddButton adding={this.props.adding}/>
+                                    </div>
+                                </div>
                                 <Divider/>
                                 <List>
                                     {persons}
                                 </List>
                             </Paper>
                         </MuiThemeProvider>
-                        <div className="row justify-content-center">
-                            <div className="col-11"></div>
-                            <div className="col-2">
-                                <AddButton adding={this.props.adding}/>
-                            </div>
-                        </div>
                     </div>
-
-
+                    <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
+                                 onTextChange={this.props.onTextChange} onAddOwner={this.props.onAddOwner}/>
                 </div>
-
-                <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
-                             onTextChange={this.props.onTextChange} onAddOwner={this.props.onAddOwner}/>
             </div>
 
         );
