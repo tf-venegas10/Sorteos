@@ -18,6 +18,7 @@ export default class RegisterManager extends Component {
             pswdVer: null,
             disableButton: true,
             processingAuth: false,
+            pswdMatch: false,
         }
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -43,7 +44,10 @@ export default class RegisterManager extends Component {
     }
 
     handlePswdVerChange(val) {
-        this.setState({pswdVer: val});
+        this.setState({
+            pswdVer: val,
+            pswdMatch: this.state.pswd === val
+        });
         this.verifyInput();
         this.setState({disableButton: ((this.state.pswd === this.state.pswdVer) && this.state.disableButton)});
     }
@@ -53,7 +57,7 @@ export default class RegisterManager extends Component {
         this.setState({
             disableButton: !((this.state.username && this.state.username !== "") && (this.state.email && this.state.email !== "")
             && (this.state.pswd && this.state.pswd !== "") && (this.state.pswdVer && this.state.pswdVer !== "") ?
-                emailRegex.test(this.state.email) : false)
+                emailRegex.test(this.state.email) : false),
         });
     }
 
@@ -93,6 +97,7 @@ export default class RegisterManager extends Component {
                             onPswdChange={this.handlePswdChange}
                             onPswdVerChange={this.handlePswdVerChange}
                             disableButton={this.state.disableButton}
+                            match={this.state.pswdMatch}
                         />
                 }
             </div>

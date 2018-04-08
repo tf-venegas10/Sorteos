@@ -81,12 +81,9 @@ export default class CustomDialog extends Component {
 
     }
 
-
-
-
     render() {
         const customContentStyle = {
-            width: '200px',
+            width: '10%',
             maxWidth: 'none',
 
         };

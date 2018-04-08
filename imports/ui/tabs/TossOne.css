@@ -6,3 +6,16 @@ TossOne Styles
     padding-top: 5%;
     padding-bottom: 5%;
 }
+
+.head-title {
+    color: #211836;
+    font-family: "Nova Slim", sans-serif;
+    font-size: 30px;
+    padding-top: 5%;
+    padding-left: 5%;
+}
+
+.scroll{
+    overflow-y: scroll;
+    max-height: 50%;
+}

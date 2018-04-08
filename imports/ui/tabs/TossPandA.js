@@ -32,8 +32,8 @@ export default class TossPandA extends Component {
 
     handleRouletteSpin(value) {
 
-        Meteor.call("tossUps.addResultPandAs", this.props.selected._id, {person: this.state.chosenOne, action:value});
-        this.setState({value:value});
+        Meteor.call("tossUps.addResultPandAs", this.props.selected._id, {person: this.state.chosenOne, action: value});
+        this.setState({value: value});
 
     };
 
@@ -98,7 +98,7 @@ export default class TossPandA extends Component {
         }
         i = 0;
         let results = [];
-        if(this.props.selected.resultsPandAs) {
+        if (this.props.selected.resultsPandAs) {
             this.props.selected.resultsPandAs.forEach((op) => {
                     i += 1;
                     results.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
@@ -122,39 +122,50 @@ export default class TossPandA extends Component {
                                               aria-label="Boton girar Ruleta"/>
                             </MuiThemeProvider>
                         </div>
-                        <Roulette options={(this.props.options)?this.props.options:[]} baseSize={250} spin={this.state.spin}
+                        <Roulette options={(this.props.options) ? this.props.options : []} baseSize={250}
+                                  spin={this.state.spin}
                                   onSpin={this.onSpin}
-                                  onComplete={this.handleRouletteSpin} weights={(this.props.weights)?this.props.weights:[]}/>
+                                  onComplete={this.handleRouletteSpin}
+                                  weights={(this.props.weights) ? this.props.weights : []}/>
                     </div>
-                    <div className="col-sm-3 col-6">
+                    <div className="col-sm-2 col-6">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
-                                <List>
-                                    {opt}
-                                </List>
+                                <h1 className="col-10 head-title">Results</h1>
                                 <Divider/>
                                 <List>
                                     {results}
                                 </List>
                             </Paper>
                         </MuiThemeProvider>
-
                     </div>
-                    <div className="col-sm-3 col-6">
+                    <div className="col-sm-2 col-6">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
+                                <h1 className="head-title">Actions</h1>
+                                <Divider/>
+                                <List>
+                                    {opt}
+                                </List>
+                            </Paper>
+                        </MuiThemeProvider>
+
+                    </div>
+                    <div className="col-sm-2 col-6">
+                        <MuiThemeProvider>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
+                                <div className="row">
+                                    <h1 className="col-10 head-title">Persons</h1>
+                                    <div className="col-2">
+                                        <AddButton adding={this.props.adding}/>
+                                    </div>
+                                </div>
+                                <Divider/>
                                 <List>
                                     {persons}
                                 </List>
-                                <Divider/>
                             </Paper>
                         </MuiThemeProvider>
-                        <div className="row justify-content-end">
-                            <div className="col-11"></div>
-                            <div className="col-2">
-                                <AddButton adding={this.props.adding}/>
-                            </div>
-                        </div>
                     </div>
 
 

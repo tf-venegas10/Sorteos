@@ -36,7 +36,7 @@ export default class OwnerDialog extends Component {
 
     render() {
         const customContentStyle = {
-            width: '20%',
+            width: '10%',
             maxWidth: 'none',
 
         };

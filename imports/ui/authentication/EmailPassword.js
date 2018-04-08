@@ -7,7 +7,7 @@ import "./Auth.css"
 
 export default class EmailPassword extends Component {
 
-    handleUsername(e){
+    handleUsername(e) {
         this.props.onUsernameChange($("#username").val());
     }
 
@@ -27,13 +27,13 @@ export default class EmailPassword extends Component {
         return (
             <div className="col-3">
                 <div className="card auth-card">
-                    <h2 className="card-header auth-card-title">{this.props.typeAuth}</h2>
+                    <h2 className="auth-card-title">{this.props.typeAuth}</h2>
                     <form onSubmit={this.props.submitAction}>
                         {
                             this.props.typeAuth === "Register" ?
                                 <div className="form-group">
                                     <label htmlFor="username">Username:</label>
-                                    <input placeholder="Username" type="username" id="username"
+                                    <input placeholder="Username" type="text" id="username"
                                            className="form-control"
                                            onChange={this.handleUsername.bind(this)}
                                            aria-label="Text input for username"
@@ -43,14 +43,14 @@ export default class EmailPassword extends Component {
                         }
                         <div className="form-group">
                             <label htmlFor="email">Email:</label>
-                            <input placeholder="Email" type="email" id={"email" + this.props.typeAuth}
+                            <input placeholder="email@example.com" type="email" id={"email" + this.props.typeAuth}
                                    className="form-control"
                                    onChange={this.handleEmail.bind(this)}
                                    aria-label="Text input for email"
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="password">Password:</label>
+                            <label htmlFor="Password">Password:</label>
                             <input placeholder="Password" type="password" id={"password" + this.props.typeAuth}
                                    className="form-control"
                                    onChange={this.handlePswd.bind(this)}
@@ -59,13 +59,21 @@ export default class EmailPassword extends Component {
                         </div>
                         {
                             this.props.typeAuth === "Register" ?
-                                <div className="form-group">
+                                <div className={"form-group " + ($("#passwordVer").is(":focus") ?
+                                    (this.props.match? "has-success" : "has-danger"):"")}>
                                     <label htmlFor="password">Confirm Password:</label>
                                     <input placeholder="Password" type="password" id="passwordVer"
-                                           className="form-control"
+                                           className={"form-control " + ( $("#passwordVer").is(":focus") ?
+                                               (this.props.match?
+                                               "form-control-success" : "form-control-danger"):"")}
                                            onChange={this.handlePswdVerify.bind(this)}
                                            aria-label="Text input for verifying password"
                                     />
+                                    {
+                                         $("#passwordVer").is(":focus") ?
+                                             this.props.match? null :
+                                            <small className="form-control-feedback">Passwords must match!</small>:null
+                                    }
                                 </div>
                                 : null
                         }

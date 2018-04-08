@@ -9,8 +9,8 @@ Auth modules styles
 
 }
 
-.auth-card{
-    background: #BBDBB8;
+.auth-card {
+    background: rgb(183, 183, 157);
     color: #211836;
     margin-top: 40%;
     margin-bottom: 10%;
@@ -18,27 +18,36 @@ Auth modules styles
     padding-right: 10%;
 }
 
-.auth-card-title{
-    color: rgb(22,98,131);
+.auth-card-title {
+    color: rgb(22, 98, 131);
+    font-family: "Nova Slim", sans-serif;
+    padding-top: 3%;
 }
 
-.auth-button{
+.form-group label {
+    font-family: "Hind Madurai", sans-serif;
+    text-align: left;
+    position: initial;
+}
+
+.auth-button {
     background: #211836;
     color: #FFFFFF;
+    font-family: "Nova Slim", sans-serif;
 }
 
-.complete-viewport{
+.complete-viewport {
     /*width: 100vw;*/
 }
 
-.circular-progress{
-    margin-top: 40%;
+.circular-progress {
+    margin-top: 20%;
     margin-bottom: 10%;
     padding-left: 10%;
     padding-right: 10%;
 }
 
-.auth-text{
+.auth-text {
     color: rgb(183, 183, 157);
     font-family: 'Nova Slim', cursive;
     font-size: 35px;

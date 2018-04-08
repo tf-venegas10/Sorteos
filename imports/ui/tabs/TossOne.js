@@ -36,7 +36,7 @@ export default class TossOne extends Component {
         else {
             Meteor.call("tossUps.addResultP", this.props.selected._id, value);
         }
-        this.setState({value:value});
+        this.setState({value: value});
     };
 
     //TODO: handle request delete
@@ -109,10 +109,20 @@ export default class TossOne extends Component {
             backgroundColor: "#BBDBB8",
         };
 
+        const listScroll = {
+            overflowY: opt.length>5?"scroll":"auto",
+            height: "30%",
+        };
+
+        const listResultsScroll = {
+            overflowY: results.length>5?"scroll":"auto",
+            height: "30%",
+        };
+
         return (
             <div>
                 <div className="container-fluid row toss-content">
-                    <div className="col-sm-9 col-12">
+                    <div className="col-sm-8 col-12">
                         <div className="roulette-container">
                             <MuiThemeProvider>
                                 <RaisedButton
@@ -130,24 +140,32 @@ export default class TossOne extends Component {
                                   onComplete={this.handleRouletteSpin}
                                   weights={(this.props.weights) ? this.props.weights : []}/>
                     </div>
-                    <div className="col-sm-3 col-8 center-items">
+                    <div className="col-sm-2 col-8">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
-                                <List>
-                                    {opt}
-                                </List>
+                                <h1 className="head-title">Results</h1>
                                 <Divider/>
-                                <List>
+                                <List style={listResultsScroll}>
                                     {results}
                                 </List>
                             </Paper>
                         </MuiThemeProvider>
-                        <div className="row justify-content-end">
-                            <div className="col-11"></div>
-                            <div className="col-2">
-                                <AddButton adding={this.props.adding}/>
-                            </div>
-                        </div>
+                    </div>
+                    <div className="col-sm-2 col-8">
+                        <MuiThemeProvider>
+                            <Paper zDepth={2} rounded={false} style={paperInk}>
+                                <div className="row">
+                                    <h1 className="head-title col-10">{this.props.person ? "Persons" : "Actions"}</h1>
+                                    <div className="col-2">
+                                        <AddButton adding={this.props.adding}/>
+                                    </div>
+                                </div>
+                                <Divider/>
+                                <List style={listScroll}>
+                                    {opt}
+                                </List>
+                            </Paper>
+                        </MuiThemeProvider>
                     </div>
                 </div>
                 <Dialog open={this.props.add} handleClose={this.props.handleClose} action={this.props.action}

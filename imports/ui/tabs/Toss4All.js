@@ -202,8 +202,7 @@ export default class Toss4All extends Component {
 
         return (
             <div>
-                <div className="row">
-
+                <div className="container-fluid row toss-content">
                     <div className="col-3"></div>
                     <div className="col-2">
                         <MuiThemeProvider>
@@ -240,10 +239,6 @@ export default class Toss4All extends Component {
                             </MuiThemeProvider>
                         </MuiThemeProvider>
                     </div>
-                    <div className="col-6"></div>
-                    <div className="col-1">
-                        <AddButton adding={this.props.adding}/>
-                    </div>
                 </div>
                 <div className="container-fluid row">
                     <div className="col-sm-2 col-6">
@@ -276,6 +271,8 @@ export default class Toss4All extends Component {
                     <div className="col-sm-2 col-6">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
+                                <h1 className="head-title">Actions</h1>
+                                <Divider/>
                                 <List>
                                     {opt}
                                 </List>
@@ -286,13 +283,19 @@ export default class Toss4All extends Component {
                     <div className="col-sm-2 col-6">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
+                                <h1 className="head-title">Persons</h1>
+                                <Divider/>
                                 <List>
                                     {persons}
                                 </List>
-                                <Divider/>
                             </Paper>
                         </MuiThemeProvider>
-
+                        <div className="row justify-content-center">
+                            <div className="col-11"></div>
+                            <div className="col-2">
+                                <AddButton adding={this.props.adding}/>
+                            </div>
+                        </div>
                     </div>
 
 
