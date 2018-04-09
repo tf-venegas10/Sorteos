@@ -135,6 +135,10 @@ export default class Toss4All extends Component {
         let persons = [];
         let i = 0;
         let totalWeight = 0;
+        let listStyle = {
+            fontFamily: "\"Hind Madurai\",sans-serif",
+            color: "#211836",
+        };
         if (this.props.weights && this.props.weights.length > 0) {
             totalWeight = this.props.weights.reduce((a, w) => a + w);
 
@@ -147,6 +151,7 @@ export default class Toss4All extends Component {
                         opt.push(<ListItem
                             primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}
                             key={i}
+                            style={listStyle}
                             rightIcon={<ActionDelete onClick={this.handleRequestDelete.bind(this, i, true)}/>}/>);
                     }
                 );
@@ -156,6 +161,7 @@ export default class Toss4All extends Component {
                         persons.push(<ListItem
                             primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalPWeight * 100) + "%"}
                             key={i}
+                            style={listStyle}
                             rightIcon={<ActionDelete
                                 onClick={this.handleRequestDelete.bind(this, i, false)}/>}/>);
                     }
@@ -169,7 +175,8 @@ export default class Toss4All extends Component {
 
                     sorted.forEach((op) => {
                         i += 1;
-                        results.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
+                        results.push(<ListItem
+                            style={listStyle} primaryText={op.person + ": " + op.action} key={i}/>);
                     });
                     i++;
                     results.push(<Divider key={i}/>);
@@ -189,7 +196,8 @@ export default class Toss4All extends Component {
         if (this.props.selected.results4All && this.props.selected.results4All.length > 0) {
             this.props.selected.results4All[this.props.selected.results4All.length - 1].forEach((op) => {
                 i += 1;
-                res.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
+                res.push(<ListItem
+                    style={listStyle} primaryText={op.person + ": " + op.action} key={i}/>);
             });
         }
         res.push(finalItem);
@@ -277,8 +285,9 @@ export default class Toss4All extends Component {
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <div className="row justify-content-center">
-                                    <h1 className="head-title col-10">Persons</h1>
-                                    <div className="col-2">
+                                    <div className="col-1"></div>
+                                    <h1 className="head-title col-7">Persons</h1>
+                                    <div className="col-4">
                                         <AddButton adding={this.props.adding}/>
                                     </div>
                                 </div>

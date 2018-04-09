@@ -62,7 +62,11 @@ export default class TossOne extends Component {
             totalWeight = this.props.weights.reduce((a, w) => a + w);
         }
         const opStyle = {
-            color: "#FFFFFF"
+            color: "#FFFFFF",
+        };
+        let listStyle = {
+            fontFamily: "\"Hind Madurai\",sans-serif",
+            color: "#211836",
         };
         if (this.props.weights && this.props.weights.length > 0 && this.props.options && this.props.options.length > 0) {
             this.props.options.forEach((op) => {
@@ -70,7 +74,7 @@ export default class TossOne extends Component {
                     opt.push(<ListItem
                         primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}
                         key={i}
-                        stylye={opStyle}
+                        style={listStyle}
                         rightIcon={
                             <ActionDelete
                                 onClick={this.handleRequestDelete.bind(this, i)}
@@ -87,7 +91,8 @@ export default class TossOne extends Component {
             if (this.props.selected.resultsP) {
                 this.props.selected.resultsP.forEach((op) => {
                         i += 1;
-                        results.push(<ListItem primaryText={op} key={i}/>);
+                        results.push(<ListItem
+                            style={listStyle} primaryText={op} key={i}/>);
                     }
                 );
             }
@@ -96,7 +101,8 @@ export default class TossOne extends Component {
             if (this.props.selected.resultsA) {
                 this.props.selected.resultsA.forEach((op) => {
                         i += 1;
-                        results.push(<ListItem primaryText={op} key={i}/>);
+                        results.push(<ListItem
+                            style={listStyle} primaryText={op} key={i}/>);
                     }
                 );
             }
@@ -171,8 +177,9 @@ export default class TossOne extends Component {
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <div className="row">
-                                    <h1 className="head-title col-10">{this.props.person ? "Persons" : "Actions"}</h1>
-                                    <div className="col-2">
+                                    <div className="col-1"></div>
+                                    <h1 className="head-title col-6">{this.props.person ? "Persons" : "Actions"}</h1>
+                                    <div className="col-4">
                                         <AddButton adding={this.props.adding}/>
                                     </div>
                                 </div>

@@ -48,7 +48,8 @@ export default class Selector extends Component {
 
     render() {
         const background = {
-            backgroundColor: '#1498d5'
+            backgroundColor: '#1498d5',
+            fontFamily: "\"Nova Slim\", sans-serif",
         };
 
         const ink = {
