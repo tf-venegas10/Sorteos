@@ -70,6 +70,10 @@ export default class TossPandA extends Component {
         let persons = [];
         let i = 0;
         let totalWeight = 0;
+        let listStyle = {
+            fontFamily: "\"Hind Madurai\",sans-serif",
+            color: "#211836",
+        };
         if (this.props.weights && this.props.weights.length > 0) {
             totalWeight = this.props.weights.reduce((a, w) => a + w);
 
@@ -80,6 +84,7 @@ export default class TossPandA extends Component {
                 this.props.options.forEach((op) => {
                         i += 1;
                         opt.push(<ListItem
+                            style = {listStyle}
                             primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalWeight * 100) + "%"}
                             key={i}
                             rightIcon={<ActionDelete onClick={this.handleRequestDelete.bind(this, i, true)}/>}/>);
@@ -89,6 +94,7 @@ export default class TossPandA extends Component {
                 this.props.persons.forEach((op) => {
                         i += 1;
                         persons.push(<ListItem
+                            style = {listStyle}
                             primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalPWeight * 100) + "%"}
                             key={i}
                             rightIcon={<ActionDelete
@@ -102,7 +108,8 @@ export default class TossPandA extends Component {
         if (this.props.selected.resultsPandAs) {
             this.props.selected.resultsPandAs.forEach((op) => {
                     i += 1;
-                    results.push(<ListItem primaryText={op.person + ": " + op.action} key={i}/>);
+                    results.push(<ListItem
+                        style = {listStyle} primaryText={op.person + ": " + op.action} key={i}/>);
                 }
             );
         }
@@ -165,8 +172,9 @@ export default class TossPandA extends Component {
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <div className="row">
-                                    <h1 className="col-10 head-title">Persons</h1>
-                                    <div className="col-2">
+                                    <div className="col-1"></div>
+                                    <h1 className="col-7 head-title">Persons</h1>
+                                    <div className="col-4">
                                         <AddButton adding={this.props.adding}/>
                                     </div>
                                 </div>
