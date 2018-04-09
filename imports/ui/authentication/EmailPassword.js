@@ -25,37 +25,39 @@ export default class EmailPassword extends Component {
 
     render() {
         return (
-            <div className="col-3">
+            <div className="col-sm-3 col-10">
                 <div className="card auth-card">
                     <h2 className="auth-card-title">{this.props.typeAuth}</h2>
                     <form onSubmit={this.props.submitAction}>
                         {
                             this.props.typeAuth === "Register" ?
                                 <div className="form-group">
-                                    <label htmlFor="username">Username:</label>
+                                    <label htmlFor="username">Username:
                                     <input placeholder="Username" type="text" id="username"
                                            className="form-control"
                                            onChange={this.handleUsername.bind(this)}
                                            aria-label="Text input for username"
-                                    />
+                                    /></label>
                                 </div>
                                 : null
                         }
                         <div className="form-group">
-                            <label htmlFor="email">Email:</label>
+                            <label htmlFor="email">Email:
                             <input placeholder="email@example.com" type="email" id={"email" + this.props.typeAuth}
                                    className="form-control"
                                    onChange={this.handleEmail.bind(this)}
                                    aria-label="Text input for email"
                             />
+                            </label>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="Password">Password:</label>
+                            <label htmlFor="Password">Password:
                             <input placeholder="Password" type="password" id={"password" + this.props.typeAuth}
                                    className="form-control"
                                    onChange={this.handlePswd.bind(this)}
                                    aria-label="Text input for password"
                             />
+                            </label>
                         </div>
                         {
                             this.props.typeAuth === "Register" ?

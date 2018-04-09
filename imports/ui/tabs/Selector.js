@@ -5,45 +5,13 @@ import AppBar from 'material-ui/AppBar';
 import TossOne from "./TossOne";
 import TossPandA from "./TossPandA";
 import Toss4All from "./Toss4All";
+import "./Selector.css";
+import Gift from 'material-ui/svg-icons/action/redeem';
 
 
 // App component - represents the whole app
 
 export default class Selector extends Component {
-    componentDidMount()
-    {
-        this.props.addSteps([{
-            title: "Add participants",
-            text: "Now lets add new participants to the toss-up",
-            type: 'hover',
-            selector: ".body-content > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > button:nth-child(1)",
-        },{
-            title: "Add actions",
-            type: 'hover',
-            text: "To do something more than just choose a random participant add actions to the toss-up too.",
-            selector: ".body-content > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > button:nth-child(1)",
-        },{
-            title: "Choose participant",
-            type: 'hover',
-            text: "Your toss-up has 4 different views. In each one of them you will get different results. This tab allows you to select one participant at random.",
-            selector: "html body div#render-target div div.user-banner div div.center-items.body-content div div div button",
-        },{
-            title: "Choose action",
-            type: 'hover',
-            text: "This tab allows you to select one action at random.",
-            selector: ".body-content > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > button:nth-child(2)",
-        },{
-            title: "Choose one action for one participant",
-            type: 'hover',
-            text: "This tab allows you to select one action for one participant both at random.",
-            selector: ".body-content > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > button:nth-child(3)",
-        },{
-            title: "Choose one action for each participant or one participant for each action",
-            type: 'hover',
-            text: "This tab allows you to select  action for each participant or one participant for each action at random.",
-            selector: ".body-content > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > button:nth-child(4)",
-        }]);
-    }
 
 
     render() {
@@ -56,10 +24,8 @@ export default class Selector extends Component {
             backgroundColor: '#BBDBB8'
         };
         const headline = {
-            fontSize: 24,
             paddingTop: 16,
-            marginBottom: 12,
-            fontWeight: 400
+            marginBottom: 12
         };
         const titleStyle = {
             textAlign: "center"
@@ -76,7 +42,7 @@ export default class Selector extends Component {
             </MuiThemeProvider>
             <MuiThemeProvider>
                 <Tabs inkBarStyle={ink}>
-                    <Tab label="Person" buttonStyle={background}>
+                    <Tab label="Person" buttonStyle={background} icon={Gift}>
                         <TossOne options={this.props.persons} baseSize={250}
                                  weights={this.props.weightsPersons}
                                  add={this.props.add} handleClose={this.props.handleClose}
