@@ -112,14 +112,24 @@ export default class TossPandA extends Component {
         }
         i = 0;
         let results = [];
-        if (this.props.selected && this.props.selected.resultsPandAs) {
+
+        let firstItem = {
+            backgroundColor: "#88A885",
+            fontFamily: "\"Hind Madurai\",sans-serif",
+            color: "#211836",
+        };
+
+            if (this.props.selected && this.props.selected.resultsPandAs) {
+
             this.props.selected.resultsPandAs.forEach((op) => {
                     i += 1;
                     results.push(<ListItem
-                        style={listStyle} primaryText={op.person + ": " + op.action} key={i}/>);
+                        style={i==this.props.selected.resultsPandAs.length?firstItem:listStyle}
+                        primaryText={op.person + ": " + op.action} key={i}/>);
                 }
             );
         }
+        results.reverse();
         const ink = {
             backgroundColor: '#149bda'
         };

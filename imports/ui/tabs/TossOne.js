@@ -93,12 +93,18 @@ export default class TossOne extends Component {
         }
         i = 0;
         let results = [];
+        let firstItem = {
+            backgroundColor: "#88A885",
+            fontFamily: "\"Hind Madurai\",sans-serif",
+            color: "#211836",
+        };
         if (!this.props.action) {
             if (this.props.selected && this.props.selected.resultsP) {
                 this.props.selected.resultsP.forEach((op) => {
                         i += 1;
                         results.push(<ListItem
-                            style={listStyle} primaryText={op} key={i}/>);
+                            style={i==this.props.selected.resultsP.length?firstItem:listStyle}
+                            primaryText={op} key={i}/>);
                     }
                 );
             }
@@ -108,11 +114,13 @@ export default class TossOne extends Component {
                 this.props.selected.resultsA.forEach((op) => {
                         i += 1;
                         results.push(<ListItem
-                            style={listStyle} primaryText={op} key={i}/>);
+                            style={i==this.props.selected.resultsA.length?firstItem:listStyle}
+                            primaryText={op} key={i}/>);
                     }
                 );
             }
         }
+        results.reverse();
         const ink = {
             backgroundColor: '#149bda'
         };
