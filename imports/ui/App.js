@@ -302,18 +302,9 @@ export default withTracker(() => {
     Meteor.subscribe("appusers");
     Meteor.subscribe("sorteos");
     let all=TossUps.find().fetch();
-    /*all.sort((a,b)=>a.createdAt-b.createdAt);
-    let thissotrteos=[];
-    if (all && all.length>0) {
-        all.forEach((tossup) => {
-            if(Meteor.user() && tossup.owners.includes(Meteor.user()._id) ){
-                thissotrteos.push(tossup);
-            }
-        });
-    }*/
+
     return {
         currentUser: Meteor.user(),
-        //sorteos:  Meteor.subscribe("sorteos")
         sorteos: all
     }
 })(App);
