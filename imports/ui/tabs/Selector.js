@@ -46,7 +46,7 @@ export default class Selector extends Component {
             </MuiThemeProvider>
             <MuiThemeProvider>
                 <Tabs inkBarStyle={ink}>
-                    <Tab label="Person" buttonStyle={background} icon={<Face/>}>
+                    <Tab label={<h3>Person</h3>} buttonStyle={background} icon={<Face/>}>
                         <TossOne options={this.props.persons} baseSize={250}
                                  weights={this.props.weightsPersons}
                                  add={this.props.add} handleClose={this.props.handleClose}
@@ -60,7 +60,7 @@ export default class Selector extends Component {
                                  selected={this.props.tossData}
                         />
                     </Tab>
-                    <Tab label="Action" buttonStyle={background} icon={<Action/>}>
+                    <Tab label={<h3>Action</h3>} buttonStyle={background} icon={<Action/>}>
                         <TossOne options={this.props.actions} baseSize={250}
                                  weights={this.props.weightsActions}
                                  add={this.props.add} handleClose={this.props.handleClose}
@@ -74,7 +74,7 @@ export default class Selector extends Component {
                                  selected={this.props.tossData}
                         />
                     </Tab>
-                    <Tab label="Person & Action" buttonStyle={background} icon={<Gift/>}>
+                    <Tab label={<h3>Person & Action</h3>} buttonStyle={background} icon={<Gift/>}>
                         <TossPandA options={this.props.actions} baseSize={250}
                                    weights={this.props.weightsActions}
                                    add={this.props.add} handleClose={this.props.handleClose}
@@ -89,7 +89,7 @@ export default class Selector extends Component {
                                    selected={this.props.tossData}
                         />
                     </Tab>
-                    <Tab label="Actions for all" buttonStyle={background} icon={<ListCheck/>}>
+                    <Tab label={<h3>Actions for all</h3>} buttonStyle={background} icon={<ListCheck/>}>
                         <Toss4All options={this.props.actions} baseSize={250}
                                   weights={this.props.weightsActions}
                                   add={this.props.add} handleClose={this.props.handleClose}
