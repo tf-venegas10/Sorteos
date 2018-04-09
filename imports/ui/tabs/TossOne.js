@@ -99,7 +99,7 @@ export default class TossOne extends Component {
             color: "#211836",
         };
         if (!this.props.action) {
-            if (this.props.selected.resultsP) {
+            if (this.props.selected && this.props.selected.resultsP) {
                 this.props.selected.resultsP.forEach((op) => {
                         i += 1;
                         results.push(<ListItem
