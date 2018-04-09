@@ -45,7 +45,7 @@ export default class UserIndex extends Component {
         let i = 0;
 
         const paperStyle = {
-            width: "70%",
+
             backgroundColor: "#BBDBB8",
         };
 
@@ -97,7 +97,7 @@ export default class UserIndex extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-sm-2 col-12 center-items sorteos-list">
+                <div className="col-sm-4 col-12 center-items sorteos-list">
                     <MuiThemeProvider>
                         <Paper zDepth={2} rounded={false} style={paperStyle}>
                             <List>
