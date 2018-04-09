@@ -7,6 +7,10 @@ import TossPandA from "./TossPandA";
 import Toss4All from "./Toss4All";
 import "./Selector.css";
 import Gift from 'material-ui/svg-icons/action/redeem';
+import Face from 'material-ui/svg-icons/action/face';
+import Action from 'material-ui/svg-icons/action/motorcycle';
+import ListCheck from 'material-ui/svg-icons/av/playlist-add-check';
+
 
 
 // App component - represents the whole app
@@ -42,7 +46,7 @@ export default class Selector extends Component {
             </MuiThemeProvider>
             <MuiThemeProvider>
                 <Tabs inkBarStyle={ink}>
-                    <Tab label="Person" buttonStyle={background} icon={Gift}>
+                    <Tab label="Person" buttonStyle={background} icon={<Face/>}>
                         <TossOne options={this.props.persons} baseSize={250}
                                  weights={this.props.weightsPersons}
                                  add={this.props.add} handleClose={this.props.handleClose}
@@ -56,7 +60,7 @@ export default class Selector extends Component {
                                  selected={this.props.tossData}
                         />
                     </Tab>
-                    <Tab label="Action" buttonStyle={background}>
+                    <Tab label="Action" buttonStyle={background} icon={<Action/>}>
                         <TossOne options={this.props.actions} baseSize={250}
                                  weights={this.props.weightsActions}
                                  add={this.props.add} handleClose={this.props.handleClose}
@@ -70,7 +74,7 @@ export default class Selector extends Component {
                                  selected={this.props.tossData}
                         />
                     </Tab>
-                    <Tab label="Person & Action" buttonStyle={background}>
+                    <Tab label="Person & Action" buttonStyle={background} icon={<Gift/>}>
                         <TossPandA options={this.props.actions} baseSize={250}
                                    weights={this.props.weightsActions}
                                    add={this.props.add} handleClose={this.props.handleClose}
@@ -85,7 +89,7 @@ export default class Selector extends Component {
                                    selected={this.props.tossData}
                         />
                     </Tab>
-                    <Tab label="Action for each Person" buttonStyle={background}>
+                    <Tab label="Actions for all" buttonStyle={background} icon={<ListCheck/>}>
                         <Toss4All options={this.props.actions} baseSize={250}
                                   weights={this.props.weightsActions}
                                   add={this.props.add} handleClose={this.props.handleClose}
