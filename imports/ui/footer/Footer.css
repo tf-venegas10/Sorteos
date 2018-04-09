@@ -26,3 +26,24 @@ footer{
 .github-link:hover{
     color: rgb(183, 183, 157);
 }
+h5{
+    font-size: 80%;
+}
+h6{
+    font-size: 60%;
+}
+@media screen and (max-width: 600px) {
+    .footer {
+        font-size: 70%;
+      }
+    h5{
+        font-size: 80%;
+    }
+    h6{
+        font-size: 60%;
+    }
+    body div#render-target div footer.footer div.container div.row.justify-content-around div.col-4.center-items{
+        font-size: 120%;
+
+    }
+}

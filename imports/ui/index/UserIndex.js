@@ -79,7 +79,7 @@ export default class UserIndex extends Component {
         }
         return (
             <div className="row justify-content-around center-items">
-                <div className="col-8 center-items">
+                <div className="col-sm-8 col-12 center-items">
                     <div className="card welcome-card">
                         <img className="card-img-top welcome-image" src="./resources/welcome.jpg" alt="welcome image"/>
                         <div className="card-body">
@@ -97,7 +97,7 @@ export default class UserIndex extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-3 center-items sorteos-list">
+                <div className="col-sm-2 col-12 center-items sorteos-list">
                     <MuiThemeProvider>
                         <Paper zDepth={2} rounded={false} style={paperStyle}>
                             <List>

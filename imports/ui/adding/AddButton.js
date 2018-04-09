@@ -10,12 +10,14 @@ export default class AddButton extends Component {
 
     render() {
         const background={
-            backgroundColor: '#1498D5'
+            backgroundColor: '#1498D5',
+            height: '50',
+            width: '50'
         };
 
         return (
             <MuiThemeProvider>
-                <FloatingActionButton onClick={this.props.adding} style={background} aria-label="Button to add participants or actions">
+                <FloatingActionButton onClick={this.props.adding} style={background} className="floatingButton" aria-label="Button to add participants or actions">
                     <ContentAdd/>
                 </FloatingActionButton>
             </MuiThemeProvider>
