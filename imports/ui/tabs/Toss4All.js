@@ -270,10 +270,10 @@ export default class Toss4All extends Component {
                                 <ActionHelp onClick={this.help}/>
                                  {Help}
                             </Paper>
-                            <MuiThemeProvider>
-                                <RaisedButton label="Spin" style={ink} disabledBackgroundColor="true"
-                                              onClick={this.click} aria-label="Boton girar Ruleta"/>
-                            </MuiThemeProvider>
+                        </MuiThemeProvider>
+                        <MuiThemeProvider>
+                            <RaisedButton label="Spin" style={ink} disabledBackgroundColor="true"
+                                          onClick={this.click} aria-label="Boton girar Ruleta"/>
                         </MuiThemeProvider>
                     </div>
                     <div className="col-sm-2 col-8">

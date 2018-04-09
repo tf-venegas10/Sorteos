@@ -25,6 +25,7 @@ class App extends Component {
         this.state = {
             location: "index",
             userLocation: "index",
+
             newToss: false,
             sorteo: 0,
             add: false,
@@ -173,7 +174,7 @@ class App extends Component {
     handleTossDelete(id) {
         let idd = this.props.sorteos[id]._id;
         Meteor.call('tossUps.deleteMyOwnership', idd);
-        this.setState({userLocation: "index"});
+        this.setState({userLocation: "index", sorteo:0});
     }
 
     onTextChange(e) {
@@ -267,29 +268,10 @@ class App extends Component {
     }
 
     render() {
-
+        console.log(this.state.sorteo);
+        console.log(this.props.sorteos);
         return (
             <div>
-                <Joyride
-                    ref={c => (this.joyride = c)}
-                    callback={this.callback}
-                    debug={false}
-                    disableOverlay={this.state.selector === '.btn'}
-                    locale={{
-                        back: (<span>Back</span>),
-                        close: (<span>Close</span>),
-                        last: (<span>Last</span>),
-                        next: (<span>Next</span>),
-                        skip: (<span>Skip</span>),
-                    }}
-                    run={this.state.isRunning}
-                    showOverlay={this.state.joyrideOverlay}
-                    showSkipButton={true}
-                    showStepsProgress={true}
-                    stepIndex={this.state.stepIndex}
-                    steps={this.state.steps}
-                    type={this.state.joyrideType}
-                />
                 <div className={this.props.currentUser ? "user-banner" : "main-banner"}>
                     <div className={this.props.currentUser ? null : "main-content center-items"}>
                         {
@@ -362,6 +344,7 @@ export default withTracker(() => {
     Meteor.subscribe("appusers");
     Meteor.subscribe("sorteos");
     let all=TossUps.find().fetch();
+    all.sort((a,b)=>a.createdAt-b.createdAt);
     let thissotrteos=[];
     if (all && all.length>0) {
         all.forEach((tossup) => {
