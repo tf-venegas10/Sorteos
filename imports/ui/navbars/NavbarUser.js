@@ -22,7 +22,10 @@ export default class NavbarUser extends Component {
 
     render() {
         const background = {
-            backgroundColor: 'rgb(55,55,55)'
+            backgroundColor: 'rgb(55,55,55)',
+            fontFamily: "'Nova Slim', cursive",
+            color: "#1498D5",
+            textAlign: "center"
         };
         const titleStyle = {
             textAlign: "center"
@@ -44,37 +47,44 @@ export default class NavbarUser extends Component {
             <div>
                 <MuiThemeProvider>
                     <AppBar
-                        title={<img onClick={this.props.goToIndex} className="col-4 col-sm-2 col-md-1 appbar-logo"
-                                    src="name.png" alt="Toss-App"/>}
+                        title={this.props.userLocation==="sorteo"? this.props.sorteoName:
+                            <img onClick={this.props.goToIndex} className="col-4 col-sm-2 col-md-1 appbar-logo"
+                                                                                          src="name.png" alt="Toss-App"/>
+                        }
+                        titleStyle={background}
                         iconElementLeft={
-                            <IconMenu
-                                iconButtonElement={<IconButton aria-label="Boton para expandir el menu"
-                                ><Menu color={white}/></IconButton>}
-                                anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-                                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                                <IconMenu
+                                    iconButtonElement={<IconButton aria-label="Boton para expandir el menu"
+                                    ><Menu color={white}/></IconButton>}
+                                    anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+                                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
 
-                            >
-                                <MenuItem primaryText="Sign out" leftIcon={<SignOut/>}
-                                          onClick={this.props.onLogoutCallback}/>
-                                <Divider/>
-                                <MenuItem primaryText="New Toss-up" leftIcon={<ContentAdd/>}
-                                          onClick={this.props.openNew}/>
-                                <Divider/>
-                                <MenuItem primaryText="My Toss-ups" style={boldStyle}/>
-                                {sorteos}
-                                {
-                                    this.props.userLocation === "sorteo" ?
-                                        <div>
-                                            <Divider/>
-                                            <MenuItem primaryText="Add Owner" leftIcon={<ContentAdd/>}
-                                                      onClick={this.props.addOwner}/>
-                                        </div> :
-                                        null
-                                }
-                            </IconMenu>
+                                >
+                                    <MenuItem primaryText="Sign out" leftIcon={<SignOut/>}
+                                              onClick={this.props.onLogoutCallback}/>
+                                    <Divider/>
+                                    <MenuItem primaryText="New Toss-up" leftIcon={<ContentAdd/>}
+                                              onClick={this.props.openNew}/>
+                                    <Divider/>
+                                    <MenuItem primaryText="My Toss-ups" style={boldStyle}/>
+                                    {sorteos}
+                                    {
+                                        this.props.userLocation === "sorteo" ?
+                                            <div>
+                                                <Divider/>
+                                                <MenuItem primaryText="Add Owner" leftIcon={<ContentAdd/>}
+                                                          onClick={this.props.addOwner}/>
+                                            </div> :
+                                            null
+                                    }
+                                </IconMenu>
+                        }
+                        iconElementRight={
+                            this.props.userLocation==="sorteo"?
+                            <img onClick={this.props.goToIndex} className="col-8 appbar-logo"
+                                 src="name.png" alt="Toss-App"/>:null
                         }
                         style={background}
-                        titleStyle={titleStyle}
                     />
                 </MuiThemeProvider>
             </div>

@@ -145,7 +145,7 @@ export default class TossPandA extends Component {
                                               aria-label="Boton girar Ruleta"/>
                             </MuiThemeProvider>
                         </div>
-                        <Roulette options={(this.props.options) ? this.props.options : []} baseSize={250}
+                        <Roulette options={(this.props.options) ? this.props.options : []} baseSize={220}
                                   spin={this.state.spin}
                                   onSpin={this.onSpin}
                                   onComplete={this.handleRouletteSpin}

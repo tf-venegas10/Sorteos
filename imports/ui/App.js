@@ -282,6 +282,7 @@ class App extends Component {
                                             sorteos={this.props.sorteos} switchSorteo={this.switchSorteo}
                                             handleTossDelete={this.handleTossDelete} goToIndex={this.goToIndexUser}
                                             addOwner={this.addingOwner} userLocation={this.state.userLocation}
+                                            sorteoName={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].name : null}
                                 /> :
                                 <NavbarIndex goToIndex={this.goToIndex}/>
                         }
@@ -299,7 +300,6 @@ class App extends Component {
                                                   tossData={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo] : {}}
                                                   onNumberChange={this.onNumberChange}
                                                   onAddAction={this.onAddAction} onAddPerson={this.onAddPerson} onAddOwner={this.onAddOwner}
-                                                  sorteoName={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo].name : null}
                                                   handleSelectedPerson={this.handleSelectedTossOnePerson}
                                                   handleSelectedAction={this.handleSelectedTossOneAction}
                                                   handleSelectedPandA={this.handleSelectedTossPandA}
