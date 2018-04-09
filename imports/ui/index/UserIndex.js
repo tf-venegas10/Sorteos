@@ -11,41 +11,14 @@ import Divider from 'material-ui/Divider';
 import "./UserIndex.css";
 
 export default class UserIndex extends Component {
-    componentDidMount()
-    {
-        this.props.addSteps([{
-            title: "Create new Toss-up",
-            text: "To start first create a new toss-up",
-            selector: "#newTossUpButton",
-            type: 'hover',
-            position: 'bottom',
-            allowClicksThruHole: true,
-            style: {
-                backgroundColor: '#ccc',
-                mainColor: '#000',
-                header: {
-                    color: '#f04',
-                    fontSize: '3rem',
-                    textAlign: 'center',
-                },
-                footer: {
-                    display: 'none',
-                },
-                beacon: {
-                    inner: '#000',
-                    outer: '#000',
-                },
-            },
-            trigger: 'div.col-3:nth-child(2) > svg:nth-child(1)'
-        }]);
-    }
+
 
     render() {
         let sorteos = [];
         let i = 0;
 
         const paperStyle = {
-            width: "70%",
+
             backgroundColor: "#BBDBB8",
         };
 
@@ -97,7 +70,7 @@ export default class UserIndex extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-sm-2 col-12 center-items sorteos-list">
+                <div className="col-sm-4 col-12 center-items sorteos-list">
                     <MuiThemeProvider>
                         <Paper zDepth={2} rounded={false} style={paperStyle}>
                             <List>

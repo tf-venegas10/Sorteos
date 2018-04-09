@@ -31,6 +31,7 @@ UserIndex styles
 .welcome-card p{
     color: rgb(200,200,200);
     font-family: "Hind Madurai",sans-serif;
+
 }
 
 .welcome-image{
@@ -47,8 +48,8 @@ UserIndex styles
 
 .sorteos-list{
     width: 90%;
-    margin-top: 20%;
-    margin-bottom: 10%;
-    margin-left: 5%;
-    margin-right: 5%;
+    padding-top: 20%;
+    padding-bottom: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
 }

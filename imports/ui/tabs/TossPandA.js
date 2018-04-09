@@ -28,11 +28,18 @@ export default class TossPandA extends Component {
         this.click = this.click.bind(this);
         this.handleRequestDelete = this.handleRequestDelete.bind(this);
     }
+    componentDidMount(){
+        console.log("value: "+this.state.value);
+    }
 
     handleRouletteSpin(value) {
 
         Meteor.call("tossUps.addResultPandAs", this.props.selected._id, {person: this.state.chosenOne, action: value});
         this.setState({value: value});
+        setTimeout(()=>{
+            this.setState({value: ""});
+            },1000);
+
 
     };
 
@@ -95,7 +102,7 @@ export default class TossPandA extends Component {
                         i += 1;
                         persons.push(<ListItem
                             style={listStyle}
-                            primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalPWeight * 100) + "%"}
+                            primaryText={op + " :" + Math.round(this.props.weightsPersons[i - 1] / totalPWeight * 100) + "%"}
                             key={i}
                             rightIcon={<ActionDelete
                                 onClick={this.handleRequestDelete.bind(this, i, false)}/>}/>);
