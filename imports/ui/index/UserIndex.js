@@ -36,8 +36,7 @@ export default class UserIndex extends Component {
         };
 
         this.props.sorteos.forEach((s)=>{
-            sorteos.push(<ListItem style={itemStyle} key={i} primaryText={s.name}
-                                   onClick={this.props.switchSorteo.bind(this,i)}
+            sorteos.push(<ListItem style={itemStyle} key={i} primaryText={<div onClick={this.props.switchSorteo.bind(this,i)}>{s.name}</div>}
                                    rightIcon={<ActionDelete style={itemStyle}
                                                             onClick={this.props.handleTossDelete.bind(this, i)}/>}/>);
             i++;

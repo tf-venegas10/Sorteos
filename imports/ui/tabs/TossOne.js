@@ -94,7 +94,7 @@ export default class TossOne extends Component {
         i = 0;
         let results = [];
         if (!this.props.action) {
-            if (this.props.selected.resultsP) {
+            if (this.props.selected && this.props.selected.resultsP) {
                 this.props.selected.resultsP.forEach((op) => {
                         i += 1;
                         results.push(<ListItem
@@ -104,7 +104,7 @@ export default class TossOne extends Component {
             }
         }
         else {
-            if (this.props.selected.resultsA) {
+            if (this.props.selected && this.props.selected.resultsA) {
                 this.props.selected.resultsA.forEach((op) => {
                         i += 1;
                         results.push(<ListItem

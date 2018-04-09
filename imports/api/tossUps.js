@@ -14,8 +14,7 @@ if (Meteor.isServer) {
     Meteor.publish('sorteos', function tasksPublication() {
 
         let all=TossUps.find({owners: this.userId},{sort: {createdAt: -1} });
-        all.forEach((a)=>
-        {console.log(a)});
+
         return all;
     });
 

@@ -185,7 +185,7 @@ export default class Toss4All extends Component {
         }
         i = 0;
         let results = [];
-        if (this.props.selected.results4All) {
+        if (this.props.selected && this.props.selected.results4All) {
             this.props.selected.results4All.forEach((sorted) => {
 
                     sorted.forEach((op) => {

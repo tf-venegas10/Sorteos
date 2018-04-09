@@ -112,7 +112,7 @@ export default class TossPandA extends Component {
         }
         i = 0;
         let results = [];
-        if (this.props.selected.resultsPandAs) {
+        if (this.props.selected && this.props.selected.resultsPandAs) {
             this.props.selected.resultsPandAs.forEach((op) => {
                     i += 1;
                     results.push(<ListItem
