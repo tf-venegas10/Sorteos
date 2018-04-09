@@ -11,34 +11,7 @@ import Divider from 'material-ui/Divider';
 import "./UserIndex.css";
 
 export default class UserIndex extends Component {
-    componentDidMount()
-    {
-        this.props.addSteps([{
-            title: "Create new Toss-up",
-            text: "To start first create a new toss-up",
-            selector: "#newTossUpButton",
-            type: 'hover',
-            position: 'bottom',
-            allowClicksThruHole: true,
-            style: {
-                backgroundColor: '#ccc',
-                mainColor: '#000',
-                header: {
-                    color: '#f04',
-                    fontSize: '3rem',
-                    textAlign: 'center',
-                },
-                footer: {
-                    display: 'none',
-                },
-                beacon: {
-                    inner: '#000',
-                    outer: '#000',
-                },
-            },
-            trigger: 'div.col-3:nth-child(2) > svg:nth-child(1)'
-        }]);
-    }
+
 
     render() {
         let sorteos = [];

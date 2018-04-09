@@ -174,7 +174,7 @@ export default class Toss4All extends Component {
                 this.props.persons.forEach((op) => {
                         i += 1;
                         persons.push(<ListItem
-                            primaryText={op + " :" + Math.round(this.props.weights[i - 1] / totalPWeight * 100) + "%"}
+                            primaryText={op + " :" + Math.round(this.props.weightsPersons[i - 1] / totalPWeight * 100) + "%"}
                             key={i}
                             style={listStyle}
                             rightIcon={<ActionDelete

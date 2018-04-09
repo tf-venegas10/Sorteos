@@ -31,12 +31,11 @@ UserIndex styles
 .welcome-card p{
     color: rgb(200,200,200);
     font-family: "Hind Madurai",sans-serif;
-    
+
 }
 
 .welcome-image{
-    margin-top: 50%;
-    padding-top: 50%;
+    padding-top: 5%;
     padding-left: 5%;
     padding-right: 5%;
 }
