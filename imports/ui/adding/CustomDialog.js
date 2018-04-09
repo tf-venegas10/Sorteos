@@ -103,7 +103,7 @@ export default class CustomDialog extends Component {
         };
         let Help=null;
         if(this.state.help){
-            Help=<Paper><p>Add actions or participants entering their <strong>name/value</strong> on the first input.</p>
+            Help=<Paper zDepth={5}><p>Add actions or participants entering their <strong>name</strong> on the first input.</p>
                 <p>The <strong>weight</strong> input corresponds to the probabilistic weight you wish to give to your action or participant.
                 It defaults to 1 but if you want it to have a bigger probability give it a bigger value.</p></Paper>
         }
@@ -118,14 +118,13 @@ export default class CustomDialog extends Component {
                     onRequestClose={this.props.handleClose}
                     contentStyle={customContentStyle}
                 >
-                    <label htmlFor="textInput">Name/action</label><input id="textInput" type="text"
-                                                                   onChange={this.props.onTextChange}
-                />
-                    <br/>
-                    <label htmlFor="numberInput">Weight</label> <input id="numberInput" type="number"
-                                                                     onChange={this.props.onNumberChange}
-                                                                       value={this.props.inputNumb}
-                                                                     />
+                    <label htmlFor="textInput">Name <input id="textInput" type="text"
+                                                                  onChange={this.props.onTextChange}
+                    /></label>
+                    <label htmlFor="numberInput">Weight  <input id="numberInput" type="number"
+                                                                onChange={this.props.onNumberChange}
+                                                                value={this.props.inputNumb}
+                    /></label>
                     <ActionHelp onClick={this.help}/>
                     {Help}
                 </Dialog>

@@ -11,6 +11,7 @@ import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
 
 import "./Toss4All.css";
+import ActionHelp from 'material-ui/svg-icons/action/help-outline';
 
 // App component - represents the random persons fit actions sorting app
 
@@ -29,6 +30,8 @@ export default class Toss4All extends Component {
         this.handleRequestDelete = this.handleRequestDelete.bind(this);
         this.onToggle = this.onToggle.bind(this);
         this.onRepeatToggle = this.onRepeatToggle.bind(this);
+        this.help = this.help.bind(this);
+        this.closeHelp = this.closeHelp.bind(this);
 
     }
 
@@ -128,8 +131,20 @@ export default class Toss4All extends Component {
         });
     }
 
+    help() {
+        this.setState((prevState) => {
+            return {help: !prevState.help}
+        });
+    }
+
+    closeHelp() {
+        this.setState({help: false});
+    }
 
     render() {
+        const alertInk={
+            backgroundColor:"#D73A6F"
+        };
 
         let opt = [];
         let persons = [];
@@ -144,7 +159,7 @@ export default class Toss4All extends Component {
 
             let totalPWeight = 0;
             if (this.props.weightsPersons && this.props.weightsPersons.length > 0) {
-                totalWeight = this.props.weightsPersons.reduce((a, w) => a + w);
+                totalPWeight = this.props.weightsPersons.reduce((a, w) => a + w);
 
                 this.props.options.forEach((op) => {
                         i += 1;
@@ -206,12 +221,33 @@ export default class Toss4All extends Component {
             results.pop();
         }
         results.push(finalItem);
+        instructions = null;
+        if (this.props.options.length === 0 || this.props.persons.length === 0) {
 
+            instructions = (
+                <Paper style={alertInk} zDepth={5}><p>This tab allows you to select one action for each participant or the contrary.</p>
+                    <p>For this to work correctly you'll need to add both actions and participants.</p></Paper>);
+
+        }
+        let Help=[];
+        i=0;
+        if(this.state.help){
+            Help=(<MuiThemeProvider>
+                <Paper style={paperInk} zDepth={5}>
+                <p> <strong>Match participants</strong> means that the toss-up will return one action for each participant. If you check <strong>repeat</strong> the actions will be assigned according to their weight, repetition allowed.</p>
+                <p><strong>Match actions</strong> means that each action (to do) will get exactly one participant even if it means repeating participants or not showing them all.
+                </p>
+                <p>Checking <strong>repeat</strong> means participants will be assigned according to their weight, repetition allowed. </p>
+                </Paper>
+            </MuiThemeProvider>);
+        }
 
         return (
             <div>
                 <div className="container-fluid row toss-content">
+                    {instructions}
                     <div className="col-sm-4 col-12">
+
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <MuiThemeProvider>
@@ -239,6 +275,8 @@ export default class Toss4All extends Component {
                                         toggled={this.state.repeat}
                                     />
                                 </MuiThemeProvider>
+                                <ActionHelp onClick={this.help}/>
+                                 {Help}
                             </Paper>
                             <MuiThemeProvider>
                                 <RaisedButton label="Spin" style={ink} disabledBackgroundColor="true"
@@ -247,7 +285,7 @@ export default class Toss4All extends Component {
                         </MuiThemeProvider>
                     </div>
                     <div className="col-sm-2 col-8">
-                        <MuiThemeProvider>
+                            <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <List>
                                     <h1 className="head-title">History</h1>
