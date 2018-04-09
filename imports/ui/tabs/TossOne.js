@@ -160,7 +160,7 @@ export default class TossOne extends Component {
                                 />
                             </MuiThemeProvider>
                         </div>
-                        <Roulette options={(this.props.options) ? this.props.options : []} baseSize={200}
+                        <Roulette options={(this.props.options) ? this.props.options : []} baseSize={220}
                                   spin={this.state.spin}
                                   onSpin={this.onSpin}
                                   onComplete={this.handleRouletteSpin}

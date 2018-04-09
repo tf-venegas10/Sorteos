@@ -12,11 +12,9 @@ import Action from 'material-ui/svg-icons/action/motorcycle';
 import ListCheck from 'material-ui/svg-icons/av/playlist-add-check';
 
 
-
 // App component - represents the whole app
 
 export default class Selector extends Component {
-
 
     render() {
         const background = {
@@ -27,85 +25,75 @@ export default class Selector extends Component {
         const ink = {
             backgroundColor: '#BBDBB8'
         };
-        const headline = {
-            paddingTop: 16,
-            marginBottom: 12
-        };
-        const titleStyle = {
-            textAlign: "center"
-        };
+
         return (
             <div>
-            <MuiThemeProvider>
-                <AppBar
-                    title={this.props.sorteoName}
-                    iconElementLeft={<div></div>}
-                    style={background}
-                    titleStyle={titleStyle}
-                />
-            </MuiThemeProvider>
-            <MuiThemeProvider>
-                <Tabs inkBarStyle={ink}>
-                    <Tab label={<h3>Person</h3>} buttonStyle={background} icon={<Face/>}>
-                        <TossOne options={this.props.persons} baseSize={250}
-                                 weights={this.props.weightsPersons}
-                                 add={this.props.add} handleClose={this.props.handleClose}
-                                 addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner} action={false}
-                                 person={true} adding={this.props.adding} handleDelete={this.props.handleDelete}
-                                 onTextChange={this.props.onTextChange}
-                                 onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                                 onAddPerson={this.props.onAddPerson}
-                                 onAddOwner={this.props.onAddOwner}
-                                 onSelection={this.props.handleSelectedTossOnePerson}
-                                 selected={this.props.tossData}
-                        />
-                    </Tab>
-                    <Tab label={<h3>Action</h3>} buttonStyle={background} icon={<Action/>}>
-                        <TossOne options={this.props.actions} baseSize={250}
-                                 weights={this.props.weightsActions}
-                                 add={this.props.add} handleClose={this.props.handleClose}
-                                 addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner} action={true}
-                                 person={false} adding={this.props.adding} handleDelete={this.props.handleDelete}
-                                 onTextChange={this.props.onTextChange}
-                                 onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                                 onAddPerson={this.props.onAddPerson}
-                                 onAddOwner={this.props.onAddOwner}
-                                 onSelection={this.props.handleSelectedTossOneAction}
-                                 selected={this.props.tossData}
-                        />
-                    </Tab>
-                    <Tab label={<h3>Person & Action</h3>} buttonStyle={background} icon={<Gift/>}>
-                        <TossPandA options={this.props.actions} baseSize={250}
-                                   weights={this.props.weightsActions}
-                                   add={this.props.add} handleClose={this.props.handleClose}
-                                   addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner} action={true}
-                                   person={true} adding={this.props.adding}  handleDelete={this.props.handleDelete}
-                                   persons={this.props.persons} weightsPersons={this.props.weightsPersons}
-                                   onTextChange={this.props.onTextChange}
-                                   onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                                   onAddPerson={this.props.onAddPerson}
-                                   onAddOwner={this.props.onAddOwner}
-                                   onSelection={this.props.handleSelectedTossPandA}
-                                   selected={this.props.tossData}
-                        />
-                    </Tab>
-                    <Tab label={<h3>Actions for all</h3>} buttonStyle={background} icon={<ListCheck/>}>
-                        <Toss4All options={this.props.actions} baseSize={250}
-                                  weights={this.props.weightsActions}
-                                  add={this.props.add} handleClose={this.props.handleClose}
-                                  addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner} action={true}
-                                  person={true} adding={this.props.adding}  handleDelete={this.props.handleDelete}
-                                  persons={this.props.persons} weightsPersons={this.props.weightsPersons}
-                                  onTextChange={this.props.onTextChange}
-                                  onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
-                                  onAddPerson={this.props.onAddPerson}
-                                  onAddOwner={this.props.onAddOwner}
-                                  onSelection={this.props.handleSelectedToss4All}
-                                  selected={this.props.tossData}
-                        />
-                    </Tab>
-                </Tabs>
-            </MuiThemeProvider>
+                <MuiThemeProvider>
+                    <Tabs inkBarStyle={ink}>
+                        <Tab label={<h3>Person</h3>} buttonStyle={background} icon={<Face/>}>
+                            <TossOne options={this.props.persons} baseSize={250}
+                                     weights={this.props.weightsPersons}
+                                     add={this.props.add} handleClose={this.props.handleClose}
+                                     addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
+                                     action={false}
+                                     person={true} adding={this.props.adding} handleDelete={this.props.handleDelete}
+                                     onTextChange={this.props.onTextChange}
+                                     onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
+                                     onAddPerson={this.props.onAddPerson}
+                                     onAddOwner={this.props.onAddOwner}
+                                     onSelection={this.props.handleSelectedTossOnePerson}
+                                     selected={this.props.tossData}
+                            />
+                        </Tab>
+                        <Tab label={<h3>Action</h3>} buttonStyle={background} icon={<Action/>}>
+                            <TossOne options={this.props.actions} baseSize={250}
+                                     weights={this.props.weightsActions}
+                                     add={this.props.add} handleClose={this.props.handleClose}
+                                     addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
+                                     action={true}
+                                     person={false} adding={this.props.adding} handleDelete={this.props.handleDelete}
+                                     onTextChange={this.props.onTextChange}
+                                     onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
+                                     onAddPerson={this.props.onAddPerson}
+                                     onAddOwner={this.props.onAddOwner}
+                                     onSelection={this.props.handleSelectedTossOneAction}
+                                     selected={this.props.tossData}
+                            />
+                        </Tab>
+                        <Tab label={<h3>Person & Action</h3>} buttonStyle={background} icon={<Gift/>}>
+                            <TossPandA options={this.props.actions} baseSize={250}
+                                       weights={this.props.weightsActions}
+                                       add={this.props.add} handleClose={this.props.handleClose}
+                                       addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
+                                       action={true}
+                                       person={true} adding={this.props.adding} handleDelete={this.props.handleDelete}
+                                       persons={this.props.persons} weightsPersons={this.props.weightsPersons}
+                                       onTextChange={this.props.onTextChange}
+                                       onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
+                                       onAddPerson={this.props.onAddPerson}
+                                       onAddOwner={this.props.onAddOwner}
+                                       onSelection={this.props.handleSelectedTossPandA}
+                                       selected={this.props.tossData}
+                            />
+                        </Tab>
+                        <Tab label={<h3>Actions for all</h3>} buttonStyle={background} icon={<ListCheck/>}>
+                            <Toss4All options={this.props.actions} baseSize={250}
+                                      weights={this.props.weightsActions}
+                                      add={this.props.add} handleClose={this.props.handleClose}
+                                      addOwner={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
+                                      action={true}
+                                      person={true} adding={this.props.adding} handleDelete={this.props.handleDelete}
+                                      persons={this.props.persons} weightsPersons={this.props.weightsPersons}
+                                      onTextChange={this.props.onTextChange}
+                                      onNumberChange={this.props.onNumberChange} onAddAction={this.props.onAddAction}
+                                      onAddPerson={this.props.onAddPerson}
+                                      onAddOwner={this.props.onAddOwner}
+                                      onSelection={this.props.handleSelectedToss4All}
+                                      selected={this.props.tossData}
+                            />
+                        </Tab>
+                    </Tabs>
+                </MuiThemeProvider>
             </div>
         );
 
