@@ -185,13 +185,19 @@ export default class Toss4All extends Component {
         }
         i = 0;
         let results = [];
+        let firstItem = {
+            backgroundColor: "#88A885",
+            fontFamily: "\"Hind Madurai\",sans-serif",
+            color: "#211836",
+        };
         if (this.props.selected.results4All) {
             this.props.selected.results4All.forEach((sorted) => {
 
                     sorted.forEach((op) => {
                         i += 1;
                         results.push(<ListItem
-                            style={listStyle} primaryText={op.person + ": " + op.action} key={i}/>);
+                            style={i==this.props.selected.results4All.length?firstItem:listStyle}
+                            primaryText={op.person + ": " + op.action} key={i}/>);
                     });
                     i++;
                     results.push(<Divider key={i}/>);
@@ -216,6 +222,7 @@ export default class Toss4All extends Component {
             });
         }
         res.push(finalItem);
+        res.reverse();
         while (i > 0) {
             i--;
             results.pop();
