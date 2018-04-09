@@ -142,8 +142,8 @@ export default class Toss4All extends Component {
     }
 
     render() {
-        const alertInk={
-            backgroundColor:"#D73A6F"
+        const alertInk = {
+            backgroundColor: "#D73A6F"
         };
 
         let opt = [];
@@ -225,22 +225,32 @@ export default class Toss4All extends Component {
         if (this.props.options.length === 0 || this.props.persons.length === 0) {
 
             instructions = (
-                <Paper style={alertInk} zDepth={5}><p>This tab allows you to select one action for each participant or the contrary.</p>
+                <Paper style={alertInk} zDepth={5}><p>This tab allows you to select one action for each participant or
+                    the contrary.</p>
                     <p>For this to work correctly you'll need to add both actions and participants.</p></Paper>);
 
         }
-        let Help=[];
-        i=0;
-        if(this.state.help){
-            Help=(<MuiThemeProvider>
+        let Help = [];
+        i = 0;
+        if (this.state.help) {
+            Help = (<MuiThemeProvider>
                 <Paper style={paperInk} zDepth={5}>
-                <p> <strong>Match participants</strong> means that the toss-up will return one action for each participant. If you check <strong>repeat</strong> the actions will be assigned according to their weight, repetition allowed.</p>
-                <p><strong>Match actions</strong> means that each action (to do) will get exactly one participant even if it means repeating participants or not showing them all.
-                </p>
-                <p>Checking <strong>repeat</strong> means participants will be assigned according to their weight, repetition allowed. </p>
+                    <p><strong>Match participants</strong> means that the toss-up will return one action for each
+                        participant. If you check <strong>repeat</strong> the actions will be assigned according to
+                        their weight, repetition allowed.</p>
+                    <p><strong>Match actions</strong> means that each action (to do) will get exactly one participant
+                        even if it means repeating participants or not showing them all.
+                    </p>
+                    <p>Checking <strong>repeat</strong> means participants will be assigned according to their weight,
+                        repetition allowed. </p>
                 </Paper>
             </MuiThemeProvider>);
         }
+
+        const listScroll = {
+            overflowY: opt.length > 5 ? "scroll" : "auto",
+            height: "12em",
+        };
 
         return (
             <div>
@@ -276,7 +286,7 @@ export default class Toss4All extends Component {
                                     />
                                 </MuiThemeProvider>
                                 <ActionHelp onClick={this.help}/>
-                                 {Help}
+                                {Help}
                             </Paper>
                             <MuiThemeProvider>
                                 <RaisedButton label="Spin" style={ink} disabledBackgroundColor="true"
@@ -285,11 +295,11 @@ export default class Toss4All extends Component {
                         </MuiThemeProvider>
                     </div>
                     <div className="col-sm-2 col-8">
-                            <MuiThemeProvider>
+                        <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
-                                <List>
-                                    <h1 className="head-title">History</h1>
-                                    <Divider/>
+                                <h1 className="head-title">History</h1>
+                                <Divider/>
+                                <List style={listScroll}>
                                     {results}
                                 </List>
                             </Paper>
@@ -302,7 +312,7 @@ export default class Toss4All extends Component {
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <h1 className="head-title">Results</h1>
                                 <Divider/>
-                                <List>
+                                <List style={listScroll}>
                                     {res}
                                 </List>
                             </Paper>
@@ -313,7 +323,7 @@ export default class Toss4All extends Component {
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <h1 className="head-title">Actions</h1>
                                 <Divider/>
-                                <List>
+                                <List style={listScroll}>
                                     {opt}
                                 </List>
                             </Paper>
@@ -330,7 +340,7 @@ export default class Toss4All extends Component {
                                     </div>
                                 </div>
                                 <Divider/>
-                                <List>
+                                <List style={listScroll}>
                                     {persons}
                                 </List>
                             </Paper>

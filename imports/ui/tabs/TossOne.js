@@ -54,8 +54,8 @@ export default class TossOne extends Component {
     }
 
     render() {
-        const alertInk={
-            backgroundColor:"#D73A6F"
+        const alertInk = {
+            backgroundColor: "#D73A6F"
         };
 
         let opt = [];
@@ -117,35 +117,37 @@ export default class TossOne extends Component {
         const paperInk = {
             backgroundColor: "#BBDBB8",
         };
-        instructions=null;
-        if(opt.length===0){
-            if(!this.props.action) {
+        instructions = null;
+        if (opt.length === 0) {
+            if (!this.props.action) {
                 instructions = (
-                    <Paper style={alertInk} zDepth={5}><p>To start, you'll need to add some participants and actions to your Toss-up. Use the +
+                    <Paper style={alertInk} zDepth={5}><p>To start, you'll need to add some participants and actions to
+                        your Toss-up. Use the +
                         button to do this.</p>
                         <p>Your toss-up has 4 different views. In each one of them you will get different results.
                             This tab allows you to select one participant at random.</p></Paper>)
             }
-            else{
+            else {
                 instructions = (
-                <Paper style={alertInk} zDepth={5}><p>This tab allows you to select one action at random.</p></Paper>)
+                    <Paper style={alertInk} zDepth={5}><p>This tab allows you to select one action at random.</p>
+                    </Paper>)
             }
         }
 
         const listScroll = {
-            overflowY: opt.length>5?"scroll":"auto",
-            height: "30%",
+            overflowY: opt.length > 5 ? "scroll" : "auto",
+            height: "12em",
         };
 
         const listResultsScroll = {
-            overflowY: results.length>5?"scroll":"auto",
-            height: "30%",
+            overflowY: results.length > 5 ? "scroll" : "auto",
+            height: "12em",
         };
 
         return (
             <div>
                 <div className="container-fluid row toss-content">
-                    <div className="col-sm-8 col-12">
+                    <div className="col-sm-6 col-12">
                         {instructions}
                         <div className="roulette-container">
                             <MuiThemeProvider>
@@ -158,40 +160,44 @@ export default class TossOne extends Component {
                                 />
                             </MuiThemeProvider>
                         </div>
-                        <Roulette options={(this.props.options) ? this.props.options : []} baseSize={250}
+                        <Roulette options={(this.props.options) ? this.props.options : []} baseSize={200}
                                   spin={this.state.spin}
                                   onSpin={this.onSpin}
                                   onComplete={this.handleRouletteSpin}
                                   weights={(this.props.weights) ? this.props.weights : []}/>
 
                     </div>
-                    <div className="col-sm-2 col-8">
-                        <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false} style={paperInk}>
-                                <h1 className="head-title">Results</h1>
-                                <Divider/>
-                                <List style={listResultsScroll}>
-                                    {results}
-                                </List>
-                            </Paper>
-                        </MuiThemeProvider>
-                    </div>
-                    <div className="col-sm-2 col-8">
-                        <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false} style={paperInk}>
-                                <div className="row">
-                                    <div className="col-1"></div>
-                                    <h1 className="head-title col-6">{this.props.person ? "Persons" : "Actions"}</h1>
-                                    <div className="col-4">
-                                        <AddButton adding={this.props.adding}/>
-                                    </div>
-                                </div>
-                                <Divider/>
-                                <List style={listScroll}>
-                                    {opt}
-                                </List>
-                            </Paper>
-                        </MuiThemeProvider>
+                    <div className="col-sm-6 col-8">
+                        <div className="row">
+                            <div className="col-sm-6 col-8">
+                                <MuiThemeProvider>
+                                    <Paper zDepth={2} rounded={false} style={paperInk}>
+                                        <h1 className="head-title">Results</h1>
+                                        <Divider/>
+                                        <List style={listResultsScroll}>
+                                            {results}
+                                        </List>
+                                    </Paper>
+                                </MuiThemeProvider>
+                            </div>
+                            <div className="col-sm-6 col-8">
+                                <MuiThemeProvider>
+                                    <Paper zDepth={2} rounded={false} style={paperInk}>
+                                        <h1 className="head-title">{this.props.person ? "Persons" : "Actions"}</h1>
+                                        <Divider/>
+                                        <List style={listScroll}>
+                                            {opt}
+                                        </List>
+                                    </Paper>
+                                </MuiThemeProvider>
+                            </div>
+                        </div>
+                        <div className="row justify-content-end">
+                            <div className="col-3 center-items add-button">
+                                <AddButton
+                                    adding={this.props.adding}/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
