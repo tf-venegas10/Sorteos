@@ -215,7 +215,7 @@ export default class Toss4All extends Component {
         let finalItem = results.pop();
         i = 0;
         let res = [];
-        if (this.props.selected.results4All && this.props.selected.results4All.length > 0) {
+        if (this.props.selected && this.props.selected.results4All && this.props.selected.results4All.length > 0) {
             this.props.selected.results4All[this.props.selected.results4All.length - 1].forEach((op) => {
                 i += 1;
                 res.push(<ListItem
