@@ -9,6 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
+import Checkbox from 'material-ui/Checkbox';
 
 import "./Toss4All.css";
 import ActionHelp from 'material-ui/svg-icons/action/help-outline';
@@ -22,7 +23,7 @@ export default class Toss4All extends Component {
             selected: [],
             spin: false,
             matchParticipants: true,
-            repeat: true
+            repeat: true,
 
         };
 
@@ -31,7 +32,8 @@ export default class Toss4All extends Component {
         this.onToggle = this.onToggle.bind(this);
         this.onRepeatToggle = this.onRepeatToggle.bind(this);
         this.help = this.help.bind(this);
-        this.closeHelp = this.closeHelp.bind(this);
+        this.handleCheck = this.handleCheck.bind(this);
+
 
     }
 
@@ -63,7 +65,7 @@ export default class Toss4All extends Component {
                 this.props.persons.forEach((person) => {
                     let x = Math.round(Math.random() * (arr.length - 1));
                     let chosenOne = arr[x];
-                    selected.push({person: person, action: chosenOne});
+                    selected.push({person: person, action: chosenOne , checked:false});
                 });
             }
             else {
@@ -71,7 +73,7 @@ export default class Toss4All extends Component {
                 this.shuffleArray(actions);
                 let i = 0;
                 this.props.persons.forEach((p) => {
-                    selected.push({person: p, action: actions[i % actions.length]});
+                    selected.push({person: p, action: actions[i % actions.length], checked:false});
                     i++;
                 });
             }
@@ -90,23 +92,19 @@ export default class Toss4All extends Component {
                 this.props.options.forEach((action) => {
                     let x = Math.round(Math.random() * (arr.length - 1));
                     let chosenOne = arr[x];
-                    selected.push({action: action, person: chosenOne});
+                    selected.push({action: action, person: chosenOne,  checked:false});
                 });
             } else {
                 let persons = this.props.persons.slice();
                 this.shuffleArray(persons);
                 let i = 0;
                 this.props.options.forEach((p) => {
-                    selected.push({action: p, person: persons[i % persons.length]});
+                    selected.push({action: p, person: persons[i % persons.length], checked:false });
                     i++;
                 });
             }
         }
-        /*this.setState((prevState) => {
-            let toSel = prevState.selected;
-            toSel.push(selected);
-            return {selected: toSel}
-        });*/
+
         Meteor.call("tossUps.addResult4All", this.props.selected._id, selected);
 
     }
@@ -136,10 +134,10 @@ export default class Toss4All extends Component {
             return {help: !prevState.help}
         });
     }
-
-    closeHelp() {
-        this.setState({help: false});
+    handleCheck(i){
+        Meteor.call("tossUps.checkItem", this.props.selected._id, i);
     }
+
 
     render() {
         const alertInk = {
@@ -186,18 +184,16 @@ export default class Toss4All extends Component {
         i = 0;
         let results = [];
 
-        let firstItem = {
-            backgroundColor: "#88A885",
-            fontFamily: "\"Hind Madurai\",sans-serif",
-            color: "#211836",
-        };
-            if (this.props.selected && this.props.selected.results4All) {
+
+        /*
+        if (this.props.selected && this.props.selected.results4All) {
+            this.props.selected.results4All.reverse();
             this.props.selected.results4All.forEach((sorted) => {
 
                     sorted.forEach((op) => {
                         i += 1;
                         results.push(<ListItem
-                            style={i==this.props.selected.results4All.length?firstItem:listStyle}
+                            style={i == this.props.selected.results4All.length ? firstItem : listStyle}
                             primaryText={op.person + ": " + op.action} key={i}/>);
                     });
                     i++;
@@ -205,30 +201,34 @@ export default class Toss4All extends Component {
 
                 }
             );
-        }
+        }*/
         const ink = {
             color: '#149bda'
         };
         const paperInk = {
             backgroundColor: "#BBDBB8",
         };
-        let finalItem = results.pop();
+        const listInk={
+            backgroundImage: "resources/paper.jpg",
+            backgroundColor: "#f1e8e1"
+        };
+        //let finalItem = results.pop();
         i = 0;
         let res = [];
         if (this.props.selected && this.props.selected.results4All && this.props.selected.results4All.length > 0) {
-            this.props.selected.results4All[this.props.selected.results4All.length - 1].forEach((op) => {
+            this.props.selected.results4All[0].forEach((op) => {
                 i += 1;
                 res.push(<ListItem
-                    style={listStyle} primaryText={op.person + ": " + op.action} key={i}/>);
+                    style={listInk} primaryText={op.person + ": " + op.action} rightIcon ={<MuiThemeProvider><Checkbox checked={op.checked} onCheck={this.handleCheck.bind(this,i-1)}/></MuiThemeProvider>} key={i}/>);
             });
         }
-        res.push(finalItem);
+        //res.push(finalItem);
         res.reverse();
         while (i > 0) {
             i--;
             results.pop();
         }
-        results.push(finalItem);
+        //results.push(finalItem);
         instructions = null;
         if (this.props.options.length === 0 || this.props.persons.length === 0) {
 
@@ -251,6 +251,15 @@ export default class Toss4All extends Component {
                     </p>
                     <p>Checking <strong>repeat</strong> means participants will be assigned according to their weight,
                         repetition allowed. </p>
+                </Paper>
+            </MuiThemeProvider>);
+        }
+        let HelpCheckList = [];
+        i = 0;
+        if (this.state.checkListHelp) {
+            HelpCheckList = (<MuiThemeProvider>
+                <Paper style={paperInk} zDepth={5}>
+                    <p>Push the <strong>make checklist</strong> button to create a checklist out of the last result. With this everyone can keep track of the activities already completed </p>
                 </Paper>
             </MuiThemeProvider>);
         }
@@ -298,11 +307,11 @@ export default class Toss4All extends Component {
                             </Paper>
                         </MuiThemeProvider>
                         <MuiThemeProvider>
-                            <RaisedButton label="Spin" style={ink} disabledBackgroundColor="true"
+                            <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
                                           onClick={this.click} aria-label="Boton girar Ruleta"/>
                         </MuiThemeProvider>
                     </div>
-                    <div className="col-sm-2 col-8">
+                    {/*<div className="col-sm-2 col-8">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <h1 className="head-title">History</h1>
@@ -313,16 +322,17 @@ export default class Toss4All extends Component {
                             </Paper>
                         </MuiThemeProvider>
 
-                    </div>
+                    </div> */}
 
-                    <div className="col-sm-2 col-8">
+                    <div className="col-sm-6 col-12">
                         <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false} style={paperInk}>
+                            <Paper zDepth={2} rounded={false} style={listInk}>
                                 <h1 className="head-title">Results</h1>
                                 <Divider/>
                                 <List style={listScroll}>
                                     {res}
                                 </List>
+
                             </Paper>
                         </MuiThemeProvider>
                     </div>

@@ -223,11 +223,7 @@ class App extends Component {
 
 
     render() {
-        console.log(this.state.sorteo);
-        console.log(this.props.sorteos);
-        console.log((this.props.sorteos)?this.props.sorteos[this.state.sorteo]:"quej");
-        console.log(this.state.sorteo);
-        console.log(this.props.sorteos);
+
         return (
             <div>
                 <div className={this.props.currentUser ? "user-banner" : "main-banner"}>

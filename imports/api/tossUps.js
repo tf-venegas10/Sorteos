@@ -156,21 +156,41 @@ Meteor.methods({
     'tossUps.addResult4All'(tossUpId, result, callback) {
 
         check(tossUpId, String);
+        check(result,Array);
 
         let thisToss = TossUps.findOne(tossUpId);
         let results = thisToss.results4All;
+        let timesThrown= thisToss.timesThrown;
+        if(timesThrown){
+            timesThrown++;
+        }
+        else{
+            timesThrown=1;
+        }
         if(results) {
             results.push(result);
         } else{
             results=[result];
         }
-        TossUps.update({_id:tossUpId}, {$set: {results4All: results}});
+        TossUps.update({_id:tossUpId}, {$set: {results4All: [result], timesThrown:timesThrown}});
         if(callback){
             callback();
         }
 
     },
+    "tossUps.checkItem"(tossUpId, id, callback){
+        check(tossUpId, String);
+        check(id,Number);
+        let thisToss = TossUps.findOne(tossUpId);
+        let results = thisToss.results4All[0];
+        let changedResult=results[id];
+        changedResult.checked=!changedResult.checked;
+        TossUps.update({_id:tossUpId}, {$set: {results4All: [results]}});
+        if(callback){
+            callback();
+        }
 
+    },
     'tossUps.switchActions'(tossUpId, actions, weights, callback){
         check(tossUpId, String);
         check(actions, Array);

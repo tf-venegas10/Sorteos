@@ -178,9 +178,9 @@ export default class TossOne extends Component {
                                   weights={(this.props.weights) ? this.props.weights : []}/>
 
                     </div>
-                    <div className="col-sm-6 col-8">
+                    <div className="col-sm-6 col-12">
                         <div className="row">
-                            <div className="col-sm-6 col-8">
+                            <div className="col-sm-6 col-6">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="head-title">Results</h1>
@@ -191,7 +191,7 @@ export default class TossOne extends Component {
                                     </Paper>
                                 </MuiThemeProvider>
                             </div>
-                            <div className="col-sm-6 col-8">
+                            <div className="col-sm-6 col-6">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="head-title">{this.props.person ? "Persons" : "Actions"}</h1>

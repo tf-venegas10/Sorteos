@@ -168,9 +168,9 @@ export default class TossPandA extends Component {
                                   onComplete={this.handleRouletteSpin}
                                   weights={(this.props.weights) ? this.props.weights : []}/>
                     </div>
-                    <div className="col-sm-6 col-6">
+                    <div className="col-sm-6 col-12">
                         <div className="row">
-                            <div className="col-sm-4 col-6">
+                            <div className="col-sm-4 col-12">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="col-10 head-title">Results</h1>
