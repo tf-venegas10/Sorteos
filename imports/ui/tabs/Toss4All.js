@@ -208,9 +208,16 @@ export default class Toss4All extends Component {
         const paperInk = {
             backgroundColor: "#BBDBB8",
         };
-        const listInk={
-            backgroundImage: "resources/paper.jpg",
+        const listInkChecked={
+            textDecoration: "line-through",
             backgroundColor: "#f1e8e1"
+        };
+        const listInk={
+
+            backgroundColor: "#f1e8e1"
+        };
+        const image={
+            backgroundImage: "resources/paper.jpg",
         };
         //let finalItem = results.pop();
         i = 0;
@@ -219,7 +226,7 @@ export default class Toss4All extends Component {
             this.props.selected.results4All[0].forEach((op) => {
                 i += 1;
                 res.push(<ListItem
-                    style={listInk} primaryText={op.person + ": " + op.action} rightIcon ={<MuiThemeProvider><Checkbox checked={op.checked} onCheck={this.handleCheck.bind(this,i-1)}/></MuiThemeProvider>} key={i}/>);
+                    style={op.checked?listInkChecked:listInk} primaryText={op.person + ": " + op.action} rightIcon ={<MuiThemeProvider><Checkbox checked={op.checked} onCheck={this.handleCheck.bind(this,i-1)}/></MuiThemeProvider>} key={i}/>);
             });
         }
         //res.push(finalItem);
@@ -254,15 +261,7 @@ export default class Toss4All extends Component {
                 </Paper>
             </MuiThemeProvider>);
         }
-        let HelpCheckList = [];
-        i = 0;
-        if (this.state.checkListHelp) {
-            HelpCheckList = (<MuiThemeProvider>
-                <Paper style={paperInk} zDepth={5}>
-                    <p>Push the <strong>make checklist</strong> button to create a checklist out of the last result. With this everyone can keep track of the activities already completed </p>
-                </Paper>
-            </MuiThemeProvider>);
-        }
+
 
         const listScroll = {
             overflowY: opt.length > 5 ? "scroll" : "auto",
@@ -273,7 +272,25 @@ export default class Toss4All extends Component {
             <div>
                 <div className="container-fluid row toss-content">
                     {instructions}
-                    <div className="col-sm-4 col-12">
+
+                    <div className="col-sm-6 col-12">
+                        <MuiThemeProvider>
+                            <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
+                                          onClick={this.click} aria-label="Boton girar Ruleta"/>
+                        </MuiThemeProvider>
+                        <MuiThemeProvider>
+                            <Paper zDepth={2} rounded={false} style={image}>
+                                <h1 className="head-title">Results</h1>
+                                <Divider/>
+                                <List style={listScroll}>
+                                    {res}
+                                </List>
+
+                            </Paper>
+                        </MuiThemeProvider>
+                    </div>
+                    <div className="col-sm-6 col-12 row">
+                    <div className="col-sm-4 col-6">
 
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
@@ -306,37 +323,9 @@ export default class Toss4All extends Component {
                                 {Help}
                             </Paper>
                         </MuiThemeProvider>
-                        <MuiThemeProvider>
-                            <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
-                                          onClick={this.click} aria-label="Boton girar Ruleta"/>
-                        </MuiThemeProvider>
+
                     </div>
-                    {/*<div className="col-sm-2 col-8">
-                        <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false} style={paperInk}>
-                                <h1 className="head-title">History</h1>
-                                <Divider/>
-                                <List style={listScroll}>
-                                    {results}
-                                </List>
-                            </Paper>
-                        </MuiThemeProvider>
-
-                    </div> */}
-
-                    <div className="col-sm-6 col-12">
-                        <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false} style={listInk}>
-                                <h1 className="head-title">Results</h1>
-                                <Divider/>
-                                <List style={listScroll}>
-                                    {res}
-                                </List>
-
-                            </Paper>
-                        </MuiThemeProvider>
-                    </div>
-                    <div className="col-sm-2 col-8">
+                    <div className="col-sm-4 col-6">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <h1 className="head-title">Actions</h1>
@@ -347,7 +336,7 @@ export default class Toss4All extends Component {
                             </Paper>
                         </MuiThemeProvider>
                     </div>
-                    <div className="col-sm-2 col-8">
+                    <div className="col-sm-4 col-6">
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={paperInk}>
                                 <div className="row justify-content-center">
@@ -363,6 +352,7 @@ export default class Toss4All extends Component {
                                 </List>
                             </Paper>
                         </MuiThemeProvider>
+                    </div>
                     </div>
                     <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
                                  onTextChange={this.props.onTextChange} onAddOwner={this.props.onAddOwner}/>
