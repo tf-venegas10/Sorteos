@@ -279,7 +279,7 @@ export default class Toss4All extends Component {
                                           onClick={this.click} aria-label="Boton girar Ruleta"/>
                         </MuiThemeProvider>
                         <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false} style={image}>
+                            <Paper zDepth={2} rounded={false} style={listInk}>
                                 <h1 className="head-title">Results</h1>
                                 <Divider/>
                                 <List style={listScroll}>
