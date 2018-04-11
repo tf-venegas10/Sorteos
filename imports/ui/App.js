@@ -12,10 +12,6 @@ import Selector from "./tabs/Selector.js";
 import Footer from "./footer/Footer.js";
 import {TossUps} from "../api/tossUps"
 import {Meteor} from 'meteor/meteor';
-
-
-import Users from '../api/users.js';
-import Joyride from 'react-joyride';
 import CustomDialog from "./adding/CustomDialog";
 import NewTossUpDialog from "./adding/NewTossUpDialog";
 

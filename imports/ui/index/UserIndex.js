@@ -19,18 +19,18 @@ export default class UserIndex extends Component {
 
         const paperStyle = {
 
-            backgroundColor: "#BBDBB8",
+            backgroundColor: "#FAFAFA",
         };
 
         const itemStyle = {
             padding:"padding: 0px 72px 0px 16px",
             fontFamily: "\'Hind Madurai\', cursive",
             fontSize: "20px",
-            color: "#211836",
+            color: "#14061F",
         };
 
         const subHeaderStyle = {
-            color: "#211836",
+            color: "#14061F",
             fontSize: "23px",
             fontFamily: "\'Lora\', cursive",
             paddingRight: "5%",
@@ -51,7 +51,7 @@ export default class UserIndex extends Component {
                 className="btn btn-new">NEW TOSS-UP</button>);
         }
         return (
-            <div className="row justify-content-around center-items">
+            <div className="row justify-content-around center-items backgroundUser">
                 <div className="col-sm-7 col-12 center-items">
                     <div className="card welcome-card">
                         <img className="card-img-top welcome-image" src="./resources/welcome.jpg" alt="welcome image"/>

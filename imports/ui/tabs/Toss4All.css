@@ -8,18 +8,18 @@ Toss4All styles
 
 }
 .resultPaper{
-    background-image: url("./resources/paper2.png");
+    background-color: #FF8E0B;
     height: 30em;
     padding:2em 0 0 1em;
     border-radius: 50px 20px;
 }
 .resultsList{
     height: 25em;
-    background-image: url("./resources/paper2.jpg");
+    background-color: #FF8E0B;
 }
 
 .head-title {
-    color: #211836;
+    color: #304057;
     font-family: "Lora",sans-serif;
     font-size: 30px;
     padding-top: 5%;

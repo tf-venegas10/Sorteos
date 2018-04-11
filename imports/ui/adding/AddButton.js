@@ -4,6 +4,16 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 // App component - represents the whole app
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+const muiTheme = getMuiTheme({
+
+        palette: {
+            primary1Color: "#149CDB",
+            primary2Color: "#304057",
+            accent1Color: "#FF8E0B",
+            textColor: "#424242",
+        }
+    });
 
 export default class AddButton extends Component {
 
@@ -16,8 +26,8 @@ export default class AddButton extends Component {
         };
 
         return (
-            <MuiThemeProvider>
-                <FloatingActionButton onClick={this.props.adding} style={background} className="floatingButton" aria-label="Button to add participants or actions">
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <FloatingActionButton onClick={this.props.adding} style={background} secondary={true} className="floatingButton" aria-label="Button to add participants or actions">
                     <ContentAdd/>
                 </FloatingActionButton>
             </MuiThemeProvider>
