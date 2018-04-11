@@ -76,7 +76,7 @@ export default class RegisterManager extends Component {
                 this.setState({
                     processingAuth: false
                 });
-                if (error.startsWith("Email")) {
+                if (error.reason.startsWith("Email")) {
                     this.setState({
                         emailError: true,
                     });
