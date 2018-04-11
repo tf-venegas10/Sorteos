@@ -8,9 +8,9 @@ Toss4All styles
 
 }
 .resultPaper{
-    background-image: url("./resources/paper.jpg");
+    background-image: url("./resources/paper2.png");
     height: 30em;
-    padding:2em 0 0 70px;
+    padding:2em 0 0 1em;
     border-radius: 50px 20px;
 }
 .resultsList{

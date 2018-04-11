@@ -10,7 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
 import Checkbox from 'material-ui/Checkbox';
-
+import LinearProgress from 'material-ui/LinearProgress';
 import "./Toss4All.css";
 import ActionHelp from 'material-ui/svg-icons/action/help-outline';
 
@@ -223,16 +223,22 @@ export default class Toss4All extends Component {
 
         i = 0;
         let res = [];
+        let completness=null;
         if (this.props.selected && this.props.selected.results4All && this.props.selected.results4All.length > 0) {
+            let checked=0;
             this.props.selected.results4All[0].forEach((op) => {
                 i += 1;
+                if(op.checked){
+                    checked++;
+                }
                 res.push(<ListItem
-                    style={op.checked ? listInkChecked : listInk} primaryText={op.person + ": " + op.action}
-                    rightIcon={<MuiThemeProvider><Checkbox checked={op.checked}
-                                                           onCheck={this.handleCheck.bind(this, i - 1)}/></MuiThemeProvider>}
+                    style={op.checked ? listInkChecked : listInk} primaryText={op.person + ": " + op.action} insetChildren={true}
+                    rightIcon={<div><MuiThemeProvider><Checkbox checked={op.checked}
+                                                           onCheck={this.handleCheck.bind(this, i - 1)}/></MuiThemeProvider></div>}
                     key={i}/>);
                 res.push(<Divider/>)
             });
+            completness=checked/i *100;
         }
         //res.push(finalItem);
         res.reverse();
@@ -283,20 +289,20 @@ export default class Toss4All extends Component {
                             <div className="col-sm-6 col-12 center-items add-button">
                                 <MuiThemeProvider>
                                     <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
-                                                  onClick={this.click} aria-label="Boton girar Ruleta"/>
+                                                  onClick={this.click} aria-label="Button to launch new assignment"/>
                                 </MuiThemeProvider>
                             </div>
                         </div>
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={true}  className="resultPaper">
-                                <h1 className="head-title">Results</h1>
+                                <h1 className="head-title">Results</h1> <LinearProgress mode="determinate" value={completness?completness:0}/>
                                 <Divider/>
                                 <List style={listScroll} className="resultList">
                                     {res}
                                 </List>
-
                             </Paper>
                         </MuiThemeProvider>
+                        <img src={"./resources/bottom-paper.png"} alt="" />
                     </div>
                     <div className="col-sm-6 col-12 ">  
                         <div className="row justify-content-end">
