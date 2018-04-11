@@ -280,7 +280,7 @@ export default class Toss4All extends Component {
 
                     <div className="col-sm-6 col-12">
                         <div className="row justify-content-end">
-                            <div className="col-6 center-items add-button">
+                            <div className="col-sm-6 col-12 center-items add-button">
                                 <MuiThemeProvider>
                                     <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
                                                   onClick={this.click} aria-label="Boton girar Ruleta"/>
@@ -298,7 +298,7 @@ export default class Toss4All extends Component {
                             </Paper>
                         </MuiThemeProvider>
                     </div>
-                    <div className="col-sm-6 col-12 ">
+                    <div className="col-sm-6 col-12 ">  
                         <div className="row justify-content-end">
                             <div className="col-3 center-items add-button">
                                 <AddButton
