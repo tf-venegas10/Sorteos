@@ -65,7 +65,7 @@ export default class Toss4All extends Component {
                 this.props.persons.forEach((person) => {
                     let x = Math.round(Math.random() * (arr.length - 1));
                     let chosenOne = arr[x];
-                    selected.push({person: person, action: chosenOne , checked:false});
+                    selected.push({person: person, action: chosenOne, checked: false});
                 });
             }
             else {
@@ -73,7 +73,7 @@ export default class Toss4All extends Component {
                 this.shuffleArray(actions);
                 let i = 0;
                 this.props.persons.forEach((p) => {
-                    selected.push({person: p, action: actions[i % actions.length], checked:false});
+                    selected.push({person: p, action: actions[i % actions.length], checked: false});
                     i++;
                 });
             }
@@ -92,14 +92,14 @@ export default class Toss4All extends Component {
                 this.props.options.forEach((action) => {
                     let x = Math.round(Math.random() * (arr.length - 1));
                     let chosenOne = arr[x];
-                    selected.push({action: action, person: chosenOne,  checked:false});
+                    selected.push({action: action, person: chosenOne, checked: false});
                 });
             } else {
                 let persons = this.props.persons.slice();
                 this.shuffleArray(persons);
                 let i = 0;
                 this.props.options.forEach((p) => {
-                    selected.push({action: p, person: persons[i % persons.length], checked:false });
+                    selected.push({action: p, person: persons[i % persons.length], checked: false});
                     i++;
                 });
             }
@@ -134,7 +134,8 @@ export default class Toss4All extends Component {
             return {help: !prevState.help}
         });
     }
-    handleCheck(i){
+
+    handleCheck(i) {
         Meteor.call("tossUps.checkItem", this.props.selected._id, i);
     }
 
@@ -208,15 +209,15 @@ export default class Toss4All extends Component {
         const paperInk = {
             backgroundColor: "#BBDBB8",
         };
-        const listInkChecked={
+        const listInkChecked = {
             textDecoration: "line-through",
             backgroundColor: "#f1e8e1"
         };
-        const listInk={
+        const listInk = {
 
             backgroundColor: "#f1e8e1"
         };
-        const image={
+        const image = {
             backgroundImage: "resources/paper.jpg",
         };
         //let finalItem = results.pop();
@@ -226,7 +227,10 @@ export default class Toss4All extends Component {
             this.props.selected.results4All[0].forEach((op) => {
                 i += 1;
                 res.push(<ListItem
-                    style={op.checked?listInkChecked:listInk} primaryText={op.person + ": " + op.action} rightIcon ={<MuiThemeProvider><Checkbox checked={op.checked} onCheck={this.handleCheck.bind(this,i-1)}/></MuiThemeProvider>} key={i}/>);
+                    style={op.checked ? listInkChecked : listInk} primaryText={op.person + ": " + op.action}
+                    rightIcon={<MuiThemeProvider><Checkbox checked={op.checked}
+                                                           onCheck={this.handleCheck.bind(this, i - 1)}/></MuiThemeProvider>}
+                    key={i}/>);
             });
         }
         //res.push(finalItem);
@@ -274,10 +278,14 @@ export default class Toss4All extends Component {
                     {instructions}
 
                     <div className="col-sm-6 col-12">
-                        <MuiThemeProvider>
-                            <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
-                                          onClick={this.click} aria-label="Boton girar Ruleta"/>
-                        </MuiThemeProvider>
+                        <div className="row justify-content-end">
+                            <div className="col-3 center-items add-button">
+                                <MuiThemeProvider>
+                                    <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
+                                                  onClick={this.click} aria-label="Boton girar Ruleta"/>
+                                </MuiThemeProvider>
+                            </div>
+                        </div>
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={false} style={listInk}>
                                 <h1 className="head-title">Results</h1>
@@ -289,70 +297,75 @@ export default class Toss4All extends Component {
                             </Paper>
                         </MuiThemeProvider>
                     </div>
-                    <div className="col-sm-6 col-12 row">
-                    <div className="col-sm-4 col-6">
-
-                        <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false} style={paperInk}>
-                                <MuiThemeProvider>
-                                    <Toggle
-                                        style={{color: "white"}}
-                                        label="Match Participants"
-                                        onToggle={this.onToggle}
-                                        toggled={this.state.matchParticipants}
-                                    />
-                                </MuiThemeProvider>
-                                <MuiThemeProvider>
-                                    <Toggle
-                                        style={{color: "white"}}
-                                        label="Match Actions"
-                                        onToggle={this.onToggle}
-                                        toggled={!this.state.matchParticipants}
-                                    />
-                                </MuiThemeProvider>
+                    <div className="col-sm-6 col-12 ">
+                        <div className="row justify-content-end">
+                            <div className="col-3 center-items add-button">
+                                <AddButton
+                                    adding={this.props.adding}/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-4 col-6">
 
                                 <MuiThemeProvider>
-                                    <Toggle
-                                        style={{color: "white"}}
-                                        label="Repeat"
-                                        onToggle={this.onRepeatToggle}
-                                        toggled={this.state.repeat}
-                                    />
-                                </MuiThemeProvider>
-                                <ActionHelp onClick={this.help}/>
-                                {Help}
-                            </Paper>
-                        </MuiThemeProvider>
+                                    <Paper zDepth={2} rounded={false} style={paperInk}>
+                                        <MuiThemeProvider>
+                                            <Toggle
+                                                style={{color: "white"}}
+                                                label="Match Participants"
+                                                onToggle={this.onToggle}
+                                                toggled={this.state.matchParticipants}
+                                            />
+                                        </MuiThemeProvider>
+                                        <MuiThemeProvider>
+                                            <Toggle
+                                                style={{color: "white"}}
+                                                label="Match Actions"
+                                                onToggle={this.onToggle}
+                                                toggled={!this.state.matchParticipants}
+                                            />
+                                        </MuiThemeProvider>
 
-                    </div>
-                    <div className="col-sm-4 col-6">
-                        <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false} style={paperInk}>
-                                <h1 className="head-title">Actions</h1>
-                                <Divider/>
-                                <List style={listScroll}>
-                                    {opt}
-                                </List>
-                            </Paper>
-                        </MuiThemeProvider>
-                    </div>
-                    <div className="col-sm-4 col-6">
-                        <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false} style={paperInk}>
-                                <div className="row justify-content-center">
-                                    <div className="col-1"></div>
-                                    <h1 className="head-title col-7">Persons</h1>
-                                    <div className="col-4">
-                                        <AddButton adding={this.props.adding}/>
-                                    </div>
-                                </div>
-                                <Divider/>
-                                <List style={listScroll}>
-                                    {persons}
-                                </List>
-                            </Paper>
-                        </MuiThemeProvider>
-                    </div>
+                                        <MuiThemeProvider>
+                                            <Toggle
+                                                style={{color: "white"}}
+                                                label="Repeat"
+                                                onToggle={this.onRepeatToggle}
+                                                toggled={this.state.repeat}
+                                            />
+                                        </MuiThemeProvider>
+                                        <ActionHelp onClick={this.help}/>
+                                        {Help}
+                                    </Paper>
+                                </MuiThemeProvider>
+
+                            </div>
+                            <div className="col-sm-4 col-6">
+                                <MuiThemeProvider>
+                                    <Paper zDepth={2} rounded={false} style={paperInk}>
+                                        <h1 className="head-title">Actions</h1>
+                                        <Divider/>
+                                        <List style={listScroll}>
+                                            {opt}
+                                        </List>
+                                    </Paper>
+                                </MuiThemeProvider>
+                            </div>
+                            <div className="col-sm-4 col-6">
+                                <MuiThemeProvider>
+                                    <Paper zDepth={2} rounded={false} style={paperInk}>
+                                        <div className="row justify-content-center">
+                                            <div className="col-1"></div>
+                                            <h1 className="head-title col-7">Persons</h1>
+                                        </div>
+                                        <Divider/>
+                                        <List style={listScroll}>
+                                            {persons}
+                                        </List>
+                                    </Paper>
+                                </MuiThemeProvider>
+                            </div>
+                        </div>
                     </div>
                     <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
                                  onTextChange={this.props.onTextChange} onAddOwner={this.props.onAddOwner}/>

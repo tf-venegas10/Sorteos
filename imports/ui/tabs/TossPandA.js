@@ -169,6 +169,12 @@ export default class TossPandA extends Component {
                                   weights={(this.props.weights) ? this.props.weights : []}/>
                     </div>
                     <div className="col-sm-6 col-12">
+                        <div className="row justify-content-end">
+                            <div className="col-3 center-items add-button">
+                                <AddButton
+                                    adding={this.props.adding}/>
+                            </div>
+                        </div>
                         <div className="row">
                             <div className="col-sm-4 col-12">
                                 <MuiThemeProvider>
@@ -205,12 +211,7 @@ export default class TossPandA extends Component {
                                 </MuiThemeProvider>
                             </div>
                         </div>
-                        <div className="row justify-content-end">
-                            <div className="col-3 center-items add-button">
-                                <AddButton
-                                    adding={this.props.adding}/>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}

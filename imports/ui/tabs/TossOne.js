@@ -179,6 +179,12 @@ export default class TossOne extends Component {
 
                     </div>
                     <div className="col-sm-6 col-12">
+                        <div className="row justify-content-end">
+                            <div className="col-3 center-items add-button">
+                                <AddButton
+                                    adding={this.props.adding}/>
+                            </div>
+                        </div>
                         <div className="row">
                             <div className="col-sm-6 col-6">
                                 <MuiThemeProvider>
@@ -203,12 +209,7 @@ export default class TossOne extends Component {
                                 </MuiThemeProvider>
                             </div>
                         </div>
-                        <div className="row justify-content-end">
-                            <div className="col-3 center-items add-button">
-                                <AddButton
-                                    adding={this.props.adding}/>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}
