@@ -110,7 +110,7 @@ export default class TossOne extends Component {
             }
         }
         else {
-            if (this.props.selected.resultsA) {
+            if (this.props.selected && this.props.selected.resultsA) {
                 this.props.selected.resultsA.forEach((op) => {
                         i += 1;
                         results.push(<ListItem
@@ -178,9 +178,15 @@ export default class TossOne extends Component {
                                   weights={(this.props.weights) ? this.props.weights : []}/>
 
                     </div>
-                    <div className="col-sm-6 col-8">
+                    <div className="col-sm-6 col-12">
+                        <div className="row justify-content-end">
+                            <div className="col-3 center-items add-button">
+                                <AddButton
+                                    adding={this.props.adding}/>
+                            </div>
+                        </div>
                         <div className="row">
-                            <div className="col-sm-6 col-8">
+                            <div className="col-sm-6 col-6">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="head-title">Results</h1>
@@ -191,7 +197,7 @@ export default class TossOne extends Component {
                                     </Paper>
                                 </MuiThemeProvider>
                             </div>
-                            <div className="col-sm-6 col-8">
+                            <div className="col-sm-6 col-6">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="head-title">{this.props.person ? "Persons" : "Actions"}</h1>
@@ -203,12 +209,7 @@ export default class TossOne extends Component {
                                 </MuiThemeProvider>
                             </div>
                         </div>
-                        <div className="row justify-content-end">
-                            <div className="col-3 center-items add-button">
-                                <AddButton
-                                    adding={this.props.adding}/>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}

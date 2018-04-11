@@ -112,12 +112,15 @@ export default class TossPandA extends Component {
         }
         i = 0;
         let results = [];
+
         let firstItem = {
             backgroundColor: "#88A885",
             fontFamily: "\"Hind Madurai\",sans-serif",
             color: "#211836",
         };
-        if (this.props.selected.resultsPandAs) {
+
+            if (this.props.selected && this.props.selected.resultsPandAs) {
+
             this.props.selected.resultsPandAs.forEach((op) => {
                     i += 1;
                     results.push(<ListItem
@@ -165,9 +168,15 @@ export default class TossPandA extends Component {
                                   onComplete={this.handleRouletteSpin}
                                   weights={(this.props.weights) ? this.props.weights : []}/>
                     </div>
-                    <div className="col-sm-6 col-6">
+                    <div className="col-sm-6 col-12">
+                        <div className="row justify-content-end">
+                            <div className="col-3 center-items add-button">
+                                <AddButton
+                                    adding={this.props.adding}/>
+                            </div>
+                        </div>
                         <div className="row">
-                            <div className="col-sm-4 col-6">
+                            <div className="col-sm-4 col-12">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="col-10 head-title">Results</h1>
@@ -202,12 +211,7 @@ export default class TossPandA extends Component {
                                 </MuiThemeProvider>
                             </div>
                         </div>
-                        <div className="row justify-content-end">
-                            <div className="col-3 center-items add-button">
-                                <AddButton
-                                    adding={this.props.adding}/>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <OwnerDialog open={this.props.addOwner} handleCloseOwner={this.props.handleCloseOwner}

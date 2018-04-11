@@ -9,7 +9,7 @@
     "ajv": "^6.0.0",
     "bcrypt": "^1.0.3",
     "bootstrap": "^4.0.0",
-    "jquery": "^1.9.1",
+    "jquery": "^3.0.0",
     "material-ui": "^0.20.0",
     "meteor-node-stubs": "^0.3.2",
     "popper.js": "^1.14.1",
