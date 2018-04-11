@@ -211,16 +211,16 @@ export default class Toss4All extends Component {
         };
         const listInkChecked = {
             textDecoration: "line-through",
-            backgroundColor: "#f1e8e1"
+            backgroundColor: "#f1e8e1",
+            backgroundImage: "url('./resources/paper2.png')"
         };
         const listInk = {
 
-            backgroundColor: "#f1e8e1"
+            backgroundColor: "#f1e8e1",
+            backgroundImage: "url('./resources/paper2.png')"
         };
-        const image = {
-            backgroundImage: "resources/paper.jpg",
-        };
-        //let finalItem = results.pop();
+
+
         i = 0;
         let res = [];
         if (this.props.selected && this.props.selected.results4All && this.props.selected.results4All.length > 0) {
@@ -231,6 +231,7 @@ export default class Toss4All extends Component {
                     rightIcon={<MuiThemeProvider><Checkbox checked={op.checked}
                                                            onCheck={this.handleCheck.bind(this, i - 1)}/></MuiThemeProvider>}
                     key={i}/>);
+                res.push(<Divider/>)
             });
         }
         //res.push(finalItem);
@@ -279,7 +280,7 @@ export default class Toss4All extends Component {
 
                     <div className="col-sm-6 col-12">
                         <div className="row justify-content-end">
-                            <div className="col-6 center-items add-button">
+                            <div className="col-sm-6 col-12 center-items add-button">
                                 <MuiThemeProvider>
                                     <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
                                                   onClick={this.click} aria-label="Boton girar Ruleta"/>
@@ -287,17 +288,17 @@ export default class Toss4All extends Component {
                             </div>
                         </div>
                         <MuiThemeProvider>
-                            <Paper zDepth={2} rounded={false} style={listInk}>
+                            <Paper zDepth={2} rounded={true}  className="resultPaper">
                                 <h1 className="head-title">Results</h1>
                                 <Divider/>
-                                <List style={listScroll}>
+                                <List style={listScroll} className="resultList">
                                     {res}
                                 </List>
 
                             </Paper>
                         </MuiThemeProvider>
                     </div>
-                    <div className="col-sm-6 col-12 ">
+                    <div className="col-sm-6 col-12 ">  
                         <div className="row justify-content-end">
                             <div className="col-3 center-items add-button">
                                 <AddButton
