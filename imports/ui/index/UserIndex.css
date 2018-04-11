@@ -1,7 +1,9 @@
 /*---------------
 UserIndex styles
 ----------------*/
-
+.backgroundUser{
+    background-color:rgba(48,64,87,0.8) ;
+}
 .center-items {
     text-align: center;
     margin: auto;
@@ -15,8 +17,8 @@ UserIndex styles
     margin-bottom: 10%;
     margin-left: 20%;
     margin-right: 20%;
-    background-color: #D73A6F;
-    color: white;
+    background-color: #FF8E0B;
+    color: #FBFBFB;
 }
 
 .welcome-card h4 {
@@ -24,25 +26,26 @@ UserIndex styles
 }
 
 .welcome-card h5 {
-    color: rgb(220, 220, 220);
+    color: #FAFAFA;
     font-family: Lora, sans-serif;
 }
 
 .welcome-card p {
-    color: rgb(200, 200, 200);
+    color: #FAFAFA;
     font-family: "Hind Madurai", sans-serif;
 
 }
 
 .welcome-image {
+    margin-top: 5%;
     padding-top: 5%;
     padding-left: 5%;
     padding-right: 5%;
 }
 
 .btn-new {
-    background-color: white;
-    color: rgb(55, 55, 55);
+    background-color: #FAFAFA;
+    color: #424242;
     font-family: "Nova Slim", sans-serif;
 }
 

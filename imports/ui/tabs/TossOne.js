@@ -13,7 +13,16 @@ import Snackbar from 'material-ui/Snackbar';
 
 import "./TossOne.css";
 // App component - represents the random person sorting app
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+const muiTheme = getMuiTheme({
 
+    palette: {
+        primary1Color: "#149CDB",
+        primary2Color: "#304057",
+        accent1Color: "#FF8E0B",
+        textColor: "#424242",
+    }
+});
 export default class TossOne extends Component {
     constructor(props) {
         super(props);
@@ -58,7 +67,7 @@ export default class TossOne extends Component {
 
     render() {
         const alertInk = {
-            backgroundColor: "#D73A6F"
+            backgroundColor: "#FF8315"
         };
 
         let opt = [];
@@ -68,11 +77,11 @@ export default class TossOne extends Component {
             totalWeight = this.props.weights.reduce((a, w) => a + w);
         }
         const opStyle = {
-            color: "#FFFFFF",
+            color: "#FAFAFA",
         };
         let listStyle = {
             fontFamily: "\"Hind Madurai\",sans-serif",
-            color: "#211836",
+            color: "#14061F",
         };
         if (this.props.weights && this.props.weights.length > 0 && this.props.options && this.props.options.length > 0) {
             this.props.options.forEach((op) => {
@@ -94,9 +103,9 @@ export default class TossOne extends Component {
         i = 0;
         let results = [];
         let firstItem = {
-            backgroundColor: "#88A885",
+            backgroundColor: "#DCDCDC",
             fontFamily: "\"Hind Madurai\",sans-serif",
-            color: "#211836",
+            color: "#14061F",
         };
         if (!this.props.action) {
             if (this.props.selected && this.props.selected.resultsP) {
@@ -122,11 +131,13 @@ export default class TossOne extends Component {
         }
         results.reverse();
         const ink = {
-            backgroundColor: '#149bda'
+            backgroundColor: '#149bda',
+            color: "#FF8315",
+            background: "#FF8315"
         };
 
         const paperInk = {
-            backgroundColor: "#BBDBB8",
+            backgroundColor: "#FAFAFA",
         };
         instructions = null;
         if (opt.length === 0) {
@@ -161,12 +172,13 @@ export default class TossOne extends Component {
                     <div className="col-sm-6 col-12">
                         {instructions}
                         <div className="roulette-container">
-                            <MuiThemeProvider>
+                            <MuiThemeProvider muiTheme={muiTheme}>
                                 <RaisedButton
                                     className="SpinButton"
                                     label="Spin" style={ink}
                                     onClick={this.click}
                                     aria-label="Boton girar Ruleta"
+                                    secondary={true}
                                     disabled={this.props.options === [] || !this.props.options}
                                 />
                             </MuiThemeProvider>

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Dialog from '../adding/CustomDialog.js';
 import OwnerDialog from '../adding/OwnerDialog.js';
 import AddButton from "../adding/AddButton";
 import {List, ListItem} from 'material-ui/List';
@@ -13,6 +12,18 @@ import Checkbox from 'material-ui/Checkbox';
 import LinearProgress from 'material-ui/LinearProgress';
 import "./Toss4All.css";
 import ActionHelp from 'material-ui/svg-icons/action/help-outline';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Stars from 'material-ui/svg-icons/action/grade';
+
+const muiTheme = getMuiTheme({
+
+    palette: {
+        primary1Color: "#149CDB",
+        primary2Color: "#304057",
+        accent1Color: "#FF8E0B",
+        textColor: "#FAFAFA",
+    }
+});
 
 // App component - represents the random persons fit actions sorting app
 
@@ -142,7 +153,7 @@ export default class Toss4All extends Component {
 
     render() {
         const alertInk = {
-            backgroundColor: "#D73A6F"
+            backgroundColor: "#FF8E0B"
         };
 
         let opt = [];
@@ -151,7 +162,7 @@ export default class Toss4All extends Component {
         let totalWeight = 0;
         let listStyle = {
             fontFamily: "\"Hind Madurai\",sans-serif",
-            color: "#211836",
+            color: "#304057",
         };
         if (this.props.weights && this.props.weights.length > 0) {
             totalWeight = this.props.weights.reduce((a, w) => a + w);
@@ -207,17 +218,19 @@ export default class Toss4All extends Component {
             color: '#149bda'
         };
         const paperInk = {
-            backgroundColor: "#BBDBB8",
+            backgroundColor: "#FAFAFA",
         };
         const listInkChecked = {
             textDecoration: "line-through",
-            backgroundColor: "#f1e8e1",
-            backgroundImage: "url('./resources/paper2.png')"
+            backgroundColor: "#FAFAFA",
+            color: "#424242"
+
         };
         const listInk = {
 
-            backgroundColor: "#f1e8e1",
-            backgroundImage: "url('./resources/paper2.png')"
+            backgroundColor: "#FAFAFA",
+            color: "#424242"
+
         };
 
 
@@ -287,15 +300,17 @@ export default class Toss4All extends Component {
                     <div className="col-sm-6 col-12">
                         <div className="row justify-content-end">
                             <div className="col-sm-6 col-12 center-items add-button">
-                                <MuiThemeProvider>
-                                    <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
-                                                  onClick={this.click} aria-label="Button to launch new assignment"/>
-                                </MuiThemeProvider>
+
                             </div>
                         </div>
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={true}  className="resultPaper">
-                                <h1 className="head-title">Results</h1> <LinearProgress mode="determinate" value={completness?completness:0}/>
+                                <h1 className="head-title">Results {completness===100? <strong><Stars/> Complete!</strong>:null} <MuiThemeProvider muiTheme={muiTheme}>
+                                    <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
+                                                  onClick={this.click} aria-label="Button to launch new assignment" secondary={true}/>
+                                </MuiThemeProvider></h1>
+                                <h6>Times launched: { this.props.selected.timesThrown?this.props.selected.timesThrown:0}</h6>
+                                <LinearProgress mode="determinate" value={completness?completness:0}/>
                                 <Divider/>
                                 <List style={listScroll} className="resultList">
                                     {res}
@@ -312,11 +327,10 @@ export default class Toss4All extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-sm-4 col-6">
+                            <div className="col-sm-4 col-12">
 
                                 <MuiThemeProvider>
-                                    <Paper zDepth={2} rounded={false} style={paperInk}>
-                                        <MuiThemeProvider>
+                                        <MuiThemeProvider muiTheme={muiTheme}>
                                             <Toggle
                                                 style={{color: "white"}}
                                                 label="Match Participants"
@@ -324,7 +338,7 @@ export default class Toss4All extends Component {
                                                 toggled={this.state.matchParticipants}
                                             />
                                         </MuiThemeProvider>
-                                        <MuiThemeProvider>
+                                        <MuiThemeProvider muiTheme={muiTheme}>
                                             <Toggle
                                                 style={{color: "white"}}
                                                 label="Match Actions"
@@ -333,7 +347,7 @@ export default class Toss4All extends Component {
                                             />
                                         </MuiThemeProvider>
 
-                                        <MuiThemeProvider>
+                                        <MuiThemeProvider muiTheme={muiTheme}>
                                             <Toggle
                                                 style={{color: "white"}}
                                                 label="Repeat"
@@ -343,11 +357,10 @@ export default class Toss4All extends Component {
                                         </MuiThemeProvider>
                                         <ActionHelp onClick={this.help}/>
                                         {Help}
-                                    </Paper>
                                 </MuiThemeProvider>
 
                             </div>
-                            <div className="col-sm-4 col-6">
+                            <div className="col-sm-4 col-12">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="head-title">Actions</h1>
@@ -358,7 +371,7 @@ export default class Toss4All extends Component {
                                     </Paper>
                                 </MuiThemeProvider>
                             </div>
-                            <div className="col-sm-4 col-6">
+                            <div className="col-sm-4 col-12">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <div className="row justify-content-center">

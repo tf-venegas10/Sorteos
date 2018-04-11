@@ -11,7 +11,16 @@ import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
 
 import "./TossPandA.css";
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+const muiTheme = getMuiTheme({
 
+    palette: {
+        primary1Color: "#149CDB",
+        primary2Color: "#304057",
+        accent1Color: "#FF8E0B",
+        textColor: "#424242",
+    }
+});
 // App component - represents the random person sorting app
 
 export default class TossPandA extends Component {
@@ -71,7 +80,7 @@ export default class TossPandA extends Component {
 
     render() {
         const alertInk = {
-            backgroundColor: "#D73A6F"
+            backgroundColor: "#FF8E0B"
         };
         let opt = [];
         let persons = [];
@@ -79,7 +88,7 @@ export default class TossPandA extends Component {
         let totalWeight = 0;
         let listStyle = {
             fontFamily: "\"Hind Madurai\",sans-serif",
-            color: "#211836",
+            color: "#304057",
         };
         if (this.props.weights && this.props.weights.length > 0) {
             totalWeight = this.props.weights.reduce((a, w) => a + w);
@@ -114,9 +123,9 @@ export default class TossPandA extends Component {
         let results = [];
 
         let firstItem = {
-            backgroundColor: "#88A885",
+            backgroundColor: "#DCDCDC",
             fontFamily: "\"Hind Madurai\",sans-serif",
-            color: "#211836",
+            color: "#424242",
         };
 
             if (this.props.selected && this.props.selected.resultsPandAs) {
@@ -131,10 +140,10 @@ export default class TossPandA extends Component {
         }
         results.reverse();
         const ink = {
-            backgroundColor: '#149bda'
+            backgroundColor: '#149CDB'
         };
         const paperInk = {
-            backgroundColor: "#BBDBB8",
+            backgroundColor: "#FAFAFA",
         };
         instructions = null;
         if (this.props.options.length === 0 || this.props.persons.length === 0) {
@@ -157,9 +166,9 @@ export default class TossPandA extends Component {
                     <div className="col-sm-6 col-12">
                         {instructions}
                         <div className="roulette-container">
-                            <MuiThemeProvider>
+                            <MuiThemeProvider muiTheme={muiTheme}>
                                 <RaisedButton label="Spin" style={ink} onClick={this.click}
-                                              aria-label="Boton girar Ruleta"/>
+                                              aria-label="Boton girar Ruleta" secondary={true}/>
                             </MuiThemeProvider>
                         </div>
                         <Roulette options={(this.props.options) ? this.props.options : []} baseSize={220}

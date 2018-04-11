@@ -30,7 +30,7 @@ export default class NavbarUser extends Component {
 
     render() {
         const background = {
-            backgroundColor: 'rgb(55,55,55)',
+            backgroundColor: '#424242',
             fontFamily: "'Nova Slim', cursive",
             color: "#1498D5",
             textAlign: "center"
