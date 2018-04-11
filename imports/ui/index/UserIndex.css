@@ -9,7 +9,7 @@ UserIndex styles
 
 }
 
-.welcome-card{
+.welcome-card {
     width: 90%;
     margin-top: 5%;
     margin-bottom: 10%;
@@ -19,37 +19,37 @@ UserIndex styles
     color: white;
 }
 
-.welcome-card h4{
-    font-family: "Nova Slim",sans-serif;
+.welcome-card h4 {
+    font-family: "Nova Slim", sans-serif;
 }
 
-.welcome-card h5{
-    color: rgb(220,220,220);
-    font-family: Lora,sans-serif;
+.welcome-card h5 {
+    color: rgb(220, 220, 220);
+    font-family: Lora, sans-serif;
 }
 
-.welcome-card p{
-    color: rgb(200,200,200);
-    font-family: "Hind Madurai",sans-serif;
+.welcome-card p {
+    color: rgb(200, 200, 200);
+    font-family: "Hind Madurai", sans-serif;
 
 }
 
-.welcome-image{
+.welcome-image {
     padding-top: 5%;
     padding-left: 5%;
     padding-right: 5%;
 }
 
-.btn-new{
+.btn-new {
     background-color: white;
-    color: rgb(55,55,55);
-    font-family: "Nova Slim",sans-serif;
+    color: rgb(55, 55, 55);
+    font-family: "Nova Slim", sans-serif;
 }
 
-.sorteos-list{
+.sorteos-list {
     width: 90%;
-    padding-top: 20%;
-    padding-bottom: 10%;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
 }

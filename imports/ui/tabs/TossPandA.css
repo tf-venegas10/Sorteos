@@ -14,3 +14,9 @@ TossPandA styles
     padding-top: 5%;
     padding-left: 5%;
 }
+
+@media screen and (min-width: 1500px) {
+    .user-content {
+        height: 72vh;
+    }
+}

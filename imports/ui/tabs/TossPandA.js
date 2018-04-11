@@ -152,7 +152,7 @@ export default class TossPandA extends Component {
         };
 
         return (
-            <div>
+            <div className="user-content">
                 <div className="container-fluid row toss-content">
                     <div className="col-sm-6 col-12">
                         {instructions}

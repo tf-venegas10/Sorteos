@@ -274,7 +274,7 @@ export default class Toss4All extends Component {
         };
 
         return (
-            <div>
+            <div className="user-content">
                 <div className="container-fluid row toss-content">
                     {instructions}
 

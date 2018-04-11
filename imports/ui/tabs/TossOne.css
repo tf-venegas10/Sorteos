@@ -23,3 +23,9 @@ TossOne Styles
 .add-button{
     padding-top: 2%;
 }
+
+@media screen and (min-width: 1500px) {
+    .user-content {
+        height: 72vh;
+    }
+}
