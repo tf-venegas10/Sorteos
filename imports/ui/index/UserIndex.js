@@ -23,6 +23,7 @@ export default class UserIndex extends Component {
         };
 
         const itemStyle = {
+            padding:"padding: 0px 72px 0px 16px",
             fontFamily: "\'Hind Madurai\', cursive",
             fontSize: "20px",
             color: "#211836",
@@ -36,7 +37,7 @@ export default class UserIndex extends Component {
         };
 
         this.props.sorteos.forEach((s)=>{
-            sorteos.push(<ListItem style={itemStyle} key={i} primaryText={<div onClick={this.props.switchSorteo.bind(this,i)}>{s.name}</div>}
+            sorteos.push(<ListItem style={itemStyle} key={i} primaryText={<div style={{width:"100%", height:"100%"}} onClick={this.props.switchSorteo.bind(this,i)}>{s.name}</div>} onClick={this.props.switchSorteo.bind(this,i)}
                                    rightIcon={<ActionDelete style={itemStyle}
                                                             onClick={this.props.handleTossDelete.bind(this, i)}/>}/>);
             i++;
