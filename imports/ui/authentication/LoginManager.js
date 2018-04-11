@@ -15,6 +15,7 @@ export default class LoginManager extends Component {
             pswd: "",
             disableButton: true,
             processingAuth: false,
+            loginError: false,
         }
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePswdChange = this.handlePswdChange.bind(this);
@@ -46,7 +47,12 @@ export default class LoginManager extends Component {
         Meteor.loginWithPassword(this.state.email, this.state.pswd, (error) => {
             if (error) {
                 console.log("Error: " + error.reason);
-                this.setState({processingAuth: false});
+                this.setState({
+                    processingAuth: false,
+                    loginError: true,
+                });
+            }else{
+                this.setState({loginError:false})
             }
         });
     }
@@ -68,6 +74,7 @@ export default class LoginManager extends Component {
                             onEmailChange={this.handleEmailChange}
                             onPswdChange={this.handlePswdChange}
                             disableButton={this.state.disableButton}
+                            loginError={this.state.loginError}
                         />
                 }
             </div>

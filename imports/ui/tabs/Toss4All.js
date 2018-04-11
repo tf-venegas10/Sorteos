@@ -269,8 +269,8 @@ export default class Toss4All extends Component {
 
 
         const listScroll = {
-            overflowY: opt.length > 5 ? "scroll" : "auto",
-            height: "12em",
+            overflowY: opt.length > 10 ? "scroll" : "auto",
+            height: "18em",
         };
 
         return (

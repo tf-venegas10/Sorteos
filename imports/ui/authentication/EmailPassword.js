@@ -32,49 +32,66 @@ export default class EmailPassword extends Component {
                         {
                             this.props.typeAuth === "Register" ?
                                 <div className="form-group">
-                                    <label htmlFor="username">Username:
+                                    <label htmlFor="username">Username:</label>
                                     <input placeholder="Username" type="text" id="username"
                                            className="form-control"
                                            onChange={this.handleUsername.bind(this)}
                                            aria-label="Text input for username"
-                                    /></label>
+                                    />
                                 </div>
                                 : null
                         }
-                        <div className="form-group">
-                            <label htmlFor="email">Email:
+                        <div className={"form-group " + (this.props.typeAuth !== "Register" ?
+                            (this.props.loginError && !$("#emailLogin").is(":focus") ? "has-danger" : "") : "") +
+                        (this.props.typeAuth === "Register" ?
+                            (this.props.emailError && !$("#emailRegister").is(":focus") ? "has-danger" : "") : "")}>
+                            <label htmlFor="email">
+                                <p>Email:</p></label>
                             <input placeholder="email@example.com" type="email" id={"email" + this.props.typeAuth}
-                                   className="form-control"
+                                   className={"form-control " + (this.props.typeAuth !== "Register" ?
+                                       (this.props.loginError && !$("#emailLogin").is(":focus") ? "form-control-danger" : "") : "")
+                                   + (this.props.typeAuth === "Register" ?
+                                       (this.props.emailError && !$("#emailRegister").is(":focus") ? "form-control-danger" : "") : "")}
                                    onChange={this.handleEmail.bind(this)}
                                    aria-label="Text input for email"
                             />
-                            </label>
+                            {
+                                this.props.emailError ?
+                                    <small className="form-control-feedback">Email is already in use!</small> : null
+                            }
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="Password">Password:
+                        <div className={"form-group " + (this.props.typeAuth !== "Register" ?
+                            (this.props.loginError && !$("#passwordLogin").is(":focus") ? "has-danger" : "") : "")}>
+                            <label htmlFor="Password"><p>Password:</p></label>
                             <input placeholder="Password" type="password" id={"password" + this.props.typeAuth}
-                                   className="form-control"
+                                   className={"form-control " + (this.props.typeAuth !== "Register" ?
+                                       (this.props.loginError && !$("#passwordLogin").is(":focus") ? "form-control-danger" : "") : "")}
                                    onChange={this.handlePswd.bind(this)}
                                    aria-label="Text input for password"
                             />
-                            </label>
+
+                            {
+                                this.props.loginError ? <small className="form-control-feedback">Email or password are
+                                    incorrect!</small> : null
+                            }
                         </div>
                         {
                             this.props.typeAuth === "Register" ?
                                 <div className={"form-group " + ($("#passwordVer").is(":focus") ?
-                                    (this.props.match? "has-success" : "has-danger"):"")}>
+                                    (this.props.match ? "has-success" : "has-danger") : "")}>
                                     <label htmlFor="password">Confirm Password:</label>
                                     <input placeholder="Password" type="password" id="passwordVer"
-                                           className={"form-control " + ( $("#passwordVer").is(":focus") ?
-                                               (this.props.match?
-                                               "form-control-success" : "form-control-danger"):"")}
+                                           className={"form-control " + ($("#passwordVer").is(":focus") ?
+                                               (this.props.match ?
+                                                   "form-control-success" : "form-control-danger") : "")}
                                            onChange={this.handlePswdVerify.bind(this)}
                                            aria-label="Text input for verifying password"
                                     />
                                     {
-                                         $("#passwordVer").is(":focus") ?
-                                             this.props.match? null :
-                                            <small className="form-control-feedback">Passwords must match!</small>:null
+                                        $("#passwordVer").is(":focus") ?
+                                            this.props.match ? null :
+                                                <small className="form-control-feedback">Passwords must
+                                                    match!</small> : null
                                     }
                                 </div>
                                 : null

@@ -12,7 +12,7 @@ Auth modules styles
 .auth-card {
     background: rgb(183, 183, 157);
     color: #211836;
-    margin-top: 10%;
+    margin-top: 50%;
     margin-bottom: 10%;
     padding-left: 10%;
     padding-right: 10%;
@@ -52,4 +52,8 @@ Auth modules styles
     font-family: 'Nova Slim', cursive;
     font-size: 35px;
     padding-top: 5%;
+}
+
+form {
+    width: 100%;
 }

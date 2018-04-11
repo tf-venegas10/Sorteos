@@ -19,6 +19,8 @@ export default class RegisterManager extends Component {
             disableButton: true,
             processingAuth: false,
             pswdMatch: false,
+            emailError: false,
+            usernameError: false,
         }
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -71,7 +73,14 @@ export default class RegisterManager extends Component {
         }, (error) => {
             if (error) {
                 console.log("Error: " + error.reason);
-                this.setState({processingAuth: false});
+                this.setState({
+                    processingAuth: false
+                });
+                if (error.startsWith("Email")) {
+                    this.setState({
+                        emailError: true,
+                    });
+                }
             } else {
                 Meteor.call('appusers.insert', true);
             }
@@ -98,6 +107,8 @@ export default class RegisterManager extends Component {
                             onPswdVerChange={this.handlePswdVerChange}
                             disableButton={this.state.disableButton}
                             match={this.state.pswdMatch}
+                            emailError={this.state.emailError}
+                            usernameError={this.state.usernameError}
                         />
                 }
             </div>
