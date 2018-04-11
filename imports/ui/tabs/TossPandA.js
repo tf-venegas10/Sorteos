@@ -123,7 +123,7 @@ export default class TossPandA extends Component {
         let results = [];
 
         let firstItem = {
-            backgroundColor: "#C8C8C8",
+            backgroundColor: "#DCDCDC",
             fontFamily: "\"Hind Madurai\",sans-serif",
             color: "#424242",
         };

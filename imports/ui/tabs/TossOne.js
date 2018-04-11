@@ -103,7 +103,7 @@ export default class TossOne extends Component {
         i = 0;
         let results = [];
         let firstItem = {
-            backgroundColor: "#C8C8C8",
+            backgroundColor: "#DCDCDC",
             fontFamily: "\"Hind Madurai\",sans-serif",
             color: "#14061F",
         };

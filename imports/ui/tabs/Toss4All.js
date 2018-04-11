@@ -13,7 +13,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import "./Toss4All.css";
 import ActionHelp from 'material-ui/svg-icons/action/help-outline';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Stars from 'material-ui/svg-icons/action/stars';
+import Stars from 'material-ui/svg-icons/action/star-rate';
 
 const muiTheme = getMuiTheme({
 

@@ -12,13 +12,13 @@ UserIndex styles
 }
 
 .welcome-card {
-    width: 90%;
-    margin-top: 10%;
+    width: 80%;
+    margin-top: 5%;
     margin-bottom: 10%;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
     background-color: #FF8E0B;
-    color: white;
+    color: #FBFBFB;
 }
 
 .welcome-card h4 {
