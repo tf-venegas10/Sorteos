@@ -13,7 +13,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import "./Toss4All.css";
 import ActionHelp from 'material-ui/svg-icons/action/help-outline';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Stars from 'material-ui/svg-icons/action/star-rate';
+import Stars from 'material-ui/svg-icons/action/grade';
 
 const muiTheme = getMuiTheme({
 
@@ -300,15 +300,15 @@ export default class Toss4All extends Component {
                     <div className="col-sm-6 col-12">
                         <div className="row justify-content-end">
                             <div className="col-sm-6 col-12 center-items add-button">
-                                <MuiThemeProvider muiTheme={muiTheme}>
-                                    <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
-                                                  onClick={this.click} aria-label="Button to launch new assignment" secondary={true}/>
-                                </MuiThemeProvider>
+
                             </div>
                         </div>
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={true}  className="resultPaper">
-                                <h1 className="head-title">Results {completness===100? <strong><Stars/> Complete!</strong>:null}</h1>
+                                <h1 className="head-title">Results {completness===100? <strong><Stars/> Complete!</strong>:null} <MuiThemeProvider muiTheme={muiTheme}>
+                                    <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
+                                                  onClick={this.click} aria-label="Button to launch new assignment" secondary={true}/>
+                                </MuiThemeProvider></h1>
                                 <h6>Times launched: { this.props.selected.timesThrown?this.props.selected.timesThrown:0}</h6>
                                 <LinearProgress mode="determinate" value={completness?completness:0}/>
                                 <Divider/>
