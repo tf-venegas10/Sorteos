@@ -43,7 +43,10 @@ export default class LoginManager extends Component {
 
     loginWithPassword(e) {
         e.preventDefault();
-        this.setState({processingAuth: true});
+        this.setState({
+            processingAuth: true,
+            loginError: false,
+        });
         Meteor.loginWithPassword(this.state.email, this.state.pswd, (error) => {
             if (error) {
                 console.log("Error: " + error.reason);
@@ -51,23 +54,25 @@ export default class LoginManager extends Component {
                     processingAuth: false,
                     loginError: true,
                 });
-            }else{
-                this.setState({loginError:false})
+            } else {
+                this.setState({loginError: false})
             }
         });
     }
 
     render() {
         return (
-            <div className="row justify-content-around center-items">
+            <div className="row justify-content-around">
                 {
                     this.state.processingAuth ?
-                        <MuiThemeProvider>
-                            <div className="circular-progress">
-                                <CircularProgress color={"#BBDBB8"} size={80} thickness={7}/>
-                                <h1 className="auth-text">Logging in</h1>
-                            </div>
-                        </MuiThemeProvider>
+                        <div className="center-items">
+                            <MuiThemeProvider>
+                                <div className="circular-progress">
+                                    <CircularProgress color={"#BBDBB8"} size={80} thickness={7}/>
+                                    <h1 className="auth-text">Logging in</h1>
+                                </div>
+                            </MuiThemeProvider>
+                        </div>
                         : < EmailPassword
                             submitAction={this.loginWithPassword}
                             typeAuth="Login"

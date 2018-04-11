@@ -26,18 +26,24 @@ export default class EmailPassword extends Component {
     render() {
         return (
             <div className="col-sm-3 col-10">
-                <div className="card auth-card">
+                <div className={"card "+(this.props.typeAuth==="Register"?"auth-card-register":"auth-card-login")}>
                     <h2 className="auth-card-title">{this.props.typeAuth}</h2>
                     <form onSubmit={this.props.submitAction}>
                         {
                             this.props.typeAuth === "Register" ?
-                                <div className="form-group">
+                                <div className={"form-group "+ (this.props.usernameError && !$("#username").is(":focus") ?
+                                    "has-danger" : "")}>
                                     <label htmlFor="username">Username:</label>
                                     <input placeholder="Username" type="text" id="username"
-                                           className="form-control"
+                                           className={"form-control "+
+                                           (this.props.emailError && !$("#username").is(":focus") ? "form-control-danger" : "")}
                                            onChange={this.handleUsername.bind(this)}
                                            aria-label="Text input for username"
                                     />
+                                    {
+                                        this.props.usernameError ?
+                                            <small className="form-control-feedback">Username already exists!</small> : null
+                                    }
                                 </div>
                                 : null
                         }
@@ -46,7 +52,7 @@ export default class EmailPassword extends Component {
                         (this.props.typeAuth === "Register" ?
                             (this.props.emailError && !$("#emailRegister").is(":focus") ? "has-danger" : "") : "")}>
                             <label htmlFor="email">
-                                <p>Email:</p></label>
+                                Email:</label>
                             <input placeholder="email@example.com" type="email" id={"email" + this.props.typeAuth}
                                    className={"form-control " + (this.props.typeAuth !== "Register" ?
                                        (this.props.loginError && !$("#emailLogin").is(":focus") ? "form-control-danger" : "") : "")
@@ -57,12 +63,12 @@ export default class EmailPassword extends Component {
                             />
                             {
                                 this.props.emailError ?
-                                    <small className="form-control-feedback">Email is already in use!</small> : null
+                                    <small className="form-control-feedback">Email already exists!</small> : null
                             }
                         </div>
                         <div className={"form-group " + (this.props.typeAuth !== "Register" ?
                             (this.props.loginError && !$("#passwordLogin").is(":focus") ? "has-danger" : "") : "")}>
-                            <label htmlFor="Password"><p>Password:</p></label>
+                            <label htmlFor="Password">Password:</label>
                             <input placeholder="Password" type="password" id={"password" + this.props.typeAuth}
                                    className={"form-control " + (this.props.typeAuth !== "Register" ?
                                        (this.props.loginError && !$("#passwordLogin").is(":focus") ? "form-control-danger" : "") : "")}
@@ -96,7 +102,7 @@ export default class EmailPassword extends Component {
                                 </div>
                                 : null
                         }
-                        <div className="form-group">
+                        <div className="form-group center-items">
                             <button type="submit"
                                     className="btn auth-button"
                                     disabled={this.props.disableButton}
