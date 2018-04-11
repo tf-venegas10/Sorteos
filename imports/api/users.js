@@ -21,11 +21,21 @@ Meteor.methods({
         Users.insert({
             userId: Meteor.user()._id,
             email: Meteor.user().email,
-            username: Meteor.user().username
+            username: Meteor.user().username,
+            online: auth
         });
     },
+
     'appusers.find'(userId){
         return Users.findOne({userId:userId});
+    },
+
+    'appusers.offline'(){
+        Users.update({userId: Meteor.user()._id}, {$set: {online:false}});
+    },
+
+    'appusers.online'(){
+        Users.update({userId: Meteor.user()._id}, {$set: {online:true}});
     }
 });
 

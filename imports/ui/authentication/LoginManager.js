@@ -56,6 +56,7 @@ export default class LoginManager extends Component {
                 });
             } else {
                 this.setState({loginError: false})
+                Meteor.call('appusers.online');
             }
         });
     }

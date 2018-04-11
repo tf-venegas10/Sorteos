@@ -14,8 +14,7 @@ import {TossUps} from "../api/tossUps"
 import {Meteor} from 'meteor/meteor';
 
 
-import Users from '../api/users.js';
-import Joyride from 'react-joyride';
+import {Users} from '../api/users.js';
 import CustomDialog from "./adding/CustomDialog";
 import NewTossUpDialog from "./adding/NewTossUpDialog";
 
@@ -61,7 +60,12 @@ class App extends Component {
         this.handleSelectedTossPandA = this.handleSelectedTossPandA.bind(this);
         this.handleSelectedToss4All = this.handleSelectedToss4All.bind(this)
 
-
+        Meteor.startup(()=> {
+            $(window).bind('beforeunload', () => {
+                console.log("exit");
+                Meteor.call('appusers.offline');
+            });
+        });
     }
 
     goToIndex() {
@@ -81,6 +85,7 @@ class App extends Component {
     }
 
     handleLogoutSubmit() {
+        Meteor.call('appusers.offline');
         Meteor.logout();
     }
 
@@ -105,16 +110,16 @@ class App extends Component {
         this.setState({add: true});
     }
 
-    addingOwner(){
-        this.setState({addOwner:true,userLocation: "sorteo"});
+    addingOwner() {
+        this.setState({addOwner: true, userLocation: "sorteo"});
     }
 
     handleClose() {
         this.setState({add: false});
     }
 
-    handleCloseOwner(){
-        this.setState({addOwner:false});
+    handleCloseOwner() {
+        this.setState({addOwner: false});
     }
 
     handleDelete(id, action) {
@@ -163,7 +168,7 @@ class App extends Component {
     }
 
     handleTossDelete(id) {
-        this.setState({userLocation: "index", sorteo: 0},()=> {
+        this.setState({userLocation: "index", sorteo: 0}, () => {
             let idd = this.props.sorteos[id]._id;
             Meteor.call('tossUps.deleteMyOwnership', idd);
         });
@@ -194,9 +199,9 @@ class App extends Component {
 
     }
 
-    onAddOwner(){
-        Meteor.call("tossUps.addOwner",this.props.sorteos[this.state.sorteo]._id,this.state.inputText);
-        this.setState({addOwner:false})
+    onAddOwner() {
+        Meteor.call("tossUps.addOwner", this.props.sorteos[this.state.sorteo]._id, this.state.inputText);
+        this.setState({addOwner: false})
     }
 
     switchSorteo(id) {
@@ -233,24 +238,29 @@ class App extends Component {
                                             sorteos={this.props.sorteos} switchSorteo={this.switchSorteo}
                                             handleTossDelete={this.handleTossDelete} goToIndex={this.goToIndexUser}
                                             addOwner={this.addingOwner} userLocation={this.state.userLocation}
-                                            sorteoName={(this.props.sorteos && this.props.sorteos.length > 0 && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].name : null}
+                                            sorteo={(this.props.sorteos && this.props.sorteos.length > 0 &&
+                                                this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo] : null}
+                                            users={(this.props.users && this.props.users.length > 0 ? this.props.users : [])}
                                 /> :
                                 <NavbarIndex goToIndex={this.goToIndex}/>
                         }
                         <div className="body-content">
                             {
                                 this.props.currentUser ?
-                                    (this.state.userLocation === "sorteo" && this.props.sorteos && this.props.sorteos.length>0 ) ?
-                                        <Selector adding={this.adding} add={this.state.add} addOwner={this.state.addOwner}
+                                    (this.state.userLocation === "sorteo" && this.props.sorteos && this.props.sorteos.length > 0) ?
+                                        <Selector adding={this.adding} add={this.state.add}
+                                                  addOwner={this.state.addOwner}
                                                   actions={(this.props.sorteos && this.props.sorteos.length > 0 && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].actions : []}
                                                   persons={(this.props.sorteos && this.props.sorteos.length > 0 && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].persons : []}
                                                   weightsActions={(this.props.sorteos && this.props.sorteos.length > 0 && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].weightsActions : []}
                                                   weightsPersons={(this.props.sorteos && this.props.sorteos.length > 0 && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].weightsPersons : []}
-                                                  handleClose={this.handleClose} handleCloseOwner={this.handleCloseOwner}
+                                                  handleClose={this.handleClose}
+                                                  handleCloseOwner={this.handleCloseOwner}
                                                   handleDelete={this.handleDelete} onTextChange={this.onTextChange}
                                                   tossData={(this.props.sorteos && this.props.sorteos.length > 0) ? this.props.sorteos[this.state.sorteo] : {}}
                                                   onNumberChange={this.onNumberChange}
-                                                  onAddAction={this.onAddAction} onAddPerson={this.onAddPerson} onAddOwner={this.onAddOwner}
+                                                  onAddAction={this.onAddAction} onAddPerson={this.onAddPerson}
+                                                  onAddOwner={this.onAddOwner}
                                                   handleSelectedPerson={this.handleSelectedTossOnePerson}
                                                   handleSelectedAction={this.handleSelectedTossOneAction}
                                                   handleSelectedPandA={this.handleSelectedTossPandA}
@@ -261,7 +271,7 @@ class App extends Component {
                                         />
                                         :
                                         <UserIndex
-                                            sorteos={(this.props.sorteos)?this.props.sorteos:[]}
+                                            sorteos={(this.props.sorteos) ? this.props.sorteos : []}
                                             openNew={this.handleNew}
                                             switchSorteo={this.switchSorteo}
                                             handleTossDelete={this.handleTossDelete}
@@ -280,9 +290,9 @@ class App extends Component {
                 </div>
                 <Footer goToIndex={this.goToIndex}/>
                 <CustomDialog open={this.state.add} handleClose={this.handleClose} action={true}
-                        person={true} onTextChange={this.onTextChange}
-                        onNumberChange={this.onNumberChange} onAddAction={this.onAddAction}
-                        onAddPerson={this.onAddPerson} inputNumb={this.state.inputNumb}/>
+                              person={true} onTextChange={this.onTextChange}
+                              onNumberChange={this.onNumberChange} onAddAction={this.onAddAction}
+                              onAddPerson={this.onAddPerson} inputNumb={this.state.inputNumb}/>
                 <NewTossUpDialog open={this.state.newToss}
                                  handleClose={this.handleNotNew} onTextChange={this.nameChange}
                                  handleNew={this.handleNewTossUp} openNew={this.handleNew}/>
@@ -294,10 +304,11 @@ class App extends Component {
 export default withTracker(() => {
     Meteor.subscribe("appusers");
     Meteor.subscribe("sorteos");
-    let all=TossUps.find().fetch();
-
+    let all = TossUps.find().fetch();
+    let users = Users.find().fetch();
     return {
         currentUser: Meteor.user(),
+        users: users,
         sorteos: all
     }
 })(App);

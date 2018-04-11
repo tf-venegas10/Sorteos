@@ -251,6 +251,6 @@ Meteor.methods({
         if(callback){
             callback();
         }
-    }
+    },
 
 });
