@@ -16,12 +16,11 @@ html, body {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    height: 110vh;
+
 }
 
 .main-content{
     background-color: rgba(55,55,55,0.8);
-    height: 110vh;
 }
 
 .user-banner{

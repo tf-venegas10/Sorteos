@@ -3,7 +3,16 @@ Index styles
 -----------------*/
 
 .complete-viewport{
-    height: 90%;
+    height: 100%;
+}
+
+#demo{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.carousel-inner{
+    padding: 5%;
 }
 
 .slogan{
@@ -37,12 +46,15 @@ Index styles
 
 .to-login{
     color: #D73A6F;
-    font-size: 160%;
+    font-size: 130%;
     font-family: 'Lora', serif;
-    text-shadow: 1px 1px #ff0000;;
+    margin-top: 1%;
+    margin-bottom: 5%;
+    text-shadow: 1px 1px #B5184D;
 }
 
 .to-login:hover{
     color: rgb(183, 183, 157);
+    text-shadow: 1px 1px rgb(163, 163, 137);
     cursor: pointer;
 }

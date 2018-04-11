@@ -64,7 +64,11 @@ export default class RegisterManager extends Component {
     }
 
     createUser(e) {
-        this.setState({processingAuth: true});
+        this.setState({
+            processingAuth: true,
+            emailError: false,
+            usernameError: false,
+        });
         e.preventDefault();
         Accounts.createUser({
             email: this.state.email,
@@ -80,6 +84,10 @@ export default class RegisterManager extends Component {
                     this.setState({
                         emailError: true,
                     });
+                } else if (error.reason.startsWith("Username")) {
+                    this.setState({
+                        usernameError: true,
+                    });
                 }
             } else {
                 Meteor.call('appusers.insert', true);
@@ -89,15 +97,17 @@ export default class RegisterManager extends Component {
 
     render() {
         return (
-            <div className="row justify-content-around center-items complete-viewport">
+            <div className="row justify-content-around complete-viewport">
                 {
                     this.state.processingAuth ?
-                        <MuiThemeProvider>
-                            <div className="circular-progress">
-                                <CircularProgress color={"#BBDBB8"} size={80} thickness={7}/>
-                                <h1 className="auth-text">Logging in</h1>
-                            </div>
-                        </MuiThemeProvider>
+                        <div className="center-items">
+                            <MuiThemeProvider>
+                                <div className="circular-progress">
+                                    <CircularProgress color={"#BBDBB8"} size={80} thickness={7}/>
+                                    <h1 className="auth-text">Logging in</h1>
+                                </div>
+                            </MuiThemeProvider>
+                        </div>
                         : <EmailPassword
                             submitAction={this.createUser}
                             typeAuth="Register"

@@ -219,15 +219,12 @@ class App extends Component {
         Meteor.call("tossUps.addResult4All", this.props.sorteos[this.state.sorteo]._id, selected);
     }
 
-
-
-
     render() {
 
         return (
             <div>
                 <div className={this.props.currentUser ? "user-banner" : "main-banner"}>
-                    <div className={this.props.currentUser ? null : "main-content center-items"}>
+                    <div className={this.props.currentUser ? null : "main-content"}>
                         {
                             this.props.currentUser ?
                                 <NavbarUser onLogoutCallback={this.handleLogoutSubmit} open={this.state.newToss}
@@ -240,7 +237,7 @@ class App extends Component {
                                 /> :
                                 <NavbarIndex goToIndex={this.goToIndex}/>
                         }
-                        <div className="center-items body-content">
+                        <div className="body-content">
                             {
                                 this.props.currentUser ?
                                     (this.state.userLocation === "sorteo" && this.props.sorteos && this.props.sorteos.length>0 ) ?
