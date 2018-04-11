@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Meteor} from "meteor/meteor";
 import AppBar from "material-ui/AppBar";
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -54,19 +55,18 @@ export default class NavbarUser extends Component {
                         titleStyle={background}
                         iconElementLeft={
                                 <IconMenu
-                                    iconButtonElement={<IconButton aria-label="Boton para expandir el menu"
+                                    iconButtonElement={<IconButton aria-label="Button that expands the menu"
                                     ><Menu color={white}/></IconButton>}
                                     anchorOrigin={{horizontal: 'left', vertical: 'top'}}
                                     targetOrigin={{horizontal: 'left', vertical: 'top'}}
 
                                 >
-                                    <MenuItem primaryText="Sign out" leftIcon={<SignOut/>}
-                                              onClick={this.props.onLogoutCallback}/>
-                                    <Divider/>
-                                    <MenuItem primaryText="New Toss-up" leftIcon={<ContentAdd/>}
-                                              onClick={this.props.openNew}/>
+                                    <MenuItem style={boldStyle}
+                                        primaryText={"Hi! "+Meteor.user().username}/>
                                     <Divider/>
                                     <MenuItem primaryText="My Toss-ups" style={boldStyle}/>
+                                    <MenuItem primaryText="New Toss-up" leftIcon={<ContentAdd/>}
+                                              onClick={this.props.openNew}/>
                                     {sorteos}
                                     {
                                         this.props.userLocation === "sorteo" ?
@@ -77,6 +77,9 @@ export default class NavbarUser extends Component {
                                             </div> :
                                             null
                                     }
+                                    <Divider/>
+                                    <MenuItem primaryText="Sign out" leftIcon={<SignOut/>}
+                                              onClick={this.props.onLogoutCallback}/>
                                 </IconMenu>
                         }
                         iconElementRight={
