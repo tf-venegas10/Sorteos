@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Meteor} from 'meteor/meteor';
 import Roulette from "../roulette/Roulette.js";
 import Dialog from '../adding/CustomDialog.js';
 import OwnerDialog from '../adding/OwnerDialog.js';

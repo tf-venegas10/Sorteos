@@ -1,7 +1,6 @@
 import React, {Component} from "react";
+import {Meteor} from 'meteor/meteor';
 import {withTracker} from "meteor/react-meteor-data";
-
-import "./App.css";
 import NavbarIndex from './navbars/NavbarIndex.js';
 import NavbarUser from './navbars/NavbarUser.js';
 import Index from './index/Index.js';
@@ -11,12 +10,13 @@ import UserIndex from "./index/UserIndex.js";
 import Selector from "./tabs/Selector.js";
 import Footer from "./footer/Footer.js";
 import {TossUps} from "../api/tossUps"
-import {Meteor} from 'meteor/meteor';
 
 
 import {Users} from '../api/users.js';
 import CustomDialog from "./adding/CustomDialog";
 import NewTossUpDialog from "./adding/NewTossUpDialog";
+
+import "./App.css";
 
 class App extends Component {
     constructor(props) {
@@ -64,6 +64,7 @@ class App extends Component {
             $(window).bind('beforeunload', () => {
                 console.log("exit");
                 Meteor.call('appusers.offline');
+                Meteor.call('appusers.updateUserLocation',"index");
             });
         });
     }
@@ -73,6 +74,7 @@ class App extends Component {
     }
 
     goToIndexUser() {
+        Meteor.call('appusers.updateUserLocation',"index");
         this.setState({userLocation: "index"});
     }
 
@@ -86,6 +88,7 @@ class App extends Component {
 
     handleLogoutSubmit() {
         Meteor.call('appusers.offline');
+        Meteor.call('appusers.updateUserLocation',"index");
         Meteor.logout();
     }
 
@@ -250,10 +253,14 @@ class App extends Component {
                                     (this.state.userLocation === "sorteo" && this.props.sorteos && this.props.sorteos.length > 0) ?
                                         <Selector adding={this.adding} add={this.state.add}
                                                   addOwner={this.state.addOwner}
-                                                  actions={(this.props.sorteos && this.props.sorteos.length > 0 && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].actions : []}
-                                                  persons={(this.props.sorteos && this.props.sorteos.length > 0 && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].persons : []}
-                                                  weightsActions={(this.props.sorteos && this.props.sorteos.length > 0 && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].weightsActions : []}
-                                                  weightsPersons={(this.props.sorteos && this.props.sorteos.length > 0 && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].weightsPersons : []}
+                                                  actions={(this.props.sorteos && this.props.sorteos.length > 0
+                                                      && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].actions : []}
+                                                  persons={(this.props.sorteos && this.props.sorteos.length > 0
+                                                      && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].persons : []}
+                                                  weightsActions={(this.props.sorteos && this.props.sorteos.length > 0
+                                                      && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].weightsActions : []}
+                                                  weightsPersons={(this.props.sorteos && this.props.sorteos.length > 0
+                                                      && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].weightsPersons : []}
                                                   handleClose={this.handleClose}
                                                   handleCloseOwner={this.handleCloseOwner}
                                                   handleDelete={this.handleDelete} onTextChange={this.onTextChange}
@@ -265,9 +272,13 @@ class App extends Component {
                                                   handleSelectedAction={this.handleSelectedTossOneAction}
                                                   handleSelectedPandA={this.handleSelectedTossPandA}
                                                   handleSelectedToss4All={this.handleSelectedToss4All}
-                                                  owners={(this.props.sorteos && this.props.sorteos.length > 0 && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].owners : []}
+                                                  owners={(this.props.sorteos && this.props.sorteos.length > 0
+                                                      && this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo].owners : []}
                                                   addSteps={this.addSteps}
                                                   inputNumb={this.state.inputNumb}
+                                                  sorteo={(this.props.sorteos && this.props.sorteos.length > 0 &&
+                                                      this.props.sorteos[this.state.sorteo]) ? this.props.sorteos[this.state.sorteo] : null}
+                                                  users={(this.props.users && this.props.users.length > 0 ? this.props.users : [])}
                                         />
                                         :
                                         <UserIndex

@@ -36,6 +36,11 @@ Meteor.methods({
 
     'appusers.online'(){
         Users.update({userId: Meteor.user()._id}, {$set: {online:true}});
+    },
+
+    'appusers.updateUserLocation'(location){
+        check(location, String);
+        Users.update({userId: Meteor.user()._id}, {$set: {currLocation:location}});
     }
 });
 

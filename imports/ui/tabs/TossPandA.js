@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Meteor} from 'meteor/meteor';
 import Roulette from "../roulette/Roulette.js";
 import OwnerDialog from '../adding/OwnerDialog.js';
 import AddButton from "../adding/AddButton";
@@ -33,6 +34,7 @@ export default class TossPandA extends Component {
             chosenOne: null,
             onMe:false
         };
+
         this.handleRouletteSpin = this.handleRouletteSpin.bind(this);
         this.onSpin = this.onSpin.bind(this);
         this.click = this.click.bind(this);

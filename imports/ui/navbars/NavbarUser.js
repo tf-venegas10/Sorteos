@@ -23,7 +23,7 @@ export default class NavbarUser extends Component {
     constructor(props){
         super(props);
         if(Meteor.user()){
-            console.log("logged in")
+            console.log("logged in");
             Meteor.call('appusers.online');
         }
     }

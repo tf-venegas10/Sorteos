@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Meteor} from "meteor/meteor";
 import OwnerDialog from '../adding/OwnerDialog.js';
 import AddButton from "../adding/AddButton";
 import {List, ListItem} from 'material-ui/List';
@@ -44,7 +45,6 @@ export default class Toss4All extends Component {
         this.onRepeatToggle = this.onRepeatToggle.bind(this);
         this.help = this.help.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
-
 
     }
 
