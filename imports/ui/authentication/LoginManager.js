@@ -79,7 +79,6 @@ export default class LoginManager extends Component {
                             typeAuth="Login"
                             onEmailChange={this.handleEmailChange}
                             onPswdChange={this.handlePswdChange}
-                            disableButton={this.state.disableButton}
                             loginError={this.state.loginError}
                         />
                 }
