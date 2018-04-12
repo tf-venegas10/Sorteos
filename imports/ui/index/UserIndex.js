@@ -63,6 +63,7 @@ export default class UserIndex extends Component {
                                 Also you can explore and manage your toss-ups. If you haven't made any toss-ups, give it
                                 a
                                 try right now!</p>
+                            <p>Invite your friend to your toss-ups as owners so you can all see them at the same time!</p>
                             <button
                                 id={"newTossUpButton"}
                                 onClick={this.props.openNew}
