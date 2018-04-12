@@ -172,7 +172,7 @@ export default class TossPandA extends Component {
         return (
             <div className="user-content">
                 <div className="container-fluid row toss-content">
-                    <div className="col-sm-6 col-12">
+                    <div className="col-md-6 col-12">
                         {instructions}
                         <div className="roulette-container">
                             <MuiThemeProvider muiTheme={muiTheme}>
@@ -190,7 +190,7 @@ export default class TossPandA extends Component {
                                   weights={(this.props.weights) ? this.props.weights : []}/>
                             :null}
                     </div>
-                    <div className="col-sm-6 col-12">
+                    <div className="col-md-6 col-12">
                         <div className="row justify-content-end">
                             <div className="col-9"></div>
                             <div className="col-3 center-items add-button">
@@ -199,7 +199,7 @@ export default class TossPandA extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-sm-4 col-12">
+                            <div className="col-md-4 col-12">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="col-10 head-title">Results</h1>
@@ -210,7 +210,7 @@ export default class TossPandA extends Component {
                                     </Paper>
                                 </MuiThemeProvider>
                             </div>
-                            <div className="col-sm-4 col-6">
+                            <div className="col-md-4 col-6">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="head-title">Actions</h1>
@@ -222,7 +222,7 @@ export default class TossPandA extends Component {
                                 </MuiThemeProvider>
 
                             </div>
-                            <div className="col-sm-4 col-6">
+                            <div className="col-md-4 col-6">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="head-title">Persons</h1>

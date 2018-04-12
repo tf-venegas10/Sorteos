@@ -297,9 +297,9 @@ export default class Toss4All extends Component {
                 <div className="container-fluid row toss-content">
                     {instructions}
 
-                    <div className="col-sm-6 col-12">
+                    <div className="col-md-6 col-12">
                         <div className="row justify-content-end">
-                            <div className="col-sm-6 col-12 center-items add-button">
+                            <div className="col-md-6 col-12 center-items add-button">
 
                             </div>
                         </div>
@@ -321,7 +321,7 @@ export default class Toss4All extends Component {
                         </MuiThemeProvider>
                         <img src={"./resources/bottom-paper.png"} alt="" />
                     </div>
-                    <div className="col-sm-6 col-12 ">  
+                    <div className="col-md-6 col-12 ">
                         <div className="row justify-content-end">
                             <div className="col-9"></div>
                             <div className="col-3 center-items add-button">
@@ -330,7 +330,7 @@ export default class Toss4All extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-sm-4 col-12">
+                            <div className="col-md-4 col-12">
 
                                 <MuiThemeProvider>
                                         <MuiThemeProvider muiTheme={muiTheme}>
@@ -363,7 +363,7 @@ export default class Toss4All extends Component {
                                 </MuiThemeProvider>
 
                             </div>
-                            <div className="col-sm-4 col-12">
+                            <div className="col-md-4 col-12">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="head-title">Actions</h1>
@@ -374,7 +374,7 @@ export default class Toss4All extends Component {
                                     </Paper>
                                 </MuiThemeProvider>
                             </div>
-                            <div className="col-sm-4 col-12">
+                            <div className="col-md-4 col-12">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <div className="row justify-content-center">

@@ -186,7 +186,7 @@ export default class TossOne extends Component {
         return (
             <div className="user-content">
                 <div className="container-fluid row toss-content">
-                    <div className="col-sm-6 col-12">
+                    <div className="col-md-6 col-12">
                         {instructions}
                         <div className="roulette-container">
                             <MuiThemeProvider muiTheme={muiTheme}>
@@ -211,7 +211,7 @@ export default class TossOne extends Component {
                             :null}
 
                     </div>
-                    <div className="col-sm-6 col-12">
+                    <div className="col-md-6 col-12">
                         <div className="row justify-content-end">
                             <div className="col-9"></div>
                             <div className="col-3 center-items add-button">
@@ -220,7 +220,7 @@ export default class TossOne extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-sm-6 col-6">
+                            <div className="col-md-6 col-6">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="head-title">Results</h1>
@@ -231,7 +231,7 @@ export default class TossOne extends Component {
                                     </Paper>
                                 </MuiThemeProvider>
                             </div>
-                            <div className="col-sm-6 col-6">
+                            <div className="col-md-6 col-6">
                                 <MuiThemeProvider>
                                     <Paper zDepth={2} rounded={false} style={paperInk}>
                                         <h1 className="head-title">{this.props.person ? "Persons" : "Actions"}</h1>
