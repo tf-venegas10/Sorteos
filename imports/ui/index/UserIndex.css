@@ -38,14 +38,13 @@ UserIndex styles
 
 .welcome-image {
     margin-top: 5%;
-    padding-top: 5%;
     padding-left: 5%;
     padding-right: 5%;
 }
 
 .btn-new {
-    background-color: #FAFAFA;
-    color: #424242;
+    background-color: #1498D5;
+    color: #ffffff;
     font-family: "Nova Slim", sans-serif;
 }
 
