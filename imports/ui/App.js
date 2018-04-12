@@ -305,6 +305,7 @@ export default withTracker(() => {
     Meteor.subscribe("appusers");
     Meteor.subscribe("sorteos");
     let all = TossUps.find().fetch();
+    all.sort((a,b)=>b.createdAt-a.createdAt);
     let users = Users.find().fetch();
     return {
         currentUser: Meteor.user(),
