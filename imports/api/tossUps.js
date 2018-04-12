@@ -49,6 +49,10 @@ Meteor.methods({
             resultsPandAs:[],
             results4All:[],
             usernames: [],//[Meteor.users.findOne(this.userId).username],
+            spinAnglePerson:0,
+            spinAngleAction:0,
+            spinAnglePandAs:0
+
 
         });
 
@@ -173,6 +177,47 @@ Meteor.methods({
             results=[result];
         }
         TossUps.update({_id:tossUpId}, {$set: {results4All: [result], timesThrown:timesThrown}});
+        if(callback){
+            callback();
+        }
+
+    },
+    'tossUps.spinPerson'(tossUpId, spinTime, booleanVal, startAngle, callback) {
+
+        check(tossUpId, String);
+        check(spinTime,Number);
+        check(booleanVal,Boolean);
+        check(startAngle,Number);
+
+
+        TossUps.update({_id:tossUpId}, {$set: {spinPerson: booleanVal, spinTimePerson:spinTime, spinAnglePerson:startAngle}});
+        if(callback){
+            callback();
+        }
+
+    },'tossUps.spinAction'(tossUpId, spinTime, booleanVal,  startAngle,callback) {
+
+        check(tossUpId, String);
+        check(spinTime,Number);
+        check(booleanVal,Boolean);
+        check(startAngle,Number);
+
+
+        TossUps.update({_id:tossUpId}, {$set: {spinAction: booleanVal, spinTimeAction:spinTime, spinAngleAction:startAngle}});
+        if(callback){
+            callback();
+        }
+
+    },'tossUps.spinPandAs'(tossUpId, spinTime,booleanVal,  startAngle,chosenOne,callback) {
+
+        check(tossUpId, String);
+        check(spinTime,Number);
+        check(booleanVal,Boolean);
+        check(startAngle,Number);
+        check(chosenOne,String);
+
+
+        TossUps.update({_id:tossUpId}, {$set: {spinPandAs: booleanVal, spinTimePandAs:spinTime, spinAnglePandAs: startAngle, chosenOne:chosenOne}});
         if(callback){
             callback();
         }

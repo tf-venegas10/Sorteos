@@ -8,7 +8,7 @@ class Roulette extends React.Component {
         super(props);
         this.state = {
             spinAngleStart: 0,
-            startAngle: 0,
+            startAngle: props.startAngle,
             spinTime: 0,
             arc: Math.PI / (props.options.length / 2),
         };
@@ -136,8 +136,8 @@ class Roulette extends React.Component {
     }
 
     rotate(){
-        let spinTimeTotal = Math.random()*30/2*35.9+ 3*30/2*35.9;
-        if(this.state.spinTime >spinTimeTotal) {
+
+        if(this.state.spinTime >this.props.spinTimeTotal) {
             clearTimeout(this.spinTimer);
             this.stopRotateWheel();
         } else {
@@ -174,7 +174,7 @@ class Roulette extends React.Component {
         const text = this.props.options[index<0?i-1:i];
         //ctx.fillText(text, baseSize - ctx.measureText(text).width / 2, baseSize / 3);
         ctx.restore();
-        this.props.onComplete(text);
+        this.props.onComplete(text,this.state.startAngle);
     }
 
 

@@ -30,20 +30,23 @@ export default class TossPandA extends Component {
             selected: [],
             spin: false,
             value: "",
-            chosenOne: null
+            chosenOne: null,
+            onMe:false
         };
         this.handleRouletteSpin = this.handleRouletteSpin.bind(this);
         this.onSpin = this.onSpin.bind(this);
         this.click = this.click.bind(this);
         this.handleRequestDelete = this.handleRequestDelete.bind(this);
     }
-    componentDidMount(){
-        console.log("value: "+this.state.value);
-    }
 
-    handleRouletteSpin(value) {
 
-        Meteor.call("tossUps.addResultPandAs", this.props.selected._id, {person: this.state.chosenOne, action: value});
+    handleRouletteSpin(value,startAngle) {
+        if(this.state.onMe) {
+            Meteor.call("tossUps.addResultPandAs", this.props.selected._id, {person: this.props.selected.chosenOne, action: value});
+            Meteor.call("tossUps.spinPandAs", this.props.selected._id, this.props.selected.spinTimeAction,false, startAngle, this.props.selected.chosenOne);
+            this.setState({onMe:false});
+        }
+
         this.setState({value: value});
         setTimeout(()=>{
             this.setState({value: ""});
@@ -57,11 +60,10 @@ export default class TossPandA extends Component {
     };
 
     click() {
-        this.setState({spin: true, value: ""});
-    }
+        let spinTimeTotal = Math.random()*30/2*35.9+ 3*30/2*35.9;
+        this.setState({onMe:true});
 
-    onSpin(callback) {
-        //let's choose the lucky person
+
         let arr = [];
         let i;
         let j = 0;
@@ -73,8 +75,13 @@ export default class TossPandA extends Component {
         });
         let x = Math.round(Math.random() * (arr.length - 1));
         let chosenOne = arr[x];
-        this.setState({spin: false, value: "", chosenOne: chosenOne},
-            callback);
+        Meteor.call("tossUps.spinPandAs", this.props.selected._id, spinTimeTotal,true,0,chosenOne);
+
+    }
+
+    onSpin(callback) {
+        //let's choose the lucky person
+        Meteor.call("tossUps.spinPandAs", this.props.selected._id, this.props.selected.spinTimePandAs,false,0, this.props.selected.chosenOne,callback);
     }
 
 
@@ -133,7 +140,7 @@ export default class TossPandA extends Component {
             this.props.selected.resultsPandAs.forEach((op) => {
                     i += 1;
                     results.push(<ListItem
-                        style={i==this.props.selected.resultsPandAs.length?firstItem:listStyle}
+                        style={i===this.props.selected.resultsPandAs.length?firstItem:listStyle}
                         primaryText={op.person + ": " + op.action} key={i}/>);
                 }
             );
@@ -171,11 +178,15 @@ export default class TossPandA extends Component {
                                               aria-label="Boton girar Ruleta" secondary={true}/>
                             </MuiThemeProvider>
                         </div>
+                        {this.props.selected?
                         <Roulette options={(this.props.options) ? this.props.options : []} baseSize={220}
-                                  spin={this.state.spin}
+                                  spin={this.props.selected.spinPandAs}
+                                  spinTimeTotal={this.props.selected.spinTimePandAs}
+                                  startAngle={this.props.selected.spinAnglePandAs}
                                   onSpin={this.onSpin}
                                   onComplete={this.handleRouletteSpin}
                                   weights={(this.props.weights) ? this.props.weights : []}/>
+                            :null}
                     </div>
                     <div className="col-sm-6 col-12">
                         <div className="row justify-content-end">
@@ -228,7 +239,7 @@ export default class TossPandA extends Component {
                 <MuiThemeProvider>
                     <Snackbar
                         open={this.state.value !== ""}
-                        message={this.state.chosenOne + ": " + this.state.value}
+                        message={this.props.selected.chosenOne + ": " + this.state.value}
                         autoHideDuration={4000}
                         onRequestClose={this.handleRequestClose}
                         bodyStyle={{height: 200, width: 200, flexGrow: 0}}

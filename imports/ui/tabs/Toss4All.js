@@ -305,13 +305,15 @@ export default class Toss4All extends Component {
                         </div>
                         <MuiThemeProvider>
                             <Paper zDepth={2} rounded={true}  className="resultPaper">
-                                <h1 className="head-title">Results {completness===100? <strong><Stars/> Complete!</strong>:null} <MuiThemeProvider muiTheme={muiTheme}>
+                                <h1 className="head-title">Results  <MuiThemeProvider muiTheme={muiTheme}>
                                     <RaisedButton label="New Assignment" style={ink} disabledBackgroundColor="true"
                                                   onClick={this.click} aria-label="Button to launch new assignment" secondary={true}/>
-                                </MuiThemeProvider></h1>
+                                </MuiThemeProvider> {completness===100? <strong><Stars/> Complete!</strong>:null}</h1>
                                 <h6>Times launched: { this.props.selected.timesThrown?this.props.selected.timesThrown:0}</h6>
+
                                 <LinearProgress mode="determinate" value={completness?completness:0}/>
                                 <Divider/>
+
                                 <List style={listScroll} className="resultList">
                                     {res}
                                 </List>

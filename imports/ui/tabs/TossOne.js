@@ -29,6 +29,7 @@ export default class TossOne extends Component {
         this.state = {
             spin: false,
             value: "",
+            onMe: false
         };
 
         this.handleRouletteSpin = this.handleRouletteSpin.bind(this);
@@ -37,13 +38,17 @@ export default class TossOne extends Component {
         this.handleRequestDelete = this.handleRequestDelete.bind(this);
     }
 
-    handleRouletteSpin(value) {
-
-        if (this.props.action) {
-            Meteor.call("tossUps.addResultA", this.props.selected._id, value);
-        }
-        else {
-            Meteor.call("tossUps.addResultP", this.props.selected._id, value);
+    handleRouletteSpin(value, startAngle) {
+        if(this.state.onMe) {
+            if (this.props.action) {
+                Meteor.call("tossUps.addResultA", this.props.selected._id, value);
+                Meteor.call("tossUps.spinAction", this.props.selected._id, this.props.selected.spinTimeAction,false, startAngle);
+            }
+            else {
+                Meteor.call("tossUps.addResultP", this.props.selected._id, value);
+                Meteor.call("tossUps.spinPerson",this.props.selected._id, this.props.selected.spinTimePerson,false,startAngle);
+            }
+            this.setState({onMe:false});
         }
         this.setState({value: value});
         setTimeout(()=>{
@@ -57,12 +62,24 @@ export default class TossOne extends Component {
     };
 
     click() {
-        this.setState({spin: true, value: ""});
+        let spinTimeTotal = Math.random()*30/2*35.9+ 3*30/2*35.9;
+        this.setState({onMe:true});
+        if (this.props.action) {
+            Meteor.call("tossUps.spinAction", this.props.selected._id, spinTimeTotal,true,0);
+        }
+        else {
+            Meteor.call("tossUps.spinPerson", this.props.selected._id, spinTimeTotal,true,0);
+        }
     }
 
     onSpin(callback) {
-        this.setState({spin: false, value: ""},
-            callback);
+
+        if (this.props.action) {
+            Meteor.call("tossUps.spinAction", this.props.selected._id, this.props.selected.spinTimeAction,false,0, callback);
+        }
+        else {
+            Meteor.call("tossUps.spinPerson", this.props.selected._id, this.props.selected.spinTimePerson,false,0, callback);
+        }
     }
 
     render() {
@@ -112,7 +129,7 @@ export default class TossOne extends Component {
                 this.props.selected.resultsP.forEach((op) => {
                         i += 1;
                         results.push(<ListItem
-                            style={i==this.props.selected.resultsP.length?firstItem:listStyle}
+                            style={i===this.props.selected.resultsP.length?firstItem:listStyle}
                             primaryText={op} key={i}/>);
                     }
                 );
@@ -123,7 +140,7 @@ export default class TossOne extends Component {
                 this.props.selected.resultsA.forEach((op) => {
                         i += 1;
                         results.push(<ListItem
-                            style={i==this.props.selected.resultsA.length?firstItem:listStyle}
+                            style={i===this.props.selected.resultsA.length?firstItem:listStyle}
                             primaryText={op} key={i}/>);
                     }
                 );
@@ -165,7 +182,6 @@ export default class TossOne extends Component {
             overflowY: results.length > 5 ? "scroll" : "auto",
             height: "12em",
         };
-
         return (
             <div className="user-content">
                 <div className="container-fluid row toss-content">
@@ -183,11 +199,15 @@ export default class TossOne extends Component {
                                 />
                             </MuiThemeProvider>
                         </div>
+                        {this.props.selected?
                         <Roulette options={(this.props.options) ? this.props.options : []} baseSize={220}
-                                  spin={this.state.spin}
+                                  spin={(this.props.action)?this.props.selected.spinAction:this.props.selected.spinPerson}
+                                  spinTimeTotal={(this.props.action)?this.props.selected.spinTimeAction:this.props.selected.spinTimePerson}
+                                  startAngle={(this.props.action)?this.props.selected.spinAngleAction:this.props.selected.spinAnglePerson}
                                   onSpin={this.onSpin}
                                   onComplete={this.handleRouletteSpin}
                                   weights={(this.props.weights) ? this.props.weights : []}/>
+                            :null}
 
                     </div>
                     <div className="col-sm-6 col-12">
