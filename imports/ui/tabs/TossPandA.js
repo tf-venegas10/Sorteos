@@ -190,6 +190,7 @@ export default class TossPandA extends Component {
                     </div>
                     <div className="col-sm-6 col-12">
                         <div className="row justify-content-end">
+                            <div className="col-9"></div>
                             <div className="col-3 center-items add-button">
                                 <AddButton
                                     adding={this.props.adding}/>
