@@ -271,8 +271,7 @@ Meteor.methods({
                 let notifs = user.notifications? user.notifications:[];
                 notifs.push(""+Meteor.user().username+" has invited you to \""+thisToss.name+"\"");
                 Users.update({userId:user.userId},{$set: {
-                    notifications:notifs,
-                        
+                    notifications:notifs, notificationsVerified: false
                 }
                 });
             }else{

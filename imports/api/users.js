@@ -44,6 +44,10 @@ Meteor.methods({
         check(location, String);
         check(tossID, String);
         Users.update({userId: Meteor.user()._id}, {$set: {currLocation:location, currToss:tossID}});
+    },
+
+    'appusers.setNotificationsVerified'(){
+        Users.update({userId: Meteor.user()._id}, {$set:{notificationsVerified:true}})
     }
 });
 
