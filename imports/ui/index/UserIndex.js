@@ -59,10 +59,7 @@ export default class UserIndex extends Component {
                             <h4 className="card-title">Welcome to Toss-App!</h4>
                             <h5 className="card-subtitle">We are pleased to have you here.</h5>
                             <p>This is your dashboard were you can get informed about new features, content and much
-                                more.
-                                Also you can explore and manage your toss-ups. If you haven't made any toss-ups, give it
-                                a
-                                try right now!</p>
+                                more.</p>
                             <p>Invite your friend to your toss-ups as owners so you can all see them at the same time!</p>
                             <button
                                 id={"newTossUpButton"}

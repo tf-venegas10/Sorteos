@@ -22,3 +22,4 @@ accounts-password
 react-meteor-data
 accounts-facebook
 accounts-google
+meteortesting:mocha
