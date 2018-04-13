@@ -268,6 +268,13 @@ Meteor.methods({
             if(!owners.includes(user.userId)) {
                 owners.push(user.userId);
                 TossUps.update({_id: tossUpId}, {$set: {owners: owners}});
+                let notifs = user.notifications? user.notifications:[];
+                notifs.push(""+Meteor.user().username+" has invited you to \""+thisToss.name+"\"");
+                Users.update({userId:user.userId},{$set: {
+                    notifications:notifs,
+                        
+                }
+                });
             }else{
                 throw new Error("The user specified is already owner");
             }

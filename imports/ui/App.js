@@ -64,7 +64,7 @@ class App extends Component {
             $(window).bind('beforeunload', () => {
                 console.log("exit");
                 Meteor.call('appusers.offline');
-                Meteor.call('appusers.updateUserLocation',"index");
+                Meteor.call('appusers.updateUserLocation',"index","null");
             });
         });
     }

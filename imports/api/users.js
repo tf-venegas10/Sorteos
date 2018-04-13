@@ -1,6 +1,7 @@
 import {Meteor} from "meteor/meteor";
 import {Mongo} from "meteor/mongo";
 import {check} from "meteor/check";
+import {TossUps} from "./tossUps";
 
 export const Users = new Mongo.Collection("appusers");
 
@@ -22,6 +23,7 @@ Meteor.methods({
             userId: Meteor.user()._id,
             email: Meteor.user().email,
             username: Meteor.user().username,
+            notifications: [],
             online: auth
         });
     },

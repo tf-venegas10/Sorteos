@@ -6,7 +6,6 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 import SignOut from "material-ui/svg-icons/action/power-settings-new"
-import {white} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Divider from 'material-ui/Divider';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -83,7 +82,7 @@ export default class NavbarUser extends Component {
                         iconElementLeft={
                             <IconMenu
                                 iconButtonElement={<IconButton aria-label="Button that expands the menu"
-                                ><Menu color={white}/></IconButton>}
+                                ><Menu color={"#1498D5"}/></IconButton>}
                                 anchorOrigin={{horizontal: 'left', vertical: 'top'}}
                                 targetOrigin={{horizontal: 'left', vertical: 'top'}}
 
@@ -121,7 +120,7 @@ export default class NavbarUser extends Component {
                             </IconMenu>
                         }
                         style={background}
-                        iconElementRight={<Notifications/>}
+                        iconElementRight={<Notifications users={this.props.users}/>}
                     />
                 </MuiThemeProvider>
             </div>
