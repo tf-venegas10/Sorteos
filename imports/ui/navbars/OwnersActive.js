@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Meteor} from "meteor/meteor";
-import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import People from 'material-ui/svg-icons/social/people';
+
 import './OwnersActive.css';
 
 /**
@@ -43,7 +43,9 @@ export default class OwnersActive extends Component {
 
         return (
             <div>
-                <MenuItem primaryText={"Active Owners ("+owners.length+")"} style={boldStyle} onClick={this.toggleActive}/>
+                <MenuItem primaryText={"Active Owners ("+owners.length+")"}
+                          leftIcon={<People/>}
+                          style={boldStyle} onClick={this.toggleActive}/>
                 {
                     this.state.showActive ?
                         <div className="center-items">

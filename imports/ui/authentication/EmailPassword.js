@@ -25,7 +25,7 @@ export default class EmailPassword extends Component {
 
     render() {
         return (
-            <div className="col-sm-3 col-10">
+            <div className="col-md-3 col-10">
                 <div className={"card "+(this.props.typeAuth==="Register"?"auth-card-register":"auth-card-login")}>
                     <h2 className="auth-card-title">{this.props.typeAuth}</h2>
                     <form onSubmit={this.props.submitAction}>

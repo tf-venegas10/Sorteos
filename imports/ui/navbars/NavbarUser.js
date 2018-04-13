@@ -10,8 +10,11 @@ import {white} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Divider from 'material-ui/Divider';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import Home from 'material-ui/svg-icons/action/home';
+import LocalPlay from 'material-ui/svg-icons/maps/local-play';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import OwnersActive from "./OwnersActive.js";
+import Notifications from "./Notifications.js";
 
 import "./NavbarUser.css";
 
@@ -20,12 +23,22 @@ import "./NavbarUser.css";
  */
 export default class NavbarUser extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        if(Meteor.user()){
+        this.state = {
+            showTossups: false
+        }
+        if (Meteor.user()) {
             console.log("logged in");
             Meteor.call('appusers.online');
         }
+
+        this.toggleTossUps = this.toggleTossUps.bind(this);
+    }
+
+    toggleTossUps() {
+        let show = this.state.showTossups;
+        this.setState({showTossups: !show});
     }
 
     render() {
@@ -35,11 +48,12 @@ export default class NavbarUser extends Component {
             color: "#1498D5",
             textAlign: "center"
         };
+
         const titleStyle = {
             textAlign: "center"
         };
+
         const boldStyle = {
-            textAlign: "center",
             fontWeight: "bold"
         };
         let sorteos = [];
@@ -59,7 +73,7 @@ export default class NavbarUser extends Component {
                     <AppBar
                         title={this.props.userLocation === "sorteo" ?
                             <div className="row">
-                                <div className="col-sm-12">{this.props.sorteo? this.props.sorteo.name:""}</div>
+                                <div className="col-sm-12">{this.props.sorteo ? this.props.sorteo.name : ""}</div>
                             </div>
                             :
                             <img onClick={this.props.goToIndex} className="col-4 col-sm-2 col-md-1 appbar-logo"
@@ -75,12 +89,21 @@ export default class NavbarUser extends Component {
 
                             >
                                 <MenuItem style={boldStyle}
+                                          leftIcon={<Home/>}
+                                          onClick={this.props.goToIndex}
                                           primaryText={Meteor.user().username}/>
                                 <Divider/>
-                                <MenuItem primaryText="My Toss-ups" style={boldStyle}/>
+                                <div>
+                                    <MenuItem primaryText={"My Toss-ups (" + sorteos.length + ")"}
+                                              leftIcon={<LocalPlay/>}
+                                              onClick={this.toggleTossUps}
+                                              style={boldStyle}/>
+                                    {
+                                        this.state.showTossups ? sorteos : null
+                                    }
+                                </div>
                                 <MenuItem primaryText="New Toss-up" leftIcon={<ContentAdd/>}
                                           onClick={this.props.openNew}/>
-                                {sorteos}
                                 {
                                     this.props.userLocation === "sorteo" ?
                                         <div>
@@ -97,12 +120,8 @@ export default class NavbarUser extends Component {
                                           onClick={this.props.onLogoutCallback}/>
                             </IconMenu>
                         }
-                        iconElementRight={
-                            this.props.userLocation === "sorteo" ?
-                                <img onClick={this.props.goToIndex} className="col-8 appbar-logo"
-                                     src="name.png" alt="Toss-App"/> : null
-                        }
                         style={background}
+                        iconElementRight={<Notifications/>}
                     />
                 </MuiThemeProvider>
             </div>
