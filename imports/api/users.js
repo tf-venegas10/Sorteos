@@ -38,9 +38,10 @@ Meteor.methods({
         Users.update({userId: Meteor.user()._id}, {$set: {online:true}});
     },
 
-    'appusers.updateUserLocation'(location){
+    'appusers.updateUserLocation'(location, tossID){
         check(location, String);
-        Users.update({userId: Meteor.user()._id}, {$set: {currLocation:location}});
+        check(tossID, String);
+        Users.update({userId: Meteor.user()._id}, {$set: {currLocation:location, currToss:tossID}});
     }
 });
 

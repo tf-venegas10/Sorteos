@@ -74,7 +74,7 @@ class App extends Component {
     }
 
     goToIndexUser() {
-        Meteor.call('appusers.updateUserLocation',"index");
+        Meteor.call('appusers.updateUserLocation',"index","null");
         this.setState({userLocation: "index"});
     }
 
@@ -88,7 +88,7 @@ class App extends Component {
 
     handleLogoutSubmit() {
         Meteor.call('appusers.offline');
-        Meteor.call('appusers.updateUserLocation',"index");
+        Meteor.call('appusers.updateUserLocation',"index","null");
         Meteor.logout();
     }
 

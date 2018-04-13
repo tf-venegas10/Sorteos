@@ -15,7 +15,7 @@ import {Meteor} from "meteor/meteor";
 // App component - represents the whole app
 
 export default class Selector extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.personsActive = this.personsActive.bind(this);
@@ -26,20 +26,20 @@ export default class Selector extends Component {
         this.personsActive();
     }
 
-    personsActive(){
-        Meteor.call('appusers.updateUserLocation',"person");
+    personsActive() {
+        Meteor.call('appusers.updateUserLocation', "person", this.props.tossData._id);
     }
 
-    actionsActive(){
-        Meteor.call('appusers.updateUserLocation',"action");
+    actionsActive() {
+        Meteor.call('appusers.updateUserLocation', "action", this.props.tossData._id);
     }
 
-    pandasActive(){
-        Meteor.call('appusers.updateUserLocation',"panda");
+    pandasActive() {
+        Meteor.call('appusers.updateUserLocation', "panda", this.props.tossData._id);
     }
 
-    toss4allActive(){
-        Meteor.call('appusers.updateUserLocation',"toss4all");
+    toss4allActive() {
+        Meteor.call('appusers.updateUserLocation', "toss4all", this.props.tossData._id);
     }
 
     render() {
@@ -57,20 +57,22 @@ export default class Selector extends Component {
         let usersOnPandA = 0;
         let usersOnToss4All = 0;
 
-        this.props.sorteo.owners.forEach((o)=>{
-            this.props.users.forEach((u)=>{
-                if(u.userId !== Meteor.user()._id && o === u.userId && u.online){
-                    if(u.currLocation==="person"){
-                        usersOnPersons++;
-                    }
-                    else if(u.currLocation==="action"){
-                        usersOnActions++;
-                    }
-                    else if(u.currLocation==="panda"){
-                        usersOnPandA++;
-                    }
-                    else if(u.currLocation==="toss4all"){
-                        usersOnToss4All++;
+        this.props.sorteo.owners.forEach((o) => {
+            this.props.users.forEach((u) => {
+                if (u.userId !== Meteor.user()._id && o === u.userId && u.online) {
+                    if (this.props.tossData._id === u.currToss) {
+                        if (u.currLocation === "person") {
+                            usersOnPersons++;
+                        }
+                        else if (u.currLocation === "action") {
+                            usersOnActions++;
+                        }
+                        else if (u.currLocation === "panda") {
+                            usersOnPandA++;
+                        }
+                        else if (u.currLocation === "toss4all") {
+                            usersOnToss4All++;
+                        }
                     }
                     return;
                 }
@@ -81,7 +83,7 @@ export default class Selector extends Component {
             <div>
                 <MuiThemeProvider>
                     <Tabs inkBarStyle={ink}>
-                        <Tab label={<h3>PERSON{usersOnPersons>0?" ( "+usersOnPersons+" )":null}</h3>}
+                        <Tab label={<h3>PERSON{usersOnPersons > 0 ? " ( " + usersOnPersons + " )" : null}</h3>}
                              buttonStyle={background} icon={<Face/>}
                              onActive={this.personsActive}
                         >
@@ -99,7 +101,7 @@ export default class Selector extends Component {
                                      selected={this.props.tossData}
                             />
                         </Tab>
-                        <Tab label={<h3>ACTION{usersOnActions>0?" ( "+usersOnActions+" )":null}</h3>}
+                        <Tab label={<h3>ACTION{usersOnActions > 0 ? " ( " + usersOnActions + " )" : null}</h3>}
                              buttonStyle={background} icon={<Action/>}
                              onActive={this.actionsActive}
                         >
@@ -117,7 +119,7 @@ export default class Selector extends Component {
                                      selected={this.props.tossData}
                             />
                         </Tab>
-                        <Tab label={<h3>PERSON & ACTION{usersOnPandA>0?" ( "+usersOnPandA+" )":null}</h3>}
+                        <Tab label={<h3>PERSON & ACTION{usersOnPandA > 0 ? " ( " + usersOnPandA + " )" : null}</h3>}
                              buttonStyle={background} icon={<Gift/>}
                              onActive={this.pandasActive}
                         >
@@ -136,7 +138,8 @@ export default class Selector extends Component {
                                        selected={this.props.tossData}
                             />
                         </Tab>
-                        <Tab label={<h3>ACTIONS FOR ALL{usersOnToss4All>0?" ( "+usersOnToss4All+" )":null}</h3>}
+                        <Tab label={<h3>ACTIONS FOR
+                            ALL{usersOnToss4All > 0 ? " ( " + usersOnToss4All + " )" : null}</h3>}
                              buttonStyle={background} icon={<ListCheck/>}
                              onActive={this.toss4allActive}
                         >
