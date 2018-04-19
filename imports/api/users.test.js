@@ -14,19 +14,19 @@ if(Meteor.isServer) {
 
             beforeEach(function () {
                 Users.remove({});
+                Users.insert({userId:1});
             });
 
             it('can insert user', () => {
-                const insertUser = Meteor.server._methodHandlers['appusers.insert'];
-                insertUser.apply(true);
-                assert.equal(Users.find().count, 0)
+                Meteor.methods.call('appusers.insert', true);
+                assert.equal(Users.find().count(), 1)
             });
 
             it('can find user', () => {
-                const findUser = Meteor.server._methodHandlers['appusers.find'];
-                let user = findUser.apply(userId);
+                let user = Meteor.methods.call('appusers.find',1);
+                let realUser=Users.find({userId:1});
                 assert.isNotNull(user);
-                assert.equals(users.userId, userId);
+                assert.equals(user.userId, 1);
             });
 
             it('can set user offline', () => {
