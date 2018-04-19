@@ -1,7 +1,6 @@
 import {Meteor} from "meteor/meteor";
 import {Mongo} from "meteor/mongo";
 import {check} from "meteor/check";
-import {TossUps} from "./tossUps";
 
 export const Users = new Mongo.Collection("appusers");
 
@@ -29,24 +28,39 @@ Meteor.methods({
     },
 
     'appusers.find'(userId){
+        if (!this.userId) {
+            throw new Meteor.Error("not-authorized");
+        }
         return Users.findOne({userId:userId});
     },
 
     'appusers.offline'(){
+        if (!this.userId) {
+            throw new Meteor.Error("not-authorized");
+        }
         Users.update({userId: Meteor.user()._id}, {$set: {online:false}});
     },
 
     'appusers.online'(){
+        if (!this.userId) {
+            throw new Meteor.Error("not-authorized");
+        }
         Users.update({userId: Meteor.user()._id}, {$set: {online:true}});
     },
 
     'appusers.updateUserLocation'(location, tossID){
         check(location, String);
         check(tossID, String);
+        if (!this.userId) {
+            throw new Meteor.Error("not-authorized");
+        }
         Users.update({userId: Meteor.user()._id}, {$set: {currLocation:location, currToss:tossID}});
     },
 
     'appusers.setNotificationsVerified'(){
+        if (!this.userId) {
+            throw new Meteor.Error("not-authorized");
+        }
         Users.update({userId: Meteor.user()._id}, {$set:{notificationsVerified:true}})
     }
 });
